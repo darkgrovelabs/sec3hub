@@ -1,3 +1,7 @@
+
+![SEC3 HUB](https://github.com/darkgrovelabs/sec3hub/assets/7522096/466a68c8-8804-4810-8f79-e3da7b5f73ab)
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
