@@ -8,9 +8,9 @@ import {
   extendTheme,
 } from '@chakra-ui/react'
 import { mode } from '@chakra-ui/theme-tools'
-import { Nunito } from 'next/font/google'
+import { Work_Sans } from 'next/font/google'
 
-const font = Nunito({
+const font = Work_Sans({
   subsets: ['latin'],
 })
 
