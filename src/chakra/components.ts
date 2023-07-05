@@ -1,5 +1,7 @@
 'use client'
 
+// import {useColorModeValue} from '@chakra-ui/react'
+
 export * from '@chakra-ui/accordion'
 export * from '@chakra-ui/alert'
 export * from '@chakra-ui/avatar'
@@ -48,3 +50,4 @@ export * from '@chakra-ui/toast'
 export * from '@chakra-ui/tooltip'
 export * from '@chakra-ui/transition'
 export * from '@chakra-ui/visually-hidden'
+export * from '@chakra-ui/color-mode'

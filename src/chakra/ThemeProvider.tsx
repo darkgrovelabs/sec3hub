@@ -1,6 +1,5 @@
 'use client'
 
-import { CacheProvider } from '@chakra-ui/next-js'
 import {
   ChakraProvider,
   ColorModeScript,
@@ -8,15 +7,15 @@ import {
   extendTheme,
 } from '@chakra-ui/react'
 import { mode } from '@chakra-ui/theme-tools'
-import { Work_Sans } from 'next/font/google'
+import { Nunito } from 'next/font/google'
 
-const font = Work_Sans({
+const font = Nunito({
   subsets: ['latin'],
 })
 
 const config = {
   initialColorMode: 'dark',
-  useSystemColorMode: true,
+  useSystemColorMode: false,
 }
 
 const theme = extendTheme({
@@ -24,7 +23,7 @@ const theme = extendTheme({
   styles: {
     global: (props: StyleFunctionProps) => ({
       body: {
-        bg: mode('rgb(20,20,20)', 'rgb(255,255,255)'),
+        bg: mode('#fff', '#1E1E20')(props),
       },
     }),
   },
@@ -42,9 +41,7 @@ export default function ThemeProvider({
   return (
     <>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-      <CacheProvider>
-        <ChakraProvider theme={theme}>{children}</ChakraProvider>
-      </CacheProvider>
+      <ChakraProvider theme={theme}>{children}</ChakraProvider>
     </>
   )
 }

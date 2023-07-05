@@ -1,8 +1,5 @@
 {
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.preferences.autoImportFileExcludePatterns": [
-    "@chakra-ui/react",
-    "@chakra-ui"
-  ]
+  "typescript.preferences.autoImportFileExcludePatterns": ["@chakra-ui"]
 }
