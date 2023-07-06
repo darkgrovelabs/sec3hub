@@ -1,5 +1,6 @@
 import ThemeProvider from '@/chakra/ThemeProvider'
 import './globals.css'
+import { cookies } from 'next/headers'
 
 export const metadata = {
   title: 'Create Next App',
@@ -11,11 +12,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const cookieStore = cookies()
+  const uiColorMode =
+    (cookieStore.get('chakra-ui-color-mode')?.value as 'light' | 'dark') ||
+    'dark'
+
   return (
-    <html lang='en' suppressHydrationWarning>
+    <html
+      lang='en'
+      data-theme={uiColorMode}
+      style={{ colorScheme: uiColorMode }}
+    >
       <head />
-      <body>
-        <ThemeProvider>{children}</ThemeProvider>
+      <body className={`chakra-ui-${uiColorMode}`}>
+        <ThemeProvider colorMode={uiColorMode}>{children}</ThemeProvider>
       </body>
     </html>
   )

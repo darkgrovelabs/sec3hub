@@ -2,31 +2,21 @@
 
 import {
   Box,
-  Button,
   Flex,
   Heading,
   Icon,
   Input,
   InputGroup,
   InputLeftElement,
-  Portal,
   useColorMode,
-  useColorModeValue,
 } from '@/chakra/components'
-import {
-  usePathname,
-  useSearchParams,
-  useSelectedLayoutSegments,
-} from 'next/navigation'
+import { useSelectedLayoutSegments } from 'next/navigation'
 
 import { IconButton } from '@chakra-ui/react'
 import { Moon, Search, Sun } from 'lucide-react'
 import Card from '../ui/Card'
 
 export default function Navbar() {
-  const pathname = usePathname()
-  const { colorMode, toggleColorMode } = useColorMode()
-
   return (
     <>
       <Box
@@ -70,13 +60,7 @@ export default function Navbar() {
               />
             </InputGroup>
 
-            <IconButton
-              variant={'ghost'}
-              size={'sm'}
-              aria-label='Dark Theme'
-              onClick={toggleColorMode}
-              icon={colorMode === 'dark' ? <Sun /> : <Moon />}
-            />
+            <ToggleColorMode />
           </Flex>
         </Card>
       </Box>
@@ -93,4 +77,18 @@ function NavbarTitle() {
   const selectedLayoutSegment = useSelectedLayoutSegments()
 
   return <Heading fontSize={'3xl'}>{titles[selectedLayoutSegment[0]]}</Heading>
+}
+
+function ToggleColorMode() {
+  const { colorMode, toggleColorMode } = useColorMode()
+
+  return (
+    <IconButton
+      variant={'ghost'}
+      size={'sm'}
+      aria-label='Dark Theme'
+      onClick={toggleColorMode}
+      icon={colorMode === 'dark' ? <Sun /> : <Moon />}
+    />
+  )
 }
