@@ -8,12 +8,10 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  useColorMode,
 } from '@/chakra/components'
 import { useSelectedLayoutSegments } from 'next/navigation'
 
-import { IconButton } from '@chakra-ui/react'
-import { Moon, Search, Sun } from 'lucide-react'
+import { Search } from 'lucide-react'
 import Card from '../ui/Card'
 
 export default function Navbar() {

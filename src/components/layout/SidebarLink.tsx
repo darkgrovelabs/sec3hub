@@ -34,7 +34,7 @@ export default function SidebarLink(props: SidebarLinkProps) {
 
   return (
     <Link href={route}>
-      <Flex align={'center'} gap={1.5}>
+      <Flex align={'center'} gap={1.5} py={1.5}>
         <Icon
           as={icon}
           color={active ? activeIconColor : inactiveColor}
