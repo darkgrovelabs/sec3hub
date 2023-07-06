@@ -23,7 +23,7 @@ export default function ThemeProvider({
   const theme = extendTheme({
     config: {
       initialColorMode: colorMode,
-      useSystemColorMode: true,
+      useSystemColorMode: false,
     },
     styles: {
       global: (props: StyleFunctionProps) => ({
