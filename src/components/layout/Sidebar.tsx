@@ -29,26 +29,27 @@ export default function Sidebar() {
       position={'sticky'}
       top={2}
       mx={2}
-      transition={'0.4s linear'}
+      p={isSidebarOpen ? 4 : 1.5}
+      // transition={'0.4s linear'}
     >
-      <Flex h={'100%'} direction='column' justifyContent={'space-between'}>
-        <Box position={'absolute'} top={1} right={1}>
-          <Tooltip
-            hasArrow
-            label={!isSidebarOpen ? 'Show menu' : 'Hide menu'}
-            borderRadius={'lg'}
-          >
-            <IconButton
-              variant={'ghost'}
-              size={'xs'}
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              aria-label='hide menu'
-              icon={!isSidebarOpen ? <Redo2 size={22} /> : <Undo2 size={22} />}
-            ></IconButton>
-          </Tooltip>
-        </Box>
-
-        {isSidebarOpen && (
+      <Box position={'absolute'} top={1} right={1}>
+        <Tooltip
+          hasArrow
+          label={!isSidebarOpen ? 'Show menu' : 'Hide menu'}
+          borderRadius={'lg'}
+          placement='right'
+        >
+          <IconButton
+            variant={'ghost'}
+            size={'xs'}
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            aria-label='hide menu'
+            icon={!isSidebarOpen ? <Redo2 size={22} /> : <Undo2 size={22} />}
+          ></IconButton>
+        </Tooltip>
+      </Box>
+      {isSidebarOpen && (
+        <Flex h={'100%'} direction='column' justifyContent={'space-between'}>
           <>
             <Box flex='1'>
               <Center mb={2}>
@@ -99,8 +100,27 @@ export default function Sidebar() {
               <ToggleColorMode />
             </Box>
           </>
-        )}
-      </Flex>
+        </Flex>
+      )}
+
+      {!isSidebarOpen && (
+        <Box mt={12}>
+          <Stack direction='column' gap={2}>
+            <SidebarLink
+              onlyIcon
+              route='/companies'
+              label='Audit Companies'
+              icon={Building2}
+            />
+            <SidebarLink
+              onlyIcon
+              route='/products'
+              label='Products'
+              icon={BoxIcon}
+            />
+          </Stack>
+        </Box>
+      )}
     </Card>
   )
 }

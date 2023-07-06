@@ -5,6 +5,7 @@ import {
   Flex,
   Icon,
   Text,
+  Tooltip,
   useColorMode,
   useColorModeValue,
 } from '@/chakra/components'
@@ -16,10 +17,11 @@ type SidebarLinkProps = {
   route: string
   label: string
   icon: LucideIcon
+  onlyIcon?: boolean
 }
 
 export default function SidebarLink(props: SidebarLinkProps) {
-  const { route, label, icon } = props
+  const { route, label, icon, onlyIcon = false } = props
 
   const { colorMode } = useColorMode()
   const selectedLayoutSegment = useSelectedLayoutSegments()
@@ -31,6 +33,30 @@ export default function SidebarLink(props: SidebarLinkProps) {
   const activeIconColor = colorMode === 'light' ? 'teal.500' : 'teal.200'
 
   const fontWeight = active ? 800 : 500
+
+  if (onlyIcon) {
+    return (
+      <Link href={route}>
+        <Tooltip
+          hasArrow
+          placement='right'
+          label={
+            <Text fontSize={'md'} fontWeight={800}>
+              {label}
+            </Text>
+          }
+          borderRadius={'lg'}
+        >
+          <Icon
+            as={icon}
+            color={active ? activeIconColor : inactiveColor}
+            strokeWidth={active ? '2.25px' : ' 1.50px'}
+            fontSize={24}
+          />
+        </Tooltip>
+      </Link>
+    )
+  }
 
   return (
     <Link href={route}>

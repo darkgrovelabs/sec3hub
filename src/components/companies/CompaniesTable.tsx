@@ -106,7 +106,7 @@ const columns = [
                 borderRadius: '20px',
               }}
             />
-            {getValue()}
+            <Text fontWeight='bold'>{getValue()}</Text>
           </Flex>
         </Td>
       )

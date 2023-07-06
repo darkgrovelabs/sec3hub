@@ -55,12 +55,14 @@ export default function DataTableColumnHeader<TData, TValue>(
           </MenuButton>
           <MenuList minW='0' w={'100px'}>
             <MenuItem
+              fontSize={'sm'}
               icon={<ArrowUpNarrowWide size={18} />}
               onClick={() => column.toggleSorting(false)}
             >
               Asc
             </MenuItem>
             <MenuItem
+              fontSize={'sm'}
               icon={<ArrowDownNarrowWide size={18} />}
               onClick={() => column.toggleSorting(true)}
             >
@@ -68,6 +70,7 @@ export default function DataTableColumnHeader<TData, TValue>(
             </MenuItem>
             <MenuDivider />
             <MenuItem
+              fontSize={'sm'}
               icon={<EyeOff size={18} />}
               onClick={() => column.toggleVisibility(false)}
             >
