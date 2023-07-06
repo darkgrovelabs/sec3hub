@@ -59,8 +59,6 @@ export default function Navbar() {
                 placeholder={'Search...'}
               />
             </InputGroup>
-
-            <ToggleColorMode />
           </Flex>
         </Card>
       </Box>
@@ -77,18 +75,4 @@ function NavbarTitle() {
   const selectedLayoutSegment = useSelectedLayoutSegments()
 
   return <Heading fontSize={'3xl'}>{titles[selectedLayoutSegment[0]]}</Heading>
-}
-
-function ToggleColorMode() {
-  const { colorMode, toggleColorMode } = useColorMode()
-
-  return (
-    <IconButton
-      variant={'ghost'}
-      size={'sm'}
-      aria-label='Dark Theme'
-      onClick={toggleColorMode}
-      icon={colorMode === 'dark' ? <Sun /> : <Moon />}
-    />
-  )
 }
