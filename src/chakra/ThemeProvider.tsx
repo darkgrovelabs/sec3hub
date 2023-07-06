@@ -8,6 +8,8 @@ import {
 import { mode } from '@chakra-ui/theme-tools'
 import { Nunito } from 'next/font/google'
 import { cookieStorageManager } from './components'
+import Menu from './theme/menu'
+import Table from './theme/table'
 
 const font = Nunito({
   subsets: ['latin'],
@@ -35,6 +37,10 @@ export default function ThemeProvider({
     fonts: {
       heading: font.style.fontFamily,
       body: font.style.fontFamily,
+    },
+    components: {
+      Menu,
+      Table,
     },
   })
 

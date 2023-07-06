@@ -43,7 +43,7 @@ export default function Sidebar() {
               size={'xs'}
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               aria-label='hide menu'
-              icon={!isSidebarOpen ? <Redo2 /> : <Undo2 />}
+              icon={!isSidebarOpen ? <Redo2 size={22} /> : <Undo2 size={22} />}
             ></IconButton>
           </Tooltip>
         </Box>
