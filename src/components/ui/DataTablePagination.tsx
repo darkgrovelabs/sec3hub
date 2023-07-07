@@ -1,17 +1,8 @@
 'use client'
 
-import {
-  Box,
-  Button,
-  Flex,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Menu,
-  Text,
-} from '@/chakra/components'
+import { Box, Button, Flex, Text } from '@/chakra/components'
 import { Table } from '@tanstack/react-table'
-import { Check, ChevronDownIcon, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import DataTableRowsSelect from './DataTableRowsSelect'
 
 interface DataTablePaginationProps<TData> {
@@ -38,7 +29,8 @@ export default function DataTablePagination<TData>({
               <ChevronLeft />
             </Button>
             <Text>
-              Page {table.getState().pagination.pageIndex + 1} of {'TODO'}
+              Page {table.getState().pagination.pageIndex + 1} of{' '}
+              {table.getPageCount()}
             </Text>
             <Button
               size={'sm'}

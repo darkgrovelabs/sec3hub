@@ -1,11 +1,6 @@
 'use client'
 
-import Card from '../ui/Card'
-import { createColumnHelper } from '@tanstack/react-table'
-import DataTable from './DataTable'
-import DataTableColumnHeader from '../ui/DataTableColumnHeader'
 import {
-  Box,
   Flex,
   IconButton,
   Link,
@@ -15,79 +10,29 @@ import {
   Th,
   Tooltip,
 } from '@/chakra/components'
-import Image from 'next/image'
+import { TCompany } from '@/lib/companies/types'
+import formatCurrency from '@/utils/formatCurrency'
+import { createColumnHelper } from '@tanstack/react-table'
 import {
   Check,
   FileCheck,
-  Github,
   GithubIcon,
   LinkIcon,
   SendIcon,
   TwitterIcon,
 } from 'lucide-react'
-import formatCurrency from '@/utils/formatCurrency'
+import Image from 'next/image'
+import Card from '../ui/Card'
+import DataTableColumnHeader from '../ui/DataTableColumnHeader'
+import DataTable from './DataTable'
+import DataTableStickyColumn from '../ui/DataTableStickyColumn'
 
 type CompaniesTableProps = {
-  data?: []
+  initialData: TCompany[]
+  initialPageCount: number
 }
 
-type Company = {
-  name: string
-  logo_url: string
-  type: string
-  total_audits: number
-  price_per_hour?: { min: number; max: number }
-  services: string[]
-  links: {
-    twitter?: string
-    telegram?: string
-    github?: string
-    website?: string
-  }
-  sample_report: string
-  start_year: number
-}
-
-const data: Company[] = [
-  {
-    name: 'Contract Wolf',
-    logo_url:
-      'https://contractwolf.io/static/media/cwcover.62a72820d24605eca5f2.png',
-    type: 'private',
-    total_audits: 551,
-    price_per_hour: undefined,
-    services: [
-      'Contract Audit',
-      'Contract Development',
-      'web3 dApp/Website Development',
-    ],
-    links: {
-      twitter: 'https://twitter.com/contractwolf_io',
-      telegram: 'https://t.me/ContractWolfOfficial',
-      github: 'https://github.com/ContractWolf/',
-    },
-    sample_report:
-      'https://github.com/ContractWolf/smart-contract-audits/blob/main/ContractWolf_Audit_SuperOSK.pdf',
-    start_year: 2022,
-  },
-  {
-    name: 'Chain Security',
-    logo_url:
-      'https://contractwolf.io/static/media/cwcover.62a72820d24605eca5f2.png',
-    type: 'private',
-    total_audits: 100,
-    price_per_hour: undefined,
-    services: ['Contract Audit'],
-    links: {
-      twitter: 'https://twitter.com/chain_security',
-    },
-    sample_report:
-      'https://github.com/ContractWolf/smart-contract-audits/blob/main/ContractWolf_Audit_SuperOSK.pdf',
-    start_year: 2017,
-  },
-]
-
-const columnHelper = createColumnHelper<Company>()
+const columnHelper = createColumnHelper<TCompany>()
 
 export const columnHeaderNames: { [key: string]: string } = {
   name: 'Name',
@@ -127,9 +72,9 @@ const columns = [
   columnHelper.accessor('name', {
     cell: ({ row, getValue }) => {
       return (
-        <Td position={'sticky'} left={0} backdropFilter={'blur(2.5px)'}>
+        <DataTableStickyColumn>
           <Text fontWeight='bold'>{getValue()}</Text>
-        </Td>
+        </DataTableStickyColumn>
       )
     },
     header: ({ column }) => (
@@ -329,9 +274,15 @@ const columns = [
 ]
 
 export default function CompaniesTable(props: CompaniesTableProps) {
+  const { initialData, initialPageCount } = props
+
   return (
     <Card>
-      <DataTable columns={columns} data={data} />
+      <DataTable
+        columns={columns}
+        initialData={initialData}
+        initialPageCount={initialPageCount}
+      />
     </Card>
   )
 }

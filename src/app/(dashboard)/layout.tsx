@@ -17,7 +17,7 @@ export default function RootLayout({
         {/* sidebar */}
         <Sidebar />
         {/* content */}
-        <Box flex={1} minH='3000px' overflowX={'clip'}>
+        <Box flex={1} overflowX={'clip'}>
           <Navbar />
           <Box flex={1} as='section' px={4} py={6}>
             <Box mb={4}>{children}</Box>

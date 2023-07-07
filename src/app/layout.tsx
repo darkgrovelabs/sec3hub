@@ -1,4 +1,5 @@
-import ThemeProvider from '@/chakra/ThemeProvider'
+import ThemeProvider from '@/providers/ChakraThemeProvider'
+import QueryClientProvider from '@/providers/QueryClientProvider'
 import './globals.css'
 import { cookies } from 'next/headers'
 
@@ -25,7 +26,9 @@ export default function RootLayout({
     >
       <head />
       <body className={`chakra-ui-${uiColorMode}`}>
-        <ThemeProvider colorMode={uiColorMode}>{children}</ThemeProvider>
+        <QueryClientProvider>
+          <ThemeProvider colorMode={uiColorMode}>{children}</ThemeProvider>
+        </QueryClientProvider>
       </body>
     </html>
   )

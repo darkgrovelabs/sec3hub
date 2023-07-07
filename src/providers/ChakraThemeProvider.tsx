@@ -7,10 +7,10 @@ import {
 } from '@chakra-ui/react'
 import { mode } from '@chakra-ui/theme-tools'
 import { Nunito } from 'next/font/google'
-import { cookieStorageManager } from './components'
-import Menu from './theme/menu'
-import Table from './theme/table'
-import Text from './theme/text'
+import { cookieStorageManager } from '../chakra/components'
+import Menu from '../chakra/theme/menu'
+import Table from '../chakra/theme/table'
+import Text from '../chakra/theme/text'
 
 const font = Nunito({
   subsets: ['latin'],

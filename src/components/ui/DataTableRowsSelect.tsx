@@ -28,7 +28,7 @@ export default function DataTableRowsSelect<TData>(
           Show by {pageSize}
         </MenuButton>
         <MenuList minW={'0'}>
-          {[10, 20, 30, 40, 50].map((size) => {
+          {[5, 10, 20, 30, 40, 50].map((size) => {
             return (
               <MenuItem
                 key={size}
