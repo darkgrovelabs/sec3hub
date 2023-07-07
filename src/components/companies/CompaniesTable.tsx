@@ -12,6 +12,7 @@ import {
   Stack,
   Td,
   Text,
+  Th,
   Tooltip,
 } from '@/chakra/components'
 import Image from 'next/image'
@@ -88,31 +89,55 @@ const data: Company[] = [
 
 const columnHelper = createColumnHelper<Company>()
 
+export const columnHeaderNames: { [key: string]: string } = {
+  name: 'Name',
+  type: 'Type',
+  services: 'Services',
+  total_audits: 'Audits',
+  price_per_hour: 'Fee (H/USD)',
+  links: 'Links',
+  sample_report: 'Sample Report',
+  start_year: 'Year',
+}
+
 const columns = [
+  columnHelper.accessor('logo_url', {
+    cell: ({ row, getValue }) => {
+      return (
+        <Td minW={'40px'} maxW={'40px'} pl={2} pr={0}>
+          <Image
+            width={120}
+            height={120}
+            src={getValue()}
+            alt={`Company ${getValue()} Logo`}
+            style={{
+              objectFit: 'cover',
+              width: '40px',
+              height: '40px',
+              borderRadius: '20px',
+            }}
+          />
+        </Td>
+      )
+    },
+    header: ({ column }) => <Th minW={'40px'} maxW={'40px'} pl={2} pr={0}></Th>,
+    enableSorting: false,
+    enableHiding: false,
+  }),
   columnHelper.accessor('name', {
     cell: ({ row, getValue }) => {
       return (
-        <Td>
-          <Flex gap={3} align={'center'}>
-            <Image
-              width={120}
-              height={120}
-              src={row.original.logo_url}
-              alt={`Company ${row.original.logo_url} Logo`}
-              style={{
-                objectFit: 'cover',
-                width: '40px',
-                height: '40px',
-                borderRadius: '20px',
-              }}
-            />
-            <Text fontWeight='bold'>{getValue()}</Text>
-          </Flex>
+        <Td position={'sticky'} left={0} backdropFilter={'blur(2.5px)'}>
+          <Text fontWeight='bold'>{getValue()}</Text>
         </Td>
       )
     },
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Name' />
+      <DataTableColumnHeader
+        column={column}
+        title={columnHeaderNames['name']}
+        sticky
+      />
     ),
     enableSorting: true,
   }),
@@ -148,7 +173,10 @@ const columns = [
       )
     },
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Services' />
+      <DataTableColumnHeader
+        column={column}
+        title={columnHeaderNames['services']}
+      />
     ),
     enableSorting: false,
   }),
@@ -157,7 +185,11 @@ const columns = [
       return <Td isNumeric>{getValue()}</Td>
     },
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Audits' isNumeric />
+      <DataTableColumnHeader
+        column={column}
+        title={columnHeaderNames['total_audits']}
+        isNumeric
+      />
     ),
     enableSorting: true,
   }),
@@ -173,7 +205,11 @@ const columns = [
       )
     },
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Fee (H/USD)' isNumeric />
+      <DataTableColumnHeader
+        column={column}
+        title={columnHeaderNames['price_per_hour']}
+        isNumeric
+      />
     ),
     enableSorting: false,
   }),
@@ -200,7 +236,10 @@ const columns = [
       )
     },
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Report sample' />
+      <DataTableColumnHeader
+        column={column}
+        title={columnHeaderNames['sample_report']}
+      />
     ),
     enableSorting: false,
   }),
@@ -209,7 +248,11 @@ const columns = [
       return <Td isNumeric>{getValue()}</Td>
     },
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Year' isNumeric />
+      <DataTableColumnHeader
+        column={column}
+        title={columnHeaderNames['start_year']}
+        isNumeric
+      />
     ),
     enableSorting: true,
   }),
@@ -276,7 +319,10 @@ const columns = [
       )
     },
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Links' />
+      <DataTableColumnHeader
+        column={column}
+        title={columnHeaderNames['links']}
+      />
     ),
     enableSorting: false,
   }),

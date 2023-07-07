@@ -10,6 +10,7 @@ import { Nunito } from 'next/font/google'
 import { cookieStorageManager } from './components'
 import Menu from './theme/menu'
 import Table from './theme/table'
+import Text from './theme/text'
 
 const font = Nunito({
   subsets: ['latin'],
@@ -40,6 +41,7 @@ export default function ThemeProvider({
     },
     components: {
       Menu,
+      Text,
       Table,
     },
   })

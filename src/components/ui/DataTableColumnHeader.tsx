@@ -10,6 +10,7 @@ import {
   MenuItem,
   MenuList,
   Th,
+  useColorModeValue,
 } from '@/chakra/components'
 import { Column } from '@tanstack/react-table'
 import {
@@ -24,19 +25,36 @@ interface DataTableColumnHeaderProps<TData, TValue>
   column: Column<TData, TValue>
   title: string
   isNumeric?: boolean
+  sticky?: boolean
 }
 
 export default function DataTableColumnHeader<TData, TValue>(
   props: DataTableColumnHeaderProps<TData, TValue>
 ) {
-  const { column, title, isNumeric = false, className } = props
+  const { column, title, isNumeric = false, sticky = false, className } = props
+  const bgColor = useColorModeValue('#F6F6F7', '#252529')
 
   if (!column.getCanSort()) {
-    return <Th isNumeric={isNumeric}>{title}</Th>
+    return (
+      <Th
+        position={sticky ? 'sticky' : 'relative'}
+        bg={sticky ? bgColor : 'auto'}
+        zIndex={sticky ? 1 : 0}
+        left={0}
+        isNumeric={isNumeric}
+      >
+        {title}
+      </Th>
+    )
   }
 
   return (
-    <Th>
+    <Th
+      position={sticky ? 'sticky' : 'relative'}
+      bg={sticky ? bgColor : 'auto'}
+      left={0}
+      zIndex={sticky ? 1 : 0}
+    >
       <Flex
         justify={isNumeric ? 'flex-end' : 'flex-start'}
         align={'center'}

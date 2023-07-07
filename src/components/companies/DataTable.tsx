@@ -1,6 +1,12 @@
 'use client'
 
 import {
+  Box,
+  Flex,
+  Icon,
+  Input,
+  InputGroup,
+  InputLeftElement,
   Table,
   TableContainer,
   Tbody,
@@ -19,6 +25,8 @@ import {
 } from '@tanstack/react-table'
 import { Fragment, useState } from 'react'
 import DataTablePagination from '../ui/DataTablePagination'
+import DataTableViewOptions from '../ui/DataTableViewOptions'
+import { Search } from 'lucide-react'
 
 export type DataTableProps<Data extends object> = {
   data: Data[]
@@ -32,6 +40,7 @@ export default function DataTable<Data extends object>({
   const [sorting, setSorting] = useState<SortingState>([])
   const table = useReactTable({
     columns,
+    enablePinning: true,
     data,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
@@ -43,7 +52,27 @@ export default function DataTable<Data extends object>({
 
   return (
     <>
-      <TableContainer mb={4}>
+      <Flex align={'center'} gap={2} mb={6}>
+        <Box flex={1}>
+          <InputGroup size={'sm'}>
+            <InputLeftElement>
+              <Icon as={Search} />
+            </InputLeftElement>
+
+            <Input
+              minW={'15rem'}
+              // maxW={'20rem'}
+              borderRadius={'lg'}
+              placeholder={
+                'Search by Company name / type / services / fees ...'
+              }
+            />
+          </InputGroup>
+        </Box>
+        <DataTableViewOptions table={table} />
+      </Flex>
+
+      <TableContainer mb={6}>
         <Table variant='simple'>
           {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
           <Thead>

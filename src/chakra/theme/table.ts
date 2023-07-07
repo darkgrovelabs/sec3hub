@@ -1,5 +1,4 @@
 import { StyleConfig } from '@chakra-ui/theme-tools'
-import { mode } from '@chakra-ui/theme-tools'
 
 const Table: StyleConfig = {
   variants: {
