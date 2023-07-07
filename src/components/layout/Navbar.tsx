@@ -42,7 +42,7 @@ export default function Navbar() {
           <NavbarTitle />
         </Box>
 
-        <Card borderRadius={'3xl'} p={2}>
+        {/* <Card borderRadius={'3xl'} p={2}>
           <Flex align={'center'} gap={1}>
             <InputGroup>
               <InputLeftElement>
@@ -58,7 +58,7 @@ export default function Navbar() {
               />
             </InputGroup>
           </Flex>
-        </Card>
+        </Card> */}
       </Box>
     </>
   )

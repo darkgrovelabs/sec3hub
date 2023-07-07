@@ -2,13 +2,14 @@
 
 import {
   Box,
+  Button,
   Flex,
   Icon,
-  IconButton,
   Input,
   InputGroup,
   InputLeftElement,
-  InputRightElement,
+  Skeleton,
+  Spacer,
   Table,
   TableContainer,
   Tbody,
@@ -29,10 +30,11 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { Search, XCircle } from 'lucide-react'
+import { Search, XCircle, XCircleIcon } from 'lucide-react'
 import { Fragment, useMemo, useState } from 'react'
 import DataTablePagination from '../ui/DataTablePagination'
 import DataTableViewOptions from '../ui/DataTableViewOptions'
+import useDebounce from '@/hooks/useDebounce'
 
 export type DataTableProps = {
   initialData: TCompany[]
@@ -47,10 +49,18 @@ export default function DataTable({
 }: DataTableProps) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [sorting, setSorting] = useState<SortingState>([])
+  const [keyword, setKeyword] = useState<string>('')
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 5,
   })
+  const debouncecKeyword = useDebounce(keyword, 500)
+  const canReset = debouncecKeyword || sorting.length > 0
+
+  const resetFilters = () => {
+    setKeyword('')
+    setSorting([])
+  }
 
   const { order, sort } = useMemo(() => {
     if (!sorting.length) return { order: 'asc', sort: 'id' }
@@ -58,13 +68,21 @@ export default function DataTable({
   }, [sorting])
 
   const query = useQuery<TResultGetCompany>(
-    ['companies', pagination.pageIndex, pagination.pageSize, order, sort],
+    [
+      'companies',
+      pagination.pageIndex,
+      pagination.pageSize,
+      order,
+      sort,
+      debouncecKeyword,
+    ],
     () =>
       getCompanies({
         page: pagination.pageIndex,
         limit: pagination.pageSize,
         order,
         sort,
+        keyword: debouncecKeyword,
       }),
     {
       initialData: { data: initialData, pageCount: initialPageCount },
@@ -92,32 +110,36 @@ export default function DataTable({
 
   return (
     <>
-      <Flex align={'center'} gap={2} mb={6}>
-        <Box display={'flex'} flex={1}>
-          <Box>
-            <InputGroup>
-              <InputLeftElement>
-                <Icon as={Search} />
-              </InputLeftElement>
+      <Flex align={'center'} gap={2} mb={6} flexWrap={'wrap'}>
+        <Box>
+          <InputGroup>
+            <InputLeftElement>
+              <Icon as={Search} />
+            </InputLeftElement>
 
-              <Input
-                maxW={'30rem'}
-                borderRadius={'lg'}
-                placeholder={
-                  'Search by Company name / type / services / fees ...'
-                }
-              />
-              <InputRightElement>
-                <IconButton
-                  size='sm'
-                  variant={'ghost'}
-                  aria-label='Clear results'
-                  icon={<XCircle size={16} />}
-                />
-              </InputRightElement>
-            </InputGroup>
-          </Box>
+            <Input
+              minW={'md'}
+              borderRadius={'lg'}
+              placeholder={
+                'Search by Company name / type / services / fees ...'
+              }
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+            />
+          </InputGroup>
         </Box>
+        {canReset && (
+          <Box>
+            <Button
+              onClick={resetFilters}
+              variant={'outline'}
+              rightIcon={<XCircleIcon size={17} />}
+            >
+              Reset
+            </Button>
+          </Box>
+        )}
+        <Spacer />
         <DataTableViewOptions table={table} />
       </Flex>
 
@@ -142,28 +164,44 @@ export default function DataTable({
               </Tr>
             ))}
           </Thead>
-          <Tbody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <Tr key={row.id} pb={4}>
-                  {row.getVisibleCells().map((cell) => (
-                    <Fragment key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </Fragment>
-                  ))}
+
+          {query.isFetching && (
+            <Tbody>
+              {Array.from({ length: pagination.pageSize }, Math.random).map(
+                (_, i) => (
+                  <Tr key={i}>
+                    <Td colSpan={columns.length}>
+                      <Skeleton h='2.5em'></Skeleton>
+                    </Td>
+                  </Tr>
+                )
+              )}
+            </Tbody>
+          )}
+          {!query.isFetching && (
+            <Tbody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <Tr key={row.id} pb={4}>
+                    {row.getVisibleCells().map((cell) => (
+                      <Fragment key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </Fragment>
+                    ))}
+                  </Tr>
+                ))
+              ) : (
+                <Tr>
+                  <Td colSpan={columns.length}>
+                    <Text textAlign={'center'}> No results.</Text>
+                  </Td>
                 </Tr>
-              ))
-            ) : (
-              <Tr>
-                <Td colSpan={columns.length}>
-                  <Text textAlign={'center'}> No results.</Text>
-                </Td>
-              </Tr>
-            )}
-          </Tbody>
+              )}
+            </Tbody>
+          )}
         </Table>
       </TableContainer>
 

@@ -20,20 +20,20 @@ export default function DataTablePagination<TData>({
         </Box>
 
         <Box>
-          <Flex gap={2} align='center'>
+          <Flex gap={4} align='center'>
             <Button
-              size={'sm'}
+              variant={'outline'}
               onClick={() => table.previousPage()}
               isDisabled={!table.getCanPreviousPage()}
             >
               <ChevronLeft />
             </Button>
-            <Text>
+            <Text fontWeight={700}>
               Page {table.getState().pagination.pageIndex + 1} of{' '}
               {table.getPageCount()}
             </Text>
             <Button
-              size={'sm'}
+              variant={'outline'}
               onClick={() => table.nextPage()}
               isDisabled={!table.getCanNextPage()}
             >

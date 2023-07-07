@@ -24,7 +24,11 @@ export default function DataTableRowsSelect<TData>(
   return (
     <>
       <Menu matchWidth>
-        <MenuButton as={Button} rightIcon={<ChevronDownIcon />} size={'sm'}>
+        <MenuButton
+          as={Button}
+          variant={'outline'}
+          rightIcon={<ChevronDownIcon />}
+        >
           Show by {pageSize}
         </MenuButton>
         <MenuList minW={'0'}>

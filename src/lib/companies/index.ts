@@ -1,4 +1,3 @@
-import mock from './mock.json'
 import { TResultGetCompany } from './types'
 
 type TGetCompanyProps = {
@@ -6,7 +5,7 @@ type TGetCompanyProps = {
   page?: number
   order?: string
   sort?: string
-  keywords?: string
+  keyword?: string
 }
 
 async function getCompanies(
@@ -20,8 +19,8 @@ async function getCompanies(
 
   let url = `https://backbonez.fly.dev/companies?page=${page}&limit=${limit}&order=${order}&sort=${sort}`
 
-  if (props?.keywords) {
-    url += `&keywords=${props.keywords}`
+  if (props?.keyword) {
+    url += `&keyword=${props.keyword}`
   }
 
   const res = await fetch(
@@ -38,7 +37,7 @@ async function getCompanies(
   }
 
   const data = await res.json()
-  const rowCount = props?.keywords
+  const rowCount = props?.keyword
     ? res.headers.get('x-keyword-count')
     : res.headers.get('x-row-count')
 

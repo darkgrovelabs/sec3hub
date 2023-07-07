@@ -14,13 +14,7 @@ export default function DataTableStickyColumn(
   const bgColor = useColorModeValue('#F6F6F7', '#252529')
 
   return (
-    <Td
-      position={'sticky'}
-      bg={bgColor}
-      zIndex={1}
-      left={0}
-      isNumeric={isNumeric}
-    >
+    <Td position={'sticky'} bg={bgColor} left={0} isNumeric={isNumeric}>
       {children}
     </Td>
   )

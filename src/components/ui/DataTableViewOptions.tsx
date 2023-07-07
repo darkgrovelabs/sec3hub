@@ -28,8 +28,8 @@ export default function DataTableViewOptions<TData>({
     <Menu>
       <MenuButton
         as={Button}
+        variant={'outline'}
         rightIcon={<SlidersHorizontalIcon size={16} />}
-        size={'sm'}
       >
         View
       </MenuButton>
