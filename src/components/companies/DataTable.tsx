@@ -85,7 +85,11 @@ export default function DataTable({
         keyword: debouncecKeyword,
       }),
     {
-      initialData: { data: initialData, pageCount: initialPageCount },
+      initialData: {
+        data: initialData,
+        pageCount: initialPageCount,
+        rowCount: 0,
+      },
       keepPreviousData: true,
     }
   )
@@ -170,8 +174,8 @@ export default function DataTable({
               {Array.from({ length: pagination.pageSize }, Math.random).map(
                 (_, i) => (
                   <Tr key={i}>
-                    <Td colSpan={columns.length}>
-                      <Skeleton h='2.5em'></Skeleton>
+                    <Td px={0} py={4} colSpan={columns.length}>
+                      <Skeleton border={'0'} h='3em'></Skeleton>
                     </Td>
                   </Tr>
                 )

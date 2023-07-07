@@ -44,6 +44,7 @@ async function getCompanies(
   return {
     data,
     pageCount: Math.ceil(Number(rowCount) / limit),
+    rowCount: Number(rowCount),
   }
 }
 

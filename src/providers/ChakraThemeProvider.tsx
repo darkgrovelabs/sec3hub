@@ -11,6 +11,7 @@ import { cookieStorageManager } from '../chakra/components'
 import Menu from '../chakra/theme/menu'
 import Table from '../chakra/theme/table'
 import Text from '../chakra/theme/text'
+import Skeleton from '../chakra/theme/skeleton'
 
 const font = Nunito({
   subsets: ['latin'],
@@ -43,6 +44,7 @@ export default function ThemeProvider({
       Menu,
       Text,
       Table,
+      Skeleton,
     },
   })
 

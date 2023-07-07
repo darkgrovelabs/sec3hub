@@ -18,4 +18,5 @@ export type TCompany = {
 export type TResultGetCompany = {
   data: TCompany[]
   pageCount: number
+  rowCount: number
 }

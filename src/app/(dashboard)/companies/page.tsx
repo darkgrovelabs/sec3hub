@@ -1,3 +1,4 @@
+import { Box } from '@/chakra/components'
 import CompaniesTable from '@/components/companies/CompaniesTable'
 import Widgets from '@/components/companies/Widgets'
 import { getCompanies } from '@/lib/companies'
@@ -9,11 +10,13 @@ export const metadata = {
 
 export default async function Companies() {
   // initial request
-  const { data, pageCount } = await getCompanies()
+  const { data, pageCount, rowCount } = await getCompanies()
 
   return (
     <>
-      <Widgets />
+      <Box mb={4}>
+        <Widgets companies={rowCount} />
+      </Box>
       <CompaniesTable initialData={data} initialPageCount={pageCount} />
     </>
   )
