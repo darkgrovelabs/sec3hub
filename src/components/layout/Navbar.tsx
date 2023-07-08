@@ -2,27 +2,45 @@
 
 import {
   Box,
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
   Flex,
   Heading,
   Icon,
+  IconButton,
   Input,
   InputGroup,
   InputLeftElement,
+  Text,
+  useColorModeValue,
+  useDisclosure,
 } from '@/chakra/components'
-import { useSelectedLayoutSegments } from 'next/navigation'
-
-import { Search } from 'lucide-react'
+import { usePathname, useSelectedLayoutSegments } from 'next/navigation'
+import logo from 'public/images/logo.webp'
+import { Menu, Search } from 'lucide-react'
 import Card from '../ui/Card'
+import Image from 'next/image'
+import { useEffect, useRef } from 'react'
+import SidebarContent from './SidebarContent'
 
 export default function Navbar() {
   return (
     <>
       <Box
-        zIndex={1}
+        zIndex={'sticky'}
         as='nav'
         position={'sticky'}
-        top={2}
-        backdropFilter={'blur(15px)'}
+        top={{ base: 0, xl: 2 }}
+        mx={{ base: 0, xl: 2 }}
+        px={4}
+        minH={{ base: '60px', xl: '70px' }}
+        backdropFilter={'blur(20px)'}
         backgroundPosition='center'
         backgroundSize='cover'
         borderRadius='xl'
@@ -30,14 +48,27 @@ export default function Navbar() {
         transitionDuration=' 0.25s, 0.25s, 0.25s, 0s'
         transition-property='box-shadow, background-color, filter, border'
         transitionTimingFunction='linear, linear, linear, linear'
-        minH='80px'
-        padding={2}
-        mx={2}
         display={'flex'}
         alignContent={'center'}
         alignItems={'center'}
-        justifyContent={'space-between'}
+        // justifyContent={'space-between'}
       >
+        <Flex
+          align={'center'}
+          display={{ base: 'flex', xl: 'none' }}
+          gap={2}
+          mr={2}
+        >
+          <MobileMenu />
+
+          <Image
+            src={logo.src}
+            width={35}
+            height={35}
+            alt='Logo SEC3HUB'
+          ></Image>
+        </Flex>
+
         <Box>
           <NavbarTitle />
         </Box>
@@ -69,8 +100,61 @@ const titles: { [key: string]: string } = {
   products: 'Products',
 }
 
+function MobileMenu() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = useRef<HTMLButtonElement>(null)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    if (isOpen) onClose()
+  }, [pathname])
+
+  return (
+    <>
+      <IconButton
+        onClick={onOpen}
+        ref={btnRef}
+        size={'sm'}
+        variant={'outline'}
+        aria-label='Open menu'
+        icon={<Menu size={20} />}
+      />
+
+      <Drawer
+        isOpen={isOpen}
+        placement='left'
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent bg={useColorModeValue('#F6F6F7', '#252529')} p={4}>
+          <DrawerCloseButton />
+
+          <SidebarContent />
+          {/* <DrawerHeader>Create your account</DrawerHeader>
+
+          <DrawerBody>
+            <Input placeholder='Type here...' />
+          </DrawerBody>
+
+          <DrawerFooter>
+            <Button variant='outline' mr={3} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button colorScheme='blue'>Save</Button>
+          </DrawerFooter> */}
+        </DrawerContent>
+      </Drawer>
+    </>
+  )
+}
+
 function NavbarTitle() {
   const selectedLayoutSegment = useSelectedLayoutSegments()
 
-  return <Heading fontSize={'3xl'}>{titles[selectedLayoutSegment[0]]}</Heading>
+  return (
+    <Heading fontSize={{ base: '2xl', xl: '3xl' }} lineHeight={0}>
+      {titles[selectedLayoutSegment[0]]}
+    </Heading>
+  )
 }

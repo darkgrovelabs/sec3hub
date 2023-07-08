@@ -148,7 +148,7 @@ export default function DataTable({
       </Flex>
 
       <TableContainer mb={6}>
-        <Table variant='simple'>
+        <Table variant='simple' size={{ base: 'sm', xl: 'md' }}>
           {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
