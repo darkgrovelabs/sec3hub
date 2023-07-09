@@ -42,6 +42,7 @@ export default function DataTableColumnHeader<TData, TValue>(
         zIndex={sticky ? 1 : 0}
         left={0}
         isNumeric={isNumeric}
+        className={className}
       >
         {title}
       </Th>
@@ -50,10 +51,11 @@ export default function DataTableColumnHeader<TData, TValue>(
 
   return (
     <Th
-      position={sticky ? 'sticky' : 'relative'}
+      position={sticky ? 'sticky' : 'initial'}
       bg={sticky ? bgColor : 'auto'}
       left={0}
       zIndex={sticky ? 1 : 0}
+      className={className}
     >
       <Flex
         justify={isNumeric ? 'flex-end' : 'flex-start'}

@@ -30,7 +30,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { Search, XCircle, XCircleIcon } from 'lucide-react'
+import { Search, XCircleIcon } from 'lucide-react'
 import { Fragment, useMemo, useState } from 'react'
 import DataTablePagination from '../ui/DataTablePagination'
 import DataTableViewOptions from '../ui/DataTableViewOptions'
@@ -69,18 +69,16 @@ export default function DataTable({
     return { order: sorting[0].desc ? 'desc' : 'asc', sort: sorting[0].id }
   }, [sorting])
 
-  const triggersRequest = [
-    'companies',
-    pagination.pageIndex,
-    pagination.pageSize,
-    order,
-    sort,
-    debouncecKeyword,
-  ]
-
-  const query = useQuery<TResultGetCompany>(
-    triggersRequest,
-    () =>
+  const query = useQuery<TResultGetCompany>({
+    queryKey: [
+      'companies',
+      pagination.pageIndex,
+      pagination.pageSize,
+      order,
+      sort,
+      debouncecKeyword,
+    ],
+    queryFn: () =>
       getCompanies({
         page: pagination.pageIndex,
         limit: pagination.pageSize,
@@ -88,16 +86,14 @@ export default function DataTable({
         sort,
         keyword: debouncecKeyword,
       }),
-    {
-      initialData: {
-        data: initialData,
-        pageCount: initialPageCount,
-        rowCount: 0,
-      },
-      keepPreviousData: true,
-      staleTime: Infinity,
-    }
-  )
+    initialData: {
+      data: initialData,
+      pageCount: initialPageCount,
+      rowCount: 0,
+    },
+
+    keepPreviousData: true,
+  })
 
   const table = useReactTable({
     data: query.data.data,
@@ -119,15 +115,20 @@ export default function DataTable({
 
   return (
     <>
-      <Flex align={'center'} gap={2} mb={6} flexWrap={'wrap'}>
-        <Box>
+      <Flex
+        align={{ base: 'start', md: 'center' }}
+        gap={2}
+        mb={6}
+        flexWrap={'wrap'}
+        // flexDir={{ base: 'column', md: 'row' }}
+      >
+        <Box w={{ base: '100%', md: 'md' }}>
           <InputGroup>
             <InputLeftElement>
               <Icon as={Search} />
             </InputLeftElement>
 
             <Input
-              minW={'md'}
               borderRadius={'lg'}
               placeholder={
                 'Search by Company name / type / services / fees ...'
@@ -137,9 +138,11 @@ export default function DataTable({
             />
           </InputGroup>
         </Box>
+
         {canReset && (
           <Box>
             <Button
+              colorScheme='primary'
               onClick={resetFilters}
               variant={'outline'}
               rightIcon={<XCircleIcon size={17} />}
@@ -148,6 +151,7 @@ export default function DataTable({
             </Button>
           </Box>
         )}
+
         <Spacer />
         <DataTableViewOptions
           columnHeaderNames={columnHeaderNames}

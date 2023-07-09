@@ -4,7 +4,7 @@ import { Card, CardBody } from '@/chakra/components'
 import { TCompany } from '@/lib/companies/types'
 
 import DataTable from './DataTable'
-import columns, { columnHeaderNames } from './columns'
+import { columns, columnHeaderNames } from './Columns'
 
 type CompaniesTableProps = {
   initialData: TCompany[]

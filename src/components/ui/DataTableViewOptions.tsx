@@ -30,7 +30,7 @@ export default function DataTableViewOptions<TData>({
       <MenuButton
         as={Button}
         variant={'outline'}
-        rightIcon={<SlidersHorizontalIcon size={16} />}
+        rightIcon={<SlidersHorizontalIcon size={17} />}
       >
         View
       </MenuButton>
@@ -50,7 +50,7 @@ export default function DataTableViewOptions<TData>({
               >
                 {columnHeaderNames[column.id]}
                 <Spacer />
-                {column.getIsVisible() ? <Check size={18} /> : undefined}
+                {column.getIsVisible() ? <Check size={17} /> : undefined}
               </MenuItem>
             )
           })}

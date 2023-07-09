@@ -14,7 +14,12 @@ export default function DataTablePagination<TData>({
 }: DataTablePaginationProps<TData>) {
   return (
     <>
-      <Flex justifyContent={'space-between'} align={'center'}>
+      <Flex
+        justifyContent={{ base: 'initial', md: 'space-between' }}
+        align={{ base: 'center', md: 'center' }}
+        flexDir={{ base: 'column', md: 'row' }}
+        gap={4}
+      >
         <Box flex={1}>
           <DataTableRowsSelect table={table} />
         </Box>

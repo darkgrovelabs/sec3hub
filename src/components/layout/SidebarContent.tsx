@@ -58,7 +58,7 @@ export default function SidebarContent(props: SidebarContentProps) {
               <Text as='span' fontWeight={800}>
                 SEC3
               </Text>{' '}
-              <Text as='span' color='#F4B658'>
+              <Text as='span' color='red.500'>
                 HUB
               </Text>
             </Text>

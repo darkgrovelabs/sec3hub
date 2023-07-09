@@ -3,6 +3,7 @@ export type TCompany = {
   logo_url: string
   type: string
   total_audits: number
+  up_votes: number
   price_per_hour?: { min: number; max: number }
   services: string[]
   links: {

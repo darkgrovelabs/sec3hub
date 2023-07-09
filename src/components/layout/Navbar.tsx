@@ -36,8 +36,8 @@ export default function Navbar() {
         as='nav'
         position={'sticky'}
         top={{ base: 0, xl: 2 }}
-        mx={{ base: 0, xl: 2 }}
-        px={4}
+        mx={{ base: 0, xl: 3 }}
+        px={3}
         minH={{ base: '60px', xl: '70px' }}
         backdropFilter={'blur(20px)'}
         backgroundPosition='center'

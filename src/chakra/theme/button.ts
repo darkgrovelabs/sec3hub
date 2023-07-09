@@ -6,13 +6,13 @@ const Button: StyleConfig = {
     gradient: (props) => ({
       ...theme.components.Button.variants?.solid(props),
       fontWeight: 700,
-      bgGradient: 'linear(to-r, primary.400, red.700)',
+      bgGradient: 'linear(to-r, primary.300, red.800)',
       color: 'white',
       _hover: {
-        bgGradient: 'linear(to-r, red.400, primary.700)',
+        bgGradient: 'linear(to-r, red.800, primary.300)',
       },
       _focus: {
-        bgGradient: 'linear(to-r, red.400, primary.700)',
+        bgGradient: 'linear(to-r, red.800, primary.300)',
       },
       //   bg: 'primary.500',
       //   _hover: {
