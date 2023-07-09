@@ -24,7 +24,6 @@ import {
 import { usePathname, useSelectedLayoutSegments } from 'next/navigation'
 import logo from 'public/images/logo.webp'
 import { Menu, Search } from 'lucide-react'
-import Card from '../ui/Card'
 import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import SidebarContent from './SidebarContent'
@@ -127,7 +126,7 @@ function MobileMenu() {
         finalFocusRef={btnRef}
       >
         <DrawerOverlay />
-        <DrawerContent bg={useColorModeValue('#F6F6F7', '#252529')} p={4}>
+        <DrawerContent bg={useColorModeValue('#fff', '#0E0E0E')} p={4}>
           <DrawerCloseButton />
 
           <SidebarContent />
@@ -153,7 +152,12 @@ function NavbarTitle() {
   const selectedLayoutSegment = useSelectedLayoutSegments()
 
   return (
-    <Heading fontSize={{ base: '2xl', xl: '3xl' }} lineHeight={0}>
+    <Heading
+      bgGradient='linear(to-r, primary.300, red.800)'
+      bgClip='text'
+      fontWeight={800}
+      fontSize={{ base: '2xl', xl: '3xl' }}
+    >
       {titles[selectedLayoutSegment[0]]}
     </Heading>
   )

@@ -2,7 +2,7 @@
 
 import { SimpleGrid } from '@/chakra/components'
 import WidgetCard from '@/components/ui/WidgetCard'
-import { DollarSign, ListOrdered, ShieldCheck } from 'lucide-react'
+import { ListOrdered, ShieldCheck } from 'lucide-react'
 
 type WidgetsProps = {
   companies: number

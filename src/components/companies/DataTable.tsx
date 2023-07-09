@@ -39,11 +39,13 @@ import useDebounce from '@/hooks/useDebounce'
 export type DataTableProps = {
   initialData: TCompany[]
   initialPageCount: number
+  columnHeaderNames: Record<string, string>
   columns: ColumnDef<TCompany, any>[]
 }
 
 export default function DataTable({
   initialData,
+  columnHeaderNames,
   initialPageCount,
   columns,
 }: DataTableProps) {
@@ -144,7 +146,10 @@ export default function DataTable({
           </Box>
         )}
         <Spacer />
-        <DataTableViewOptions table={table} />
+        <DataTableViewOptions
+          columnHeaderNames={columnHeaderNames}
+          table={table}
+        />
       </Flex>
 
       <TableContainer mb={6}>

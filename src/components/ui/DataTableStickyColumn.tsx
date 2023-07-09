@@ -11,7 +11,7 @@ export default function DataTableStickyColumn(
   props: DataTableStickyColumnProps
 ) {
   const { children, isNumeric = false } = props
-  const bgColor = useColorModeValue('#F6F6F7', '#252529')
+  const bgColor = useColorModeValue('#fff', '#0E0E0E')
 
   return (
     <Td position={'sticky'} bg={bgColor} left={0} isNumeric={isNumeric}>

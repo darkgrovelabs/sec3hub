@@ -30,7 +30,7 @@ export default function SidebarLink(props: SidebarLinkProps) {
   const activeColor = colorMode === 'light' ? 'gray.900' : 'white'
   const inactiveColor =
     colorMode === 'light' ? 'blackAlpha.600' : 'whiteAlpha.600'
-  const activeIconColor = colorMode === 'light' ? 'teal.500' : 'teal.200'
+  const activeIconColor = 'primary.300'
 
   const fontWeight = active ? 800 : 500
 

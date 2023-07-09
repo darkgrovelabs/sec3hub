@@ -58,14 +58,16 @@ export default function SidebarContent(props: SidebarContentProps) {
               <Text as='span' fontWeight={800}>
                 SEC3
               </Text>{' '}
-              HUB
+              <Text as='span' color='#F4B658'>
+                HUB
+              </Text>
             </Text>
           </Center>
 
           <Divider my={4} />
 
           <Box mb={8}>
-            <Button w='100%' colorScheme='teal' size={'sm'} fontWeight={700}>
+            <Button w='100%' variant={'gradient'} size={'sm'} fontWeight={700}>
               Connect your wallet
             </Button>
           </Box>

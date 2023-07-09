@@ -15,14 +15,15 @@ import {
   SlidersHorizontalIcon,
   ViewIcon,
 } from 'lucide-react'
-import { columnHeaderNames } from '../companies/CompaniesTable'
 
 interface DataTableViewOptionsProps<TData> {
   table: Table<TData>
+  columnHeaderNames: Record<string, string>
 }
 
 export default function DataTableViewOptions<TData>({
   table,
+  columnHeaderNames,
 }: DataTableViewOptionsProps<TData>) {
   return (
     <Menu>

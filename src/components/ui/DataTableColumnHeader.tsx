@@ -32,7 +32,7 @@ export default function DataTableColumnHeader<TData, TValue>(
   props: DataTableColumnHeaderProps<TData, TValue>
 ) {
   const { column, title, isNumeric = false, sticky = false, className } = props
-  const bgColor = useColorModeValue('#F6F6F7', '#252529')
+  const bgColor = useColorModeValue('#fff', '#0E0E0E')
 
   if (!column.getCanSort()) {
     return (
