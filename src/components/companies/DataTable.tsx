@@ -69,15 +69,17 @@ export default function DataTable({
     return { order: sorting[0].desc ? 'desc' : 'asc', sort: sorting[0].id }
   }, [sorting])
 
+  const triggersRequest = [
+    'companies',
+    pagination.pageIndex,
+    pagination.pageSize,
+    order,
+    sort,
+    debouncecKeyword,
+  ]
+
   const query = useQuery<TResultGetCompany>(
-    [
-      'companies',
-      pagination.pageIndex,
-      pagination.pageSize,
-      order,
-      sort,
-      debouncecKeyword,
-    ],
+    triggersRequest,
     () =>
       getCompanies({
         page: pagination.pageIndex,
@@ -93,6 +95,7 @@ export default function DataTable({
         rowCount: 0,
       },
       keepPreviousData: true,
+      staleTime: Infinity,
     }
   )
 
