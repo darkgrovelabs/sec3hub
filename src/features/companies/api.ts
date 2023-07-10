@@ -7,13 +7,26 @@ import {
 export const VOTE_SIGN_MESSAGE =
   'Please sign the transaction to upvote this company. It wont cost you any gas. Thanks!'
 
+export interface ResponseError extends Error {
+  statusCode?: number
+}
+
+export class ResponseError extends Error {
+  constructor(message: string, statusCode: number) {
+    super(message)
+
+    this.name = 'ResponseError'
+    this.statusCode = statusCode
+  }
+}
+
 async function getCompanies(
   props?: TGetCompanyProps
 ): Promise<TResultGetCompany> {
   //backend start at 1
   const page = props?.page ? props.page + 1 : 1
   const limit = props?.limit || 10
-  const order = props?.order || 'asc'
+  const order = props?.order || 'desc'
   const sort = props?.sort || 'up_votes'
 
   let url = `https://backbonez.fly.dev/companies?page=${page}&limit=${limit}&order=${order}&sort=${sort}`
@@ -22,7 +35,7 @@ async function getCompanies(
     url += `&keyword=${props.keyword}`
   }
 
-  const res = await fetch(
+  const response = await fetch(
     url,
     // revalidate every hour
     // { next: { revalidate: 3600 } }
@@ -30,15 +43,15 @@ async function getCompanies(
   )
 
   // Recommendation: handle errors
-  if (!res.ok) {
+  if (!response.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error('Failed to fetch data')
   }
 
-  const data = await res.json()
+  const data = await response.json()
   const rowCount = props?.keyword
-    ? res.headers.get('x-keyword-count')
-    : res.headers.get('x-row-count')
+    ? response.headers.get('x-keyword-count')
+    : response.headers.get('x-row-count')
 
   return {
     data,
@@ -67,10 +80,10 @@ async function upVoteCompany({
   })
 
   if (!response.ok) {
-    throw new Error('Something went wrong')
+    throw new ResponseError(response.statusText, response.status)
   }
 
-  //   console.log(response.json());
+  return await response.json()
 }
 
 export { getCompanies, upVoteCompany }

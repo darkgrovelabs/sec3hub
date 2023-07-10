@@ -1,7 +1,7 @@
 'use client'
 
-import { Button, Icon } from '@/chakra/components'
-import { upVoteCompany } from '@/features/companies/api'
+import { Button, Icon, useToast } from '@/chakra/components'
+import { ResponseError, upVoteCompany } from '@/features/companies/api'
 import { TUpVoteCompanyMutationParams } from '@/features/companies/types'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useMutation } from '@tanstack/react-query'
@@ -46,6 +46,7 @@ export default function UpVoteCompanyButton(props: UpVoteCompanyButtonProps) {
   const { address } = useAccount()
   const { openConnectModal } = useConnectModal()
   const confettiRef = useRef()
+  const toast = useToast()
   const { votes, companyId } = props
 
   // TODO: Update cache when mutation happens
@@ -57,9 +58,28 @@ export default function UpVoteCompanyButton(props: UpVoteCompanyButtonProps) {
     onSuccess: () => {
       setOptimisticVotes((prev) => prev + 1)
       shoot()
+      toast({
+        title: 'Thank you!',
+        description: `We got your vote`,
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: 'top',
+      })
     },
-    //TODO: handle error
-    onError: () => {},
+    onError: (error: ResponseError) => {
+      // just show success if user already voted, its fine
+      if (error.statusCode === 409) {
+        return toast({
+          title: 'Thank you!',
+          description: `We got your vote`,
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+          position: 'top',
+        })
+      }
+    },
   })
 
   const handleClick = async () => {
@@ -81,9 +101,12 @@ export default function UpVoteCompanyButton(props: UpVoteCompanyButtonProps) {
       <Button
         size={{ base: 'sm', xl: 'md' }}
         variant='solid'
-        leftIcon={<Icon as={ArrowUpCircle} />}
+        leftIcon={<Icon fontSize={20} color='primary.300' as={ArrowUpCircle} />}
         lineHeight={0}
+        isLoading={upVote.isLoading}
         onClick={handleClick}
+        fontWeight={optimisticVotes > 0 ? 800 : 400}
+        color={'inherit'}
       >
         {optimisticVotes}
       </Button>

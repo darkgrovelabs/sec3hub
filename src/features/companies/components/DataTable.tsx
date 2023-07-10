@@ -51,7 +51,7 @@ export default function DataTable({
 }: DataTableProps) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [sorting, setSorting] = useState<SortingState>([
-    { id: 'up_votes', desc: false },
+    { id: 'up_votes', desc: true },
   ])
   const [keyword, setKeyword] = useState<string>('')
   const [pagination, setPagination] = useState<PaginationState>({
