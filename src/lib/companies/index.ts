@@ -1,21 +1,20 @@
-import { TResultGetCompany } from './types'
+import {
+  TGetCompanyProps,
+  TResultGetCompany,
+  TUpVoteCompanyMutationParams,
+} from './types'
 
-type TGetCompanyProps = {
-  limit?: number
-  page?: number
-  order?: string
-  sort?: string
-  keyword?: string
-}
+export const VOTE_SIGN_MESSAGE =
+  'Please sign the transaction to upvote this company. It wont cost you any gas. Thanks!'
 
 async function getCompanies(
   props?: TGetCompanyProps
 ): Promise<TResultGetCompany> {
   //backend start at 1
   const page = props?.page ? props.page + 1 : 1
-  const limit = props?.limit || 5
+  const limit = props?.limit || 10
   const order = props?.order || 'asc'
-  const sort = props?.sort || 'id'
+  const sort = props?.sort || 'up_votes'
 
   let url = `https://backbonez.fly.dev/companies?page=${page}&limit=${limit}&order=${order}&sort=${sort}`
 
@@ -48,4 +47,30 @@ async function getCompanies(
   }
 }
 
-export { getCompanies }
+async function upVoteCompany({
+  walletAddress,
+  signature,
+  companyId,
+}: TUpVoteCompanyMutationParams) {
+  const response = await fetch('https://backbonez.fly.dev/vote', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      msg: VOTE_SIGN_MESSAGE,
+      pub: walletAddress,
+      sig: signature,
+      id: companyId,
+      type: 'company',
+    }),
+  })
+
+  if (!response.ok) {
+    throw new Error('Something went wrong')
+  }
+
+  //   console.log(response.json());
+}
+
+export { getCompanies, upVoteCompany }

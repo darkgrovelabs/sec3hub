@@ -1,4 +1,5 @@
 export type TCompany = {
+  id: number
   name: string
   logo_url: string
   type: string
@@ -20,4 +21,18 @@ export type TResultGetCompany = {
   data: TCompany[]
   pageCount: number
   rowCount: number
+}
+
+export type TGetCompanyProps = {
+  limit?: number
+  page?: number
+  order?: string
+  sort?: string
+  keyword?: string
+}
+
+export type TUpVoteCompanyMutationParams = {
+  walletAddress: `0x${string}`
+  signature: string
+  companyId: number
 }
