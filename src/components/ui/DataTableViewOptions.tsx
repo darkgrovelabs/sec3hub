@@ -34,7 +34,7 @@ export default function DataTableViewOptions<TData>({
       >
         View
       </MenuButton>
-      <MenuList minW={'0'}>
+      <MenuList zIndex={'dropdown'} minW={'0'}>
         {table
           .getAllColumns()
           .filter(
