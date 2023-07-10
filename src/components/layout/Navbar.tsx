@@ -4,29 +4,31 @@ import {
   Box,
   Button,
   Drawer,
-  DrawerBody,
   DrawerCloseButton,
   DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
   DrawerOverlay,
   Flex,
   Heading,
-  Icon,
   IconButton,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Text,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   useColorModeValue,
   useDisclosure,
 } from '@/chakra/components'
+import Image from 'next/image'
 import { usePathname, useSelectedLayoutSegments } from 'next/navigation'
 import logo from 'public/images/logo.webp'
-import { Menu, Search } from 'lucide-react'
-import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import SidebarContent from './SidebarContent'
+import {
+  LightbulbIcon,
+  ListPlusIcon,
+  MenuIcon,
+  SmilePlusIcon,
+} from 'lucide-react'
+import Link from 'next/link'
 
 export default function Navbar() {
   return (
@@ -50,26 +52,49 @@ export default function Navbar() {
         display={'flex'}
         alignContent={'center'}
         alignItems={'center'}
-        // justifyContent={'space-between'}
+        justifyContent={'space-between'}
       >
-        <Flex
-          align={'center'}
-          display={{ base: 'flex', xl: 'none' }}
-          gap={2}
-          mr={2}
-        >
-          <MobileMenu />
+        <Flex align={'center'} gap={2} mr={2}>
+          <Box gap={2} display={{ base: 'flex', xl: 'none' }}>
+            <MobileMenu />
 
-          <Image
-            src={logo.src}
-            width={35}
-            height={35}
-            alt='Logo SEC3HUB'
-          ></Image>
+            <Image
+              src={logo.src}
+              width={35}
+              height={35}
+              alt='Logo SEC3HUB'
+            ></Image>
+          </Box>
+
+          <NavbarTitle />
         </Flex>
 
         <Box>
-          <NavbarTitle />
+          <Menu>
+            <MenuButton
+              leftIcon={<SmilePlusIcon size={20} />}
+              as={Button}
+              size={{ base: 'sm', xl: 'md' }}
+              variant={'gradient'}
+            >
+              Add Content
+            </MenuButton>
+
+            <MenuList>
+              <Link
+                href='https://docs.google.com/forms/d/e/1FAIpQLSfpfjwmBrxYIln5rQUAvIRLjNmE7q5weqvoDmcrcxRO2fCfOQ/viewform'
+                target='_blank'
+              >
+                <MenuItem icon={<ListPlusIcon />}>Submit resource</MenuItem>
+              </Link>
+              <Link
+                href='https://github.com/orgs/darkgrovelabs/discussions/new/choose'
+                target='_blank'
+              >
+                <MenuItem icon={<LightbulbIcon />}>Request feature</MenuItem>
+              </Link>
+            </MenuList>
+          </Menu>
         </Box>
 
         {/* <Card borderRadius={'3xl'} p={2}>
@@ -95,7 +120,7 @@ export default function Navbar() {
 }
 
 const titles: { [key: string]: string } = {
-  companies: 'Audit Companies',
+  companies: 'Companies',
   products: 'Products',
 }
 
@@ -116,7 +141,7 @@ function MobileMenu() {
         size={'sm'}
         variant={'outline'}
         aria-label='Open menu'
-        icon={<Menu size={20} />}
+        icon={<MenuIcon size={20} />}
       />
 
       <Drawer
