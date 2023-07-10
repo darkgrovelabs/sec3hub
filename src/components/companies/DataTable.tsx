@@ -20,7 +20,7 @@ import {
 } from '@/chakra/components'
 import { getCompanies } from '@/lib/companies'
 import { TCompany, TResultGetCompany } from '@/lib/companies/types'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   ColumnDef,
   PaginationState,
@@ -50,18 +50,18 @@ export default function DataTable({
   columns,
 }: DataTableProps) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
-  const [sorting, setSorting] = useState<SortingState>([])
+  const [sorting, setSorting] = useState<SortingState>([
+    { id: 'up_votes', desc: false },
+  ])
   const [keyword, setKeyword] = useState<string>('')
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
-    pageSize: 5,
+    pageSize: 10,
   })
   const debouncecKeyword = useDebounce(keyword, 500)
-  const canReset = debouncecKeyword || sorting.length > 0
 
   const resetFilters = () => {
     setKeyword('')
-    setSorting([])
   }
 
   const { order, sort } = useMemo(() => {
@@ -139,7 +139,7 @@ export default function DataTable({
           </InputGroup>
         </Box>
 
-        {canReset && (
+        {debouncecKeyword && (
           <Box>
             <Button
               colorScheme='primary'

@@ -29,6 +29,7 @@ import {
 
 import DataTableColumnHeader from '../ui/DataTableColumnHeader'
 import DataTableStickyColumn from '../ui/DataTableStickyColumn'
+import UpVoteCompanyButton from './UpVoteCompanyButton'
 
 const columnHelper = createColumnHelper<TCompany>()
 
@@ -49,17 +50,7 @@ const columns = [
     cell: ({ row, getValue }) => {
       return (
         <Td className='td-no-padding-aside'>
-          <Button
-            size={{ base: 'sm', xl: 'md' }}
-            variant='solid'
-            leftIcon={<ArrowUpCircle size={20} />}
-            lineHeight={0}
-            onClick={() => {
-              console.log('upvote')
-            }}
-          >
-            117
-          </Button>
+          <UpVoteCompanyButton companyId={row.original.id} votes={getValue()} />
         </Td>
       )
     },
