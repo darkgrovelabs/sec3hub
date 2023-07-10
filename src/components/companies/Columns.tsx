@@ -17,6 +17,7 @@ import { TCompany } from '@/lib/companies/types'
 import formatCurrency from '@/utils/formatCurrency'
 import { createColumnHelper } from '@tanstack/react-table'
 import {
+  ArrowUpCircle,
   Check,
   FileCheck,
   GithubIcon,
@@ -35,9 +36,9 @@ const columnHeaderNames: { [key: string]: string } = {
   name: 'Name',
   type: 'Type',
   services: 'Services',
-  up_votes: 'Stars',
+  up_votes: 'Up Votes',
   total_audits: 'Audits',
-  price_per_hour: 'Fee (H/USD)',
+  price_per_hour: 'Fee (p/hr)',
   links: 'Links',
   sample_report: 'Sample Report',
   start_year: 'Year',
@@ -51,7 +52,7 @@ const columns = [
           <Button
             size={{ base: 'sm', xl: 'md' }}
             variant='solid'
-            leftIcon={<StarIcon size={20} />}
+            leftIcon={<ArrowUpCircle size={20} />}
             lineHeight={0}
             onClick={() => {
               console.log('upvote')
@@ -117,7 +118,7 @@ const columns = [
   }),
   columnHelper.accessor('total_audits', {
     cell: ({ row, getValue }) => {
-      return <Td isNumeric>+{getValue()}</Td>
+      return <Td isNumeric>{getValue()}+</Td>
     },
     header: ({ column }) => (
       <DataTableColumnHeader
@@ -161,7 +162,7 @@ const columns = [
                 }
               >
                 <Tag size='md' borderRadius={'full'}>
-                  +{value.length - 1}
+                  {value.length - 1}+
                 </Tag>
               </Tooltip>
             )}
@@ -177,26 +178,26 @@ const columns = [
     ),
     enableSorting: false,
   }),
-  columnHelper.accessor('price_per_hour', {
-    cell: ({ row, getValue }) => {
-      const value = getValue()
-      if (!value) return <Td isNumeric>TBD</Td>
+  // columnHelper.accessor('price_per_hour', {
+  //   cell: ({ row, getValue }) => {
+  //     const value = getValue()
+  //     if (!value) return <Td isNumeric>TBD</Td>
 
-      return (
-        <Td isNumeric>
-          {formatCurrency(value.min)} - {formatCurrency(value.max)}
-        </Td>
-      )
-    },
-    header: ({ column }) => (
-      <DataTableColumnHeader
-        column={column}
-        title={columnHeaderNames['price_per_hour']}
-        isNumeric
-      />
-    ),
-    enableSorting: false,
-  }),
+  //     return (
+  //       <Td isNumeric>
+  //         {formatCurrency(value.min)} - {formatCurrency(value.max)}
+  //       </Td>
+  //     )
+  //   },
+  //   header: ({ column }) => (
+  //     <DataTableColumnHeader
+  //       column={column}
+  //       title={columnHeaderNames['price_per_hour']}
+  //       isNumeric
+  //     />
+  //   ),
+  //   enableSorting: false,
+  // }),
   columnHelper.accessor('sample_report', {
     cell: ({ row, getValue }) => {
       const value = getValue()

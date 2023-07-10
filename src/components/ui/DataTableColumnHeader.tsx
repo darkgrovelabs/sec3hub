@@ -37,9 +37,9 @@ export default function DataTableColumnHeader<TData, TValue>(
   if (!column.getCanSort()) {
     return (
       <Th
+        zIndex={sticky ? 3 : 2}
         position={sticky ? 'sticky' : 'relative'}
         bg={sticky ? bgColor : 'auto'}
-        zIndex={sticky ? 1 : 0}
         left={0}
         isNumeric={isNumeric}
         className={className}
@@ -51,10 +51,10 @@ export default function DataTableColumnHeader<TData, TValue>(
 
   return (
     <Th
-      position={sticky ? 'sticky' : 'initial'}
+      zIndex={sticky ? 3 : 2}
+      position={sticky ? 'sticky' : 'relative'}
       bg={sticky ? bgColor : 'auto'}
       left={0}
-      zIndex={sticky ? 1 : 0}
       className={className}
     >
       <Flex

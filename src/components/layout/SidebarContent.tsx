@@ -28,7 +28,7 @@ export default function SidebarContent(props: SidebarContentProps) {
         <SidebarLink
           onlyIcon
           route='/companies'
-          label='Audit Companies'
+          label='Companies'
           icon={Building2}
         />
         <SidebarLink
@@ -75,7 +75,7 @@ export default function SidebarContent(props: SidebarContentProps) {
           <Stack direction='column' gap={2}>
             <SidebarLink
               route='/companies'
-              label='Audit Companies'
+              label='Companies'
               icon={Building2}
             />
             <SidebarLink route='/products' label='Products' icon={BoxIcon} />
