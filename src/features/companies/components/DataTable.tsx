@@ -18,9 +18,12 @@ import {
   Thead,
   Tr,
 } from '@/chakra/components'
-import { getCompanies } from '@/lib/companies'
-import { TCompany, TResultGetCompany } from '@/lib/companies/types'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import DataTableViewOptions from '@/components//DataTableViewOptions'
+import DataTablePagination from '@/components/DataTablePagination'
+import { getCompanies } from '@/features/companies/api'
+import { TCompany, TResultGetCompany } from '@/features/companies/types'
+import useDebounce from '@/hooks/useDebounce'
+import { useQuery } from '@tanstack/react-query'
 import {
   ColumnDef,
   PaginationState,
@@ -32,9 +35,6 @@ import {
 } from '@tanstack/react-table'
 import { Search, XCircleIcon } from 'lucide-react'
 import { Fragment, useMemo, useState } from 'react'
-import DataTablePagination from '../ui/DataTablePagination'
-import DataTableViewOptions from '../ui/DataTableViewOptions'
-import useDebounce from '@/hooks/useDebounce'
 
 export type DataTableProps = {
   initialData: TCompany[]

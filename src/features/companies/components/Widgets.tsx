@@ -1,7 +1,7 @@
 'use client'
 
 import { SimpleGrid } from '@/chakra/components'
-import WidgetCard from '@/components/ui/WidgetCard'
+import WidgetCard from '@/components/WidgetCard'
 import { ListOrdered, ShieldCheck } from 'lucide-react'
 
 type WidgetsProps = {

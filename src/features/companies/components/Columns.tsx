@@ -3,7 +3,6 @@
 import {
   Avatar,
   Box,
-  Button,
   Flex,
   IconButton,
   Link,
@@ -13,22 +12,19 @@ import {
   Text,
   Tooltip,
 } from '@/chakra/components'
-import { TCompany } from '@/lib/companies/types'
-import formatCurrency from '@/utils/formatCurrency'
+import { TCompany } from '@/features/companies/types'
 import { createColumnHelper } from '@tanstack/react-table'
 import {
-  ArrowUpCircle,
   Check,
   FileCheck,
   GithubIcon,
   LinkIcon,
   SendIcon,
-  StarIcon,
   TwitterIcon,
 } from 'lucide-react'
 
-import DataTableColumnHeader from '../ui/DataTableColumnHeader'
-import DataTableStickyColumn from '../ui/DataTableStickyColumn'
+import DataTableColumnHeader from '@/components/DataTableColumnHeader'
+import DataTableStickyColumn from '@/components/DataTableStickyColumn'
 import UpVoteCompanyButton from './UpVoteCompanyButton'
 
 const columnHelper = createColumnHelper<TCompany>()

@@ -1,8 +1,8 @@
 'use client'
 
 import { Button, Icon } from '@/chakra/components'
-import { upVoteCompany } from '@/lib/companies'
-import { TUpVoteCompanyMutationParams } from '@/lib/companies/types'
+import { upVoteCompany } from '@/features/companies/api'
+import { TUpVoteCompanyMutationParams } from '@/features/companies/types'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useMutation } from '@tanstack/react-query'
 import { signMessage } from '@wagmi/core'

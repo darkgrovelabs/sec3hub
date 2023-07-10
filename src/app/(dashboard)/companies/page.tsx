@@ -1,7 +1,7 @@
 import { Box } from '@/chakra/components'
-import CompaniesTable from '@/components/companies/CompaniesTable'
-import Widgets from '@/components/companies/Widgets'
-import { getCompanies } from '@/lib/companies'
+import CompaniesTable from '@/features/companies/components/CompaniesTable'
+import Widgets from '@/features/companies/components/Widgets'
+import { getCompanies } from '@/features/companies/api'
 
 // TODO:
 export const metadata = {
