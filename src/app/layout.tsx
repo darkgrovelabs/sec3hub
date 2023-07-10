@@ -2,6 +2,7 @@ import ThemeProvider from '@/providers/ChakraThemeProvider'
 import QueryClientProvider from '@/providers/QueryClientProvider'
 import './globals.css'
 import { cookies } from 'next/headers'
+import WalletProvider from '@/providers/WalletProvider'
 
 export const metadata = {
   title: 'Create Next App',
@@ -26,9 +27,11 @@ export default function RootLayout({
     >
       <head />
       <body className={`chakra-ui-${uiColorMode}`}>
-        <QueryClientProvider>
-          <ThemeProvider colorMode={uiColorMode}>{children}</ThemeProvider>
-        </QueryClientProvider>
+        <ThemeProvider colorMode={uiColorMode}>
+          <QueryClientProvider>
+            <WalletProvider>{children}</WalletProvider>
+          </QueryClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

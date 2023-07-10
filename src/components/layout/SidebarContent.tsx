@@ -14,6 +14,7 @@ import { BoxIcon, Building2, Moon, Sun } from 'lucide-react'
 import Image from 'next/image'
 import logo from 'public/images/logo.webp'
 import SidebarLink from './SidebarLink'
+import ConnectWallet from './ConnectWallet'
 
 type SidebarContentProps = {
   mini?: boolean
@@ -66,10 +67,8 @@ export default function SidebarContent(props: SidebarContentProps) {
 
           <Divider my={4} />
 
-          <Box mb={8}>
-            <Button w='100%' variant={'gradient'} size={'sm'} fontWeight={700}>
-              Connect your wallet
-            </Button>
+          <Box mb={6}>
+            <ConnectWallet />
           </Box>
 
           <Stack direction='column' gap={2}>

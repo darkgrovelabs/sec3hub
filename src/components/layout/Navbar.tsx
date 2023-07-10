@@ -44,7 +44,7 @@ export default function Navbar() {
         backdropFilter={'blur(20px)'}
         backgroundPosition='center'
         backgroundSize='cover'
-        borderRadius='xl'
+        borderRadius={{ base: 'none', xl: 'xl' }}
         transitionDelay='0s, 0s, 0s, 0s'
         transitionDuration=' 0.25s, 0.25s, 0.25s, 0s'
         transition-property='box-shadow, background-color, filter, border'
