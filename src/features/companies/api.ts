@@ -2,6 +2,7 @@ import {
   TGetCompanyProps,
   TResultGetCompany,
   TUpVoteCompanyMutationParams,
+  TCompany,
 } from './types'
 
 export const VOTE_SIGN_MESSAGE =
@@ -45,7 +46,7 @@ async function getCompanies(
   // Recommendation: handle errors
   if (!response.ok) {
     // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
+    throw new ResponseError(response.statusText, response.status)
   }
 
   const data = await response.json()
@@ -58,6 +59,24 @@ async function getCompanies(
     pageCount: Math.ceil(Number(rowCount) / limit),
     rowCount: Number(rowCount),
   }
+}
+
+async function getCompaniesStats() {
+  const response = await fetch('https://backbonez.fly.dev/companies/stats', {
+    cache: 'no-store',
+  })
+
+  if (!response.ok) {
+    throw new ResponseError(response.statusText, response.status)
+  }
+
+  const data = await response.json()
+
+  const totalCompanies = data?.totalCompanies[0]?.count
+  const totalAudits = data?.totalAudits[0]?.sum
+  const lastRecord = data?.lastRecord[0] as TCompany
+
+  return { totalCompanies, totalAudits, lastRecord }
 }
 
 async function upVoteCompany({
@@ -86,4 +105,4 @@ async function upVoteCompany({
   return await response.json()
 }
 
-export { getCompanies, upVoteCompany }
+export { getCompanies, upVoteCompany, getCompaniesStats }

@@ -99,8 +99,10 @@ export default function UpVoteCompanyButton(props: UpVoteCompanyButtonProps) {
     <>
       <Button
         size={{ base: 'sm', xl: 'md' }}
-        variant='solid'
-        leftIcon={<Icon fontSize={20} color='primary.300' as={ArrowUpCircle} />}
+        variant='ghost'
+        leftIcon={
+          <Icon fontSize={20} color={'primary.300'} as={ArrowUpCircle} />
+        }
         lineHeight={0}
         isLoading={upVote.isLoading}
         onClick={handleClick}

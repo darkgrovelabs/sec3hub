@@ -66,8 +66,8 @@ const columns = [
           <Flex align={'center'} gap={2}>
             <Avatar
               size={'sm'}
-              name={row.original.name}
-              src={getValue()}
+              name={getValue()}
+              src={row.original.logo_url}
               bg={'primary.400'}
               color='white'
             />

@@ -1,23 +1,35 @@
 import { Box } from '@/chakra/components'
 import CompaniesTable from '@/features/companies/components/CompaniesTable'
 import Widgets from '@/features/companies/components/Widgets'
-import { getCompanies } from '@/features/companies/api'
+import { getCompanies, getCompaniesStats } from '@/features/companies/api'
 
-// TODO:
+// TODO: Metadata
 export const metadata = {
   title: 'Audit Companies',
 }
 
+//TODO: Handle errors
 export default async function Companies() {
-  // initial request
-  const { data, pageCount, rowCount } = await getCompanies()
+  const [companies, stats] = await Promise.all([
+    getCompanies(),
+    getCompaniesStats(),
+  ])
+
+  console.log(stats)
 
   return (
     <>
       <Box mb={4}>
-        <Widgets companies={rowCount} />
+        <Widgets
+          totalCompanies={stats.totalCompanies}
+          totalAudits={stats.totalAudits}
+          lastCompany={stats.lastRecord}
+        />
       </Box>
-      <CompaniesTable initialData={data} initialPageCount={pageCount} />
+      <CompaniesTable
+        initialData={companies.data}
+        initialPageCount={companies.pageCount}
+      />
     </>
   )
 }

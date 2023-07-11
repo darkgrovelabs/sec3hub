@@ -1,53 +1,48 @@
 'use client'
 
 import {
+  Avatar,
   Box,
-  Flex,
-  Icon,
   Card,
+  CardBody,
+  Flex,
   Text,
   useColorMode,
-  CardBody,
 } from '@/chakra/components'
-import { LucideIcon } from 'lucide-react'
+import { TCompany } from '../types'
+import dayjs from 'dayjs'
 
-type WidgetCardProps = {
-  label: string
-  value: number | string
-  icon: LucideIcon
+type WidgetCompanyProps = {
+  company: TCompany
 }
 
-export default function WidgetCard(props: WidgetCardProps) {
-  const { label, value, icon } = props
+export default function WidgetCompany(props: WidgetCompanyProps) {
+  const { company } = props
   const { colorMode } = useColorMode()
 
   const labelColor = colorMode === 'light' ? 'blackAlpha.600' : 'whiteAlpha.600'
   const iconBgColor = colorMode === 'light' ? 'blue.400' : 'blue.100'
-  const iconColor = colorMode === 'light' ? 'white' : 'gray.900'
+
+  const date = dayjs(dayjs()).diff(company.created_at, 'days')
 
   return (
     <>
       <Card>
         <CardBody display={'flex'} alignContent={'center'}>
           <Flex align={'center'} gap={4}>
-            {/* <Flex
-              borderRadius={'3xl'}
-              p={3}
-              alignContent={'center'}
-              bgColor={iconBgColor}
-            >
-              <Icon color={iconColor} fontSize={28} as={icon}></Icon>
-            </Flex> 
-  */}
             <Flex
               borderRadius={'3xl'}
-              h={14}
-              w={14}
-              bgColor={iconBgColor}
+              //   bgColor={iconBgColor}
               justifyContent={'center'}
               alignItems={'center'}
             >
-              <Icon color={iconColor} fontSize={28} as={icon}></Icon>
+              <Avatar
+                name={company.name}
+                src={company.logo_url}
+                h={14}
+                w={14}
+                bgColor={iconBgColor}
+              />
             </Flex>
 
             <Box>
@@ -57,11 +52,16 @@ export default function WidgetCard(props: WidgetCardProps) {
                 textTransform={'uppercase'}
                 color={labelColor}
               >
-                {label}
+                Last company
               </Text>
-              <Text fontSize={'xl'} fontWeight={800}>
-                {value}
-              </Text>
+              <Flex align={'center'} gap={2}>
+                <Text fontSize={'xl'} fontWeight={800}>
+                  {company.name}
+                </Text>
+                <Text as='span' fontSize={'xs'} color={labelColor}>
+                  added {date} days ago
+                </Text>
+              </Flex>
             </Box>
           </Flex>
         </CardBody>

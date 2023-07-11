@@ -15,12 +15,19 @@ export type TCompany = {
   }
   sample_report: string
   start_year: number
+  created_at: string
 }
 
 export type TResultGetCompany = {
   data: TCompany[]
   pageCount: number
   rowCount: number
+}
+
+export type TResultGetCompanyStats = {
+  totalCompanies: number
+  totalAudits: number
+  lastRecord: TCompany
 }
 
 export type TGetCompanyProps = {
