@@ -21,7 +21,6 @@ export default function WidgetCard(props: WidgetCardProps) {
   const { label, value, icon } = props
   const { colorMode } = useColorMode()
 
-  const labelColor = colorMode === 'light' ? 'blackAlpha.600' : 'whiteAlpha.600'
   const iconBgColor = colorMode === 'light' ? 'blue.400' : 'blue.100'
   const iconColor = colorMode === 'light' ? 'white' : 'gray.900'
 
@@ -55,7 +54,7 @@ export default function WidgetCard(props: WidgetCardProps) {
                 lineHeight={'shorter'}
                 fontSize={'sm'}
                 textTransform={'uppercase'}
-                color={labelColor}
+                variant={'muted'}
               >
                 {label}
               </Text>

@@ -22,6 +22,7 @@ import Image from 'next/image'
 import logo from 'public/images/logo.webp'
 import ConnectWallet from './ConnectWallet'
 import SidebarLink from './SidebarLink'
+import { version } from '../../../package.json'
 
 type SidebarContentProps = {
   mini?: boolean
@@ -68,14 +69,17 @@ export default function SidebarContent(props: SidebarContentProps) {
               alt='Logo SEC3HUB'
             ></Image>
           </Center>
-          <Center>
-            <Text fontSize={'2xl'} fontWeight={500}>
+          <Center flexDir='column'>
+            <Text fontSize={'2xl'} fontWeight={500} lineHeight={'short'}>
               <Text as='span' fontWeight={800}>
                 SEC3
               </Text>{' '}
               <Text as='span' color='red.500'>
                 HUB
               </Text>
+            </Text>
+            <Text variant={'muted'} fontSize={'xs'}>
+              v {version}
             </Text>
           </Center>
 

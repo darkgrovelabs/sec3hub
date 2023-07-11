@@ -23,6 +23,7 @@ import logo from 'public/images/logo.webp'
 import { useEffect, useRef } from 'react'
 import SidebarContent from './SidebarContent'
 import {
+  FlagIcon,
   LightbulbIcon,
   ListPlusIcon,
   MenuIcon,
@@ -92,6 +93,12 @@ export default function Navbar() {
                 target='_blank'
               >
                 <MenuItem icon={<LightbulbIcon />}>Request feature</MenuItem>
+              </Link>
+              <Link
+                href='https://github.com/darkgrovelabs/sec3hub/issues/new'
+                target='_blank'
+              >
+                <MenuItem icon={<FlagIcon />}>Report issue</MenuItem>
               </Link>
             </MenuList>
           </Menu>
