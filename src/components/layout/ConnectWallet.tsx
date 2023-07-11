@@ -34,17 +34,22 @@ export default function ConnectWallet(props: ConnectWalletProps) {
           chain &&
           (!authenticationStatus || authenticationStatus === 'authenticated')
 
+        if (!ready) {
+          return (
+            <Button
+              w='100%'
+              leftIcon={<Icon color='primary.300' as={WalletIcon} />}
+              onClick={openConnectModal}
+              isLoading
+              type='button'
+            >
+              Connect Wallet
+            </Button>
+          )
+        }
+
         return (
-          <Box
-            {...(!ready && {
-              'aria-hidden': true,
-              style: {
-                opacity: 0,
-                pointerEvents: 'none',
-                userSelect: 'none',
-              },
-            })}
-          >
+          <Box>
             {(() => {
               if (!connected) {
                 return (
