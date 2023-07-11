@@ -20,8 +20,8 @@ import {
 } from '@/chakra/components'
 import DataTableViewOptions from '@/components//DataTableViewOptions'
 import DataTablePagination from '@/components/DataTablePagination'
-import { getCompanies } from '@/features/companies/api'
-import { TCompany, TResultGetCompany } from '@/features/companies/types'
+import { getAuditors } from '@/features/auditors/api'
+import { TAuditor, TResultGetAuditors } from '@/features/auditors/types'
 import useDebounce from '@/hooks/useDebounce'
 import { useQuery } from '@tanstack/react-query'
 import {
@@ -37,10 +37,10 @@ import { Search, XCircleIcon } from 'lucide-react'
 import { Fragment, useMemo, useState } from 'react'
 
 export type DataTableProps = {
-  initialData: TCompany[]
+  initialData: TAuditor[]
   initialPageCount: number
   columnHeaderNames: Record<string, string>
-  columns: ColumnDef<TCompany, any>[]
+  columns: ColumnDef<TAuditor, any>[]
 }
 
 export default function DataTable({
@@ -69,7 +69,7 @@ export default function DataTable({
     return { order: sorting[0].desc ? 'desc' : 'asc', sort: sorting[0].id }
   }, [sorting])
 
-  const query = useQuery<TResultGetCompany>({
+  const query = useQuery<TResultGetAuditors>({
     queryKey: [
       'companies',
       pagination.pageIndex,
@@ -79,7 +79,7 @@ export default function DataTable({
       debouncecKeyword,
     ],
     queryFn: () =>
-      getCompanies({
+      getAuditors({
         page: pagination.pageIndex,
         limit: pagination.pageSize,
         order,
@@ -130,9 +130,7 @@ export default function DataTable({
 
             <Input
               borderRadius={'lg'}
-              placeholder={
-                'Search by Company name / type / services / fees ...'
-              }
+              placeholder={'Search by Solo Auditor / Company / Services ...'}
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
             />

@@ -10,11 +10,18 @@ import {
   Text,
   useColorMode,
 } from '@/chakra/components'
-import { BoxIcon, Building2, Moon, Sun } from 'lucide-react'
+import {
+  BoxIcon,
+  LifeBuoyIcon,
+  Moon,
+  SkullIcon,
+  Sun,
+  UsersIcon,
+} from 'lucide-react'
 import Image from 'next/image'
 import logo from 'public/images/logo.webp'
-import SidebarLink from './SidebarLink'
 import ConnectWallet from './ConnectWallet'
+import SidebarLink from './SidebarLink'
 
 type SidebarContentProps = {
   mini?: boolean
@@ -28,15 +35,22 @@ export default function SidebarContent(props: SidebarContentProps) {
       <Stack direction='column' gap={2}>
         <SidebarLink
           onlyIcon
-          route='/companies'
-          label='Companies'
-          icon={Building2}
+          route='/auditors'
+          label='Auditors'
+          icon={UsersIcon}
         />
         <SidebarLink
           onlyIcon
           route='/products'
           label='Products'
           icon={BoxIcon}
+        />
+        <SidebarLink onlyIcon route='/rekts' label='Rekts' icon={SkullIcon} />
+        <SidebarLink
+          onlyIcon
+          route='/resources'
+          label='Resources'
+          icon={LifeBuoyIcon}
         />
       </Stack>
     )
@@ -72,12 +86,14 @@ export default function SidebarContent(props: SidebarContentProps) {
           </Box>
 
           <Stack direction='column' gap={2}>
-            <SidebarLink
-              route='/companies'
-              label='Companies'
-              icon={Building2}
-            />
+            <SidebarLink route='/auditors' label='Auditors' icon={UsersIcon} />
             <SidebarLink route='/products' label='Products' icon={BoxIcon} />
+            <SidebarLink route='/rekts' label='Rekts' icon={SkullIcon} />
+            <SidebarLink
+              route='/resources'
+              label='Resources'
+              icon={LifeBuoyIcon}
+            />
           </Stack>
         </Box>
 

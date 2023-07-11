@@ -9,14 +9,14 @@ import {
   Text,
   useColorMode,
 } from '@/chakra/components'
-import { TCompany } from '../types'
+import { TAuditor } from '../types'
 import dayjs from 'dayjs'
 
-type WidgetCompanyProps = {
-  company: TCompany
+type WidgetAuditorProps = {
+  company: TAuditor
 }
 
-export default function WidgetCompany(props: WidgetCompanyProps) {
+export default function WidgetCompany(props: WidgetAuditorProps) {
   const { company } = props
   const { colorMode } = useColorMode()
 

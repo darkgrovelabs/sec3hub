@@ -1,8 +1,8 @@
 'use client'
 
 import { Button, Icon, useToast } from '@/chakra/components'
-import { ResponseError, upVoteCompany } from '@/features/companies/api'
-import { TUpVoteCompanyMutationParams } from '@/features/companies/types'
+import { ResponseError, upVoteCompany } from '@/features/auditors/api'
+import { TUpVoteAuditorMutationParams } from '@/features/auditors/types'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useMutation } from '@tanstack/react-query'
 import { signMessage } from '@wagmi/core'
@@ -53,7 +53,7 @@ export default function UpVoteCompanyButton(props: UpVoteCompanyButtonProps) {
   const [optimisticVotes, setOptimisticVotes] = useState<number>(votes)
 
   const upVote = useMutation({
-    mutationFn: (params: TUpVoteCompanyMutationParams) => upVoteCompany(params),
+    mutationFn: (params: TUpVoteAuditorMutationParams) => upVoteCompany(params),
     onSuccess: () => {
       setOptimisticVotes((prev) => prev + 1)
       shoot()

@@ -1,8 +1,9 @@
 import {
-  TGetCompanyProps,
-  TResultGetCompany,
-  TUpVoteCompanyMutationParams,
-  TCompany,
+  TGetAuditorsParams,
+  TResultGetAuditors,
+  TUpVoteAuditorMutationParams,
+  TAuditor,
+  TResultGetAuditorStats,
 } from './types'
 
 export const VOTE_SIGN_MESSAGE =
@@ -21,16 +22,16 @@ export class ResponseError extends Error {
   }
 }
 
-async function getCompanies(
-  props?: TGetCompanyProps
-): Promise<TResultGetCompany> {
+async function getAuditors(
+  props?: TGetAuditorsParams
+): Promise<TResultGetAuditors> {
   //backend start at 1
   const page = props?.page ? props.page + 1 : 1
   const limit = props?.limit || 10
   const order = props?.order || 'desc'
   const sort = props?.sort || 'up_votes'
 
-  let url = `https://backbonez.fly.dev/companies?page=${page}&limit=${limit}&order=${order}&sort=${sort}`
+  let url = `https://backbonez.fly.dev/auditors?page=${page}&limit=${limit}&order=${order}&sort=${sort}`
 
   if (props?.keyword) {
     url += `&keyword=${props.keyword}`
@@ -61,8 +62,8 @@ async function getCompanies(
   }
 }
 
-async function getCompaniesStats() {
-  const response = await fetch('https://backbonez.fly.dev/companies/stats', {
+async function getAuditorsStats(): Promise<TResultGetAuditorStats> {
+  const response = await fetch('https://backbonez.fly.dev/auditors/stats', {
     cache: 'no-store',
   })
 
@@ -72,18 +73,18 @@ async function getCompaniesStats() {
 
   const data = await response.json()
 
-  const totalCompanies = data?.totalCompanies[0]?.count
+  const totalAuditors = data?.totalAuditors[0]?.count
   const totalAudits = data?.totalAudits[0]?.sum
-  const lastRecord = data?.lastRecord[0] as TCompany
+  const lastRecord = data?.lastRecord[0] as TAuditor
 
-  return { totalCompanies, totalAudits, lastRecord }
+  return { totalAuditors, totalAudits, lastRecord }
 }
 
 async function upVoteCompany({
   walletAddress,
   signature,
   companyId,
-}: TUpVoteCompanyMutationParams) {
+}: TUpVoteAuditorMutationParams) {
   const response = await fetch('https://backbonez.fly.dev/vote', {
     method: 'POST',
     headers: {
@@ -105,4 +106,4 @@ async function upVoteCompany({
   return await response.json()
 }
 
-export { getCompanies, upVoteCompany, getCompaniesStats }
+export { getAuditors, upVoteCompany, getAuditorsStats }

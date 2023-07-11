@@ -12,7 +12,7 @@ import {
   Text,
   Tooltip,
 } from '@/chakra/components'
-import { TCompany } from '@/features/companies/types'
+import { TAuditor } from '@/features/auditors/types'
 import { createColumnHelper } from '@tanstack/react-table'
 import {
   Check,
@@ -25,9 +25,9 @@ import {
 
 import DataTableColumnHeader from '@/components/DataTableColumnHeader'
 import DataTableStickyColumn from '@/components/DataTableStickyColumn'
-import UpVoteCompanyButton from './UpVoteCompanyButton'
+import UpVoteAuditorButton from './UpVoteAuditorButton'
 
-const columnHelper = createColumnHelper<TCompany>()
+const columnHelper = createColumnHelper<TAuditor>()
 
 const columnHeaderNames: { [key: string]: string } = {
   name: 'Name',
@@ -46,7 +46,7 @@ const columns = [
     cell: ({ row, getValue }) => {
       return (
         <Td className='td-no-padding-aside'>
-          <UpVoteCompanyButton companyId={row.original.id} votes={getValue()} />
+          <UpVoteAuditorButton companyId={row.original.id} votes={getValue()} />
         </Td>
       )
     },

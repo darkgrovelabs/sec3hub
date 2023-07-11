@@ -120,8 +120,10 @@ export default function Navbar() {
 }
 
 const titles: { [key: string]: string } = {
-  companies: 'Companies',
+  auditors: 'Audit Buddies',
   products: 'Products',
+  rekts: 'Rekts',
+  resources: 'Resources',
 }
 
 function MobileMenu() {

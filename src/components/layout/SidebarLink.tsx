@@ -7,7 +7,6 @@ import {
   Text,
   Tooltip,
   useColorMode,
-  useColorModeValue,
 } from '@/chakra/components'
 import { LucideIcon } from 'lucide-react'
 import Link from 'next/link'

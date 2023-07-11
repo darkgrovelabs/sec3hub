@@ -1,4 +1,4 @@
-export type TCompany = {
+export type TAuditor = {
   id: number
   name: string
   logo_url: string
@@ -18,19 +18,19 @@ export type TCompany = {
   created_at: string
 }
 
-export type TResultGetCompany = {
-  data: TCompany[]
+export type TResultGetAuditors = {
+  data: TAuditor[]
   pageCount: number
   rowCount: number
 }
 
-export type TResultGetCompanyStats = {
-  totalCompanies: number
+export type TResultGetAuditorStats = {
+  totalAuditors: number
   totalAudits: number
-  lastRecord: TCompany
+  lastRecord: TAuditor
 }
 
-export type TGetCompanyProps = {
+export type TGetAuditorsParams = {
   limit?: number
   page?: number
   order?: string
@@ -38,7 +38,7 @@ export type TGetCompanyProps = {
   keyword?: string
 }
 
-export type TUpVoteCompanyMutationParams = {
+export type TUpVoteAuditorMutationParams = {
   walletAddress: `0x${string}`
   signature: string
   companyId: number

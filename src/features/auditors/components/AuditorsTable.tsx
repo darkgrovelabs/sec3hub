@@ -1,17 +1,17 @@
 'use client'
 
 import { Card, CardBody } from '@/chakra/components'
-import { TCompany } from '@/features/companies/types'
+import { TAuditor } from '@/features/auditors/types'
 
 import DataTable from './DataTable'
 import { columns, columnHeaderNames } from './Columns'
 
-type CompaniesTableProps = {
-  initialData: TCompany[]
+type AuditorsTableProps = {
+  initialData: TAuditor[]
   initialPageCount: number
 }
 
-export default function CompaniesTable(props: CompaniesTableProps) {
+export default function AuditorsTable(props: AuditorsTableProps) {
   const { initialData, initialPageCount } = props
 
   return (

@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 
-// redirect to companies page for now
+// redirect to auditors page for now
 export default function Home() {
-  redirect('/companies')
+  redirect('/auditors')
 }
