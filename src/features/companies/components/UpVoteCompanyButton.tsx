@@ -8,7 +8,7 @@ import { useMutation } from '@tanstack/react-query'
 import { signMessage } from '@wagmi/core'
 import canvasConfetti from 'canvas-confetti'
 import { ArrowUpCircle } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { useAccount } from 'wagmi'
 
 type UpVoteCompanyButtonProps = {
@@ -45,7 +45,6 @@ function shoot() {
 export default function UpVoteCompanyButton(props: UpVoteCompanyButtonProps) {
   const { address } = useAccount()
   const { openConnectModal } = useConnectModal()
-  const confettiRef = useRef()
   const toast = useToast()
   const { votes, companyId } = props
 
@@ -93,7 +92,7 @@ export default function UpVoteCompanyButton(props: UpVoteCompanyButtonProps) {
         'Please sign the transaction to upvote this company. It wont cost you any gas. Thanks!',
     })
 
-    await upVote.mutateAsync({ walletAddress: address, signature, companyId })
+    upVote.mutate({ walletAddress: address, signature, companyId })
   }
 
   return (
