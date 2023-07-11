@@ -1,12 +1,9 @@
 'use client'
 
 import { Button, Icon, useToast } from '@/chakra/components'
-import {
-  ResponseError,
-  VOTE_SIGN_MESSAGE,
-  upVoteCompany,
-} from '@/features/auditors/api'
-import { TUpVoteAuditorMutationParams } from '@/features/auditors/types'
+import { upVote } from '@/features/auditors/api'
+
+import { ResponseError, TUpVoteMutationParams } from '@/types'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useMutation } from '@tanstack/react-query'
 import { signMessage } from '@wagmi/core'
@@ -15,9 +12,10 @@ import { ArrowUpCircle } from 'lucide-react'
 import { useState } from 'react'
 import { useAccount } from 'wagmi'
 
-type UpVoteCompanyButtonProps = {
+type UpVoteButtonProps = {
   votes: number
-  companyId: number
+  id: number
+  message: string
 }
 
 var defaults = {
@@ -46,18 +44,18 @@ function shoot() {
   })
 }
 
-export default function UpVoteCompanyButton(props: UpVoteCompanyButtonProps) {
+export default function UpVoteButton(props: UpVoteButtonProps) {
   const { address } = useAccount()
   const { openConnectModal } = useConnectModal()
   const toast = useToast()
-  const { votes, companyId } = props
+  const { votes, id, message } = props
 
   // TODO: Update cache when mutation happens
   // for now, companies are refetch on every table change
   const [optimisticVotes, setOptimisticVotes] = useState<number>(votes)
 
-  const upVote = useMutation({
-    mutationFn: (params: TUpVoteAuditorMutationParams) => upVoteCompany(params),
+  const upVoteMutation = useMutation({
+    mutationFn: (params: TUpVoteMutationParams) => upVote(params),
     onSuccess: () => {
       setOptimisticVotes((prev) => prev + 1)
       shoot()
@@ -91,11 +89,9 @@ export default function UpVoteCompanyButton(props: UpVoteCompanyButtonProps) {
       return openConnectModal()
     }
 
-    const signature = await signMessage({
-      message: VOTE_SIGN_MESSAGE,
-    })
+    const signature = await signMessage({ message })
 
-    upVote.mutate({ walletAddress: address, signature, companyId })
+    upVoteMutation.mutate({ walletAddress: address, signature, id })
   }
 
   return (
@@ -107,7 +103,7 @@ export default function UpVoteCompanyButton(props: UpVoteCompanyButtonProps) {
           <Icon fontSize={20} color={'primary.300'} as={ArrowUpCircle} />
         }
         lineHeight={0}
-        isLoading={upVote.isLoading}
+        isLoading={upVoteMutation.isLoading}
         onClick={handleClick}
         fontWeight={optimisticVotes > 0 ? 800 : 400}
         color={'inherit'}

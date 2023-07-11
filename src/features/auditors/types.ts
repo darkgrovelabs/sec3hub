@@ -29,17 +29,3 @@ export type TResultGetAuditorStats = {
   totalAudits: number
   lastRecord: TAuditor
 }
-
-export type TGetAuditorsParams = {
-  limit?: number
-  page?: number
-  order?: string
-  sort?: string
-  keyword?: string
-}
-
-export type TUpVoteAuditorMutationParams = {
-  walletAddress: `0x${string}`
-  signature: string
-  companyId: number
-}

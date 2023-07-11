@@ -16,6 +16,7 @@ import { TAuditor } from '@/features/auditors/types'
 import { createColumnHelper } from '@tanstack/react-table'
 import {
   Check,
+  CheckIcon,
   FileCheck,
   GithubIcon,
   LinkIcon,
@@ -23,22 +24,24 @@ import {
   TwitterIcon,
 } from 'lucide-react'
 
-import DataTableStickyColumn from '@/components/table/DataTableStickyColumn'
 import DataTableColumnHeader from '@/components/table/DataTableColumnHeader'
-import UpVoteAuditorButton from '../../../components/UpVoteButton'
+import DataTableStickyColumn from '@/components/table/DataTableStickyColumn'
+import UpVoteButton from '@/components/UpVoteButton'
 import { VOTE_SIGN_MESSAGE } from '../api'
+import { TProduct } from '../types'
 
-const columnHelper = createColumnHelper<TAuditor>()
+const columnHelper = createColumnHelper<TProduct>()
 
 const columnHeaderNames: { [key: string]: string } = {
   name: 'Name',
-  type: 'Type',
-  services: 'Services',
+  description: 'Description',
+  is_opensource: 'Open Source',
+  is_commercial: 'Commercial',
   up_votes: 'Up Votes',
-  total_audits: 'Audits',
-  price_per_hour: 'Fee (p/hr)',
+  // total_audits: 'Audits',
+  // price_per_hour: 'Fee (p/hr)',
   links: 'Links',
-  sample_report: 'Sample Report',
+  // sample_report: 'Sample Report',
   start_year: 'Year',
 }
 
@@ -47,7 +50,7 @@ const columns = [
     cell: ({ row, getValue }) => {
       return (
         <Td className='td-no-padding-aside'>
-          <UpVoteAuditorButton
+          <UpVoteButton
             id={row.original.id}
             votes={getValue()}
             message={VOTE_SIGN_MESSAGE}
@@ -90,74 +93,36 @@ const columns = [
     ),
     enableSorting: true,
   }),
-  columnHelper.accessor('type', {
+  columnHelper.accessor('description', {
     cell: ({ row, getValue }) => {
-      const value = getValue()
       return (
-        <Td>
-          {value === 'private' ? (
-            <Text>Private</Text>
-          ) : (
-            <Text>Crowdfunding</Text>
-          )}
+        <Td
+          textOverflow={'ellipsis'}
+          whiteSpace={{ base: 'inherit', sm: 'inherit', md: 'normal' }}
+          maxW={{ base: 'xs', md: 'md' }}
+          fontSize={'sm'}
+          overflow={'hidden'}
+          className='td-no-padding-aside'
+        >
+          {getValue()}
         </Td>
       )
     },
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Type' />
+      <DataTableColumnHeader
+        column={column}
+        title='Description'
+        className='td-no-padding-aside'
+      />
     ),
     enableSorting: false,
   }),
-  columnHelper.accessor('total_audits', {
+  columnHelper.accessor('is_opensource', {
     cell: ({ row, getValue }) => {
-      return <Td isNumeric>{getValue()}+</Td>
-    },
-    header: ({ column }) => (
-      <DataTableColumnHeader
-        column={column}
-        title={columnHeaderNames['total_audits']}
-        isNumeric
-      />
-    ),
-    enableSorting: true,
-  }),
-  columnHelper.accessor('services', {
-    cell: ({ row, getValue }) => {
-      const value = getValue()
-
-      if (!Array.isArray(value) || value.length === 0) {
-        return <Td>No services</Td>
-      }
-
-      // show only one service with icon + the rest in a tooltip
       return (
         <Td>
-          <Flex gap={2} align={'center'}>
-            <Text as='span'>{value[0]}</Text>
-            {value.length > 1 && (
-              <Tooltip
-                hasArrow
-                border={'lg'}
-                label={
-                  <Box px={1} py={2}>
-                    <Stack>
-                      {value.slice(1).map((service, index) => (
-                        <Flex align={'center'} key={index} gap={1}>
-                          <Check size={16} />
-                          <Text lineHeight={1} key={index}>
-                            {service}
-                          </Text>
-                        </Flex>
-                      ))}
-                    </Stack>
-                  </Box>
-                }
-              >
-                <Tag size='md' borderRadius={'full'}>
-                  {value.length - 1}+
-                </Tag>
-              </Tooltip>
-            )}
+          <Flex justifyContent={'center'}>
+            {getValue() ? <CheckIcon /> : null}
           </Flex>
         </Td>
       )
@@ -165,57 +130,27 @@ const columns = [
     header: ({ column }) => (
       <DataTableColumnHeader
         column={column}
-        title={columnHeaderNames['services']}
+        title={columnHeaderNames['is_opensource']}
+        textAlign='center'
       />
     ),
     enableSorting: false,
   }),
-  // columnHelper.accessor('price_per_hour', {
-  //   cell: ({ row, getValue }) => {
-  //     const value = getValue()
-  //     if (!value) return <Td isNumeric>TBD</Td>
-
-  //     return (
-  //       <Td isNumeric>
-  //         {formatCurrency(value.min)} - {formatCurrency(value.max)}
-  //       </Td>
-  //     )
-  //   },
-  //   header: ({ column }) => (
-  //     <DataTableColumnHeader
-  //       column={column}
-  //       title={columnHeaderNames['price_per_hour']}
-  //       isNumeric
-  //     />
-  //   ),
-  //   enableSorting: false,
-  // }),
-  columnHelper.accessor('sample_report', {
+  columnHelper.accessor('is_commercial', {
     cell: ({ row, getValue }) => {
-      const value = getValue()
-
       return (
-        <Td textAlign={'center'}>
-          <Link href={value} isExternal>
-            <Tooltip
-              hasArrow
-              borderRadius={'lg'}
-              label={`${row.original.name} Report Sample`}
-            >
-              <IconButton
-                variant={'ghost'}
-                aria-label='See Report sample'
-                icon={<FileCheck />}
-              />
-            </Tooltip>
-          </Link>
+        <Td>
+          <Flex justifyContent={'center'}>
+            {getValue() ? <CheckIcon /> : null}
+          </Flex>
         </Td>
       )
     },
     header: ({ column }) => (
       <DataTableColumnHeader
         column={column}
-        title={columnHeaderNames['sample_report']}
+        title={columnHeaderNames['is_commercial']}
+        textAlign='center'
       />
     ),
     enableSorting: false,

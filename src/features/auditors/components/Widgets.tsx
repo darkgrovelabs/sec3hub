@@ -7,17 +7,17 @@ import { TAuditor } from '../types'
 import WidgetAuditor from './WidgetAuditor'
 
 type WidgetsProps = {
-  totalCompanies: number
+  totalAuditors: number
   totalAudits: number
   lastAuditor: TAuditor
 }
 
 export default function Widgets(props: WidgetsProps) {
-  const { totalCompanies, totalAudits, lastAuditor } = props
+  const { totalAuditors, totalAudits, lastAuditor } = props
 
   return (
     <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={4}>
-      <WidgetCard label='auditors' value={totalCompanies} icon={ListOrdered} />
+      <WidgetCard label='auditors' value={totalAuditors} icon={ListOrdered} />
       <WidgetCard label='audits' icon={ShieldCheck} value={totalAudits} />
       <WidgetAuditor auditor={lastAuditor} />
     </SimpleGrid>

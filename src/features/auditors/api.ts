@@ -1,29 +1,15 @@
 import {
-  TGetAuditorsParams,
-  TResultGetAuditors,
-  TUpVoteAuditorMutationParams,
-  TAuditor,
-  TResultGetAuditorStats,
-} from './types'
+  ResponseError,
+  TPaginationRequestParams,
+  TUpVoteMutationParams,
+} from '@/types'
+import { TResultGetAuditors, TAuditor, TResultGetAuditorStats } from './types'
 
 export const VOTE_SIGN_MESSAGE =
   'Please sign the transaction to upvote this auditor. It wont cost you any gas. Thanks!'
 
-export interface ResponseError extends Error {
-  statusCode?: number
-}
-
-export class ResponseError extends Error {
-  constructor(message: string, statusCode: number) {
-    super(message)
-
-    this.name = 'ResponseError'
-    this.statusCode = statusCode
-  }
-}
-
 async function getAuditors(
-  props?: TGetAuditorsParams
+  props?: TPaginationRequestParams
 ): Promise<TResultGetAuditors> {
   //backend start at 1
   const page = props?.page ? props.page + 1 : 1
@@ -80,11 +66,7 @@ async function getAuditorsStats(): Promise<TResultGetAuditorStats> {
   return { totalAuditors, totalAudits, lastRecord }
 }
 
-async function upVoteCompany({
-  walletAddress,
-  signature,
-  companyId,
-}: TUpVoteAuditorMutationParams) {
+async function upVote({ walletAddress, signature, id }: TUpVoteMutationParams) {
   const response = await fetch('https://backbonez.fly.dev/vote', {
     method: 'POST',
     headers: {
@@ -94,7 +76,7 @@ async function upVoteCompany({
       msg: VOTE_SIGN_MESSAGE,
       pub: walletAddress,
       sig: signature,
-      id: companyId,
+      id,
       type: 'auditor',
     }),
   })
@@ -106,4 +88,4 @@ async function upVoteCompany({
   return await response.json()
 }
 
-export { getAuditors, upVoteCompany, getAuditorsStats }
+export { getAuditors, upVote, getAuditorsStats }

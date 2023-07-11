@@ -20,8 +20,6 @@ import {
 } from '@/chakra/components'
 import DataTableViewOptions from '@/components/table/DataTableViewOptions'
 import DataTablePagination from '@/components/table/DataTablePagination'
-import { getAuditors } from '@/features/auditors/api'
-import { TAuditor, TResultGetAuditors } from '@/features/auditors/types'
 import useDebounce from '@/hooks/useDebounce'
 import { useQuery } from '@tanstack/react-query'
 import {
@@ -35,12 +33,14 @@ import {
 } from '@tanstack/react-table'
 import { Search, XCircleIcon } from 'lucide-react'
 import { Fragment, useMemo, useState } from 'react'
+import { getProducts } from '../api'
+import { TProduct, TResultGetProducts } from '../types'
 
 export type DataTableProps = {
-  initialData: TAuditor[]
+  initialData: TProduct[]
   initialPageCount: number
   columnHeaderNames: Record<string, string>
-  columns: ColumnDef<TAuditor, any>[]
+  columns: ColumnDef<TProduct, any>[]
 }
 
 export default function DataTable({
@@ -69,9 +69,9 @@ export default function DataTable({
     return { order: sorting[0].desc ? 'desc' : 'asc', sort: sorting[0].id }
   }, [sorting])
 
-  const query = useQuery<TResultGetAuditors>({
+  const query = useQuery<TResultGetProducts>({
     queryKey: [
-      'companies',
+      'products',
       pagination.pageIndex,
       pagination.pageSize,
       order,
@@ -79,7 +79,7 @@ export default function DataTable({
       debouncecKeyword,
     ],
     queryFn: () =>
-      getAuditors({
+      getProducts({
         page: pagination.pageIndex,
         limit: pagination.pageSize,
         order,
@@ -120,7 +120,6 @@ export default function DataTable({
         gap={2}
         mb={6}
         flexWrap={'wrap'}
-        // flexDir={{ base: 'column', md: 'row' }}
       >
         <Box w={{ base: '100%', md: 'md' }}>
           <InputGroup>
@@ -130,7 +129,7 @@ export default function DataTable({
 
             <Input
               borderRadius={'lg'}
-              placeholder={'Search by Solo Auditor / Company / Services ...'}
+              placeholder={'Search by Name / Description / Website ...'}
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
             />

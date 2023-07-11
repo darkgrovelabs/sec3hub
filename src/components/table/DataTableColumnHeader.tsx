@@ -26,12 +26,20 @@ interface DataTableColumnHeaderProps<TData, TValue>
   title: string
   isNumeric?: boolean
   sticky?: boolean
+  textAlign?: 'left' | 'center' | 'right'
 }
 
 export default function DataTableColumnHeader<TData, TValue>(
   props: DataTableColumnHeaderProps<TData, TValue>
 ) {
-  const { column, title, isNumeric = false, sticky = false, className } = props
+  const {
+    column,
+    title,
+    isNumeric = false,
+    sticky = false,
+    textAlign = 'left',
+    className,
+  } = props
   const bgColor = useColorModeValue('#fff', '#0E0E0E')
 
   if (!column.getCanSort()) {
@@ -43,6 +51,7 @@ export default function DataTableColumnHeader<TData, TValue>(
         left={0}
         isNumeric={isNumeric}
         className={className}
+        textAlign={textAlign}
       >
         {title}
       </Th>
@@ -56,6 +65,7 @@ export default function DataTableColumnHeader<TData, TValue>(
       bg={sticky ? bgColor : 'auto'}
       left={0}
       className={className}
+      textAlign={textAlign}
     >
       <Flex
         justify={isNumeric ? 'flex-end' : 'flex-start'}
