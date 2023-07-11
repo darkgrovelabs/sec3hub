@@ -13,17 +13,17 @@ import { TAuditor } from '../types'
 import dayjs from 'dayjs'
 
 type WidgetAuditorProps = {
-  company: TAuditor
+  auditor: TAuditor
 }
 
-export default function WidgetCompany(props: WidgetAuditorProps) {
-  const { company } = props
+export default function WidgetAuditor(props: WidgetAuditorProps) {
+  const { auditor } = props
   const { colorMode } = useColorMode()
 
   const labelColor = colorMode === 'light' ? 'blackAlpha.600' : 'whiteAlpha.600'
   const iconBgColor = colorMode === 'light' ? 'blue.400' : 'blue.100'
 
-  const date = dayjs(dayjs()).diff(company.created_at, 'days')
+  const date = dayjs(dayjs()).diff(auditor.created_at, 'days')
 
   return (
     <>
@@ -36,8 +36,8 @@ export default function WidgetCompany(props: WidgetAuditorProps) {
               alignItems={'center'}
             >
               <Avatar
-                name={company.name}
-                src={company.logo_url}
+                name={auditor.name}
+                src={auditor.logo_url}
                 h={14}
                 w={14}
                 bgColor={iconBgColor}
@@ -55,7 +55,7 @@ export default function WidgetCompany(props: WidgetAuditorProps) {
               </Text>
               <Flex align={'center'} gap={2}>
                 <Text fontSize={'xl'} fontWeight={800}>
-                  {company.name}
+                  {auditor.name}
                 </Text>
                 <Text as='span' fontSize={'xs'} color={labelColor}>
                   added {date} days ago

@@ -1,7 +1,11 @@
 'use client'
 
 import { Button, Icon, useToast } from '@/chakra/components'
-import { ResponseError, upVoteCompany } from '@/features/auditors/api'
+import {
+  ResponseError,
+  VOTE_SIGN_MESSAGE,
+  upVoteCompany,
+} from '@/features/auditors/api'
 import { TUpVoteAuditorMutationParams } from '@/features/auditors/types'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useMutation } from '@tanstack/react-query'
@@ -88,8 +92,7 @@ export default function UpVoteCompanyButton(props: UpVoteCompanyButtonProps) {
     }
 
     const signature = await signMessage({
-      message:
-        'Please sign the transaction to upvote this company. It wont cost you any gas. Thanks!',
+      message: VOTE_SIGN_MESSAGE,
     })
 
     upVote.mutate({ walletAddress: address, signature, companyId })

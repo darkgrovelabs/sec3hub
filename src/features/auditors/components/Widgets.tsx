@@ -19,7 +19,7 @@ export default function Widgets(props: WidgetsProps) {
     <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={4}>
       <WidgetCard label='auditors' value={totalCompanies} icon={ListOrdered} />
       <WidgetCard label='audits' icon={ShieldCheck} value={totalAudits} />
-      <WidgetAuditor company={lastAuditor} />
+      <WidgetAuditor auditor={lastAuditor} />
     </SimpleGrid>
   )
 }

@@ -7,7 +7,7 @@ import {
 } from './types'
 
 export const VOTE_SIGN_MESSAGE =
-  'Please sign the transaction to upvote this company. It wont cost you any gas. Thanks!'
+  'Please sign the transaction to upvote this auditor. It wont cost you any gas. Thanks!'
 
 export interface ResponseError extends Error {
   statusCode?: number
@@ -95,7 +95,7 @@ async function upVoteCompany({
       pub: walletAddress,
       sig: signature,
       id: companyId,
-      type: 'company',
+      type: 'auditor',
     }),
   })
 
