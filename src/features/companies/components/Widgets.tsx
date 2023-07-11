@@ -15,24 +15,11 @@ type WidgetsProps = {
 export default function Widgets(props: WidgetsProps) {
   const { totalCompanies, totalAudits, lastCompany } = props
 
-  console.log(lastCompany)
-
   return (
-    <>
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={4}>
-        <WidgetCard
-          label='companies'
-          value={totalCompanies}
-          icon={ListOrdered}
-        />
-        <WidgetCard label='audits' icon={ShieldCheck} value={totalAudits} />
-        <WidgetCompany company={lastCompany} />
-        {/* <WidgetCard 
-          icon={DollarSign}
-          label='average price per hour (usd)'
-          value='TODO'
-        /> */}
-      </SimpleGrid>
-    </>
+    <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={4}>
+      <WidgetCard label='companies' value={totalCompanies} icon={ListOrdered} />
+      <WidgetCard label='audits' icon={ShieldCheck} value={totalAudits} />
+      <WidgetCompany company={lastCompany} />
+    </SimpleGrid>
   )
 }

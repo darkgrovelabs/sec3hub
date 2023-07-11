@@ -32,7 +32,6 @@ export default function WidgetCompany(props: WidgetCompanyProps) {
           <Flex align={'center'} gap={4}>
             <Flex
               borderRadius={'3xl'}
-              //   bgColor={iconBgColor}
               justifyContent={'center'}
               alignItems={'center'}
             >
@@ -52,7 +51,7 @@ export default function WidgetCompany(props: WidgetCompanyProps) {
                 textTransform={'uppercase'}
                 color={labelColor}
               >
-                Last company
+                Recently added
               </Text>
               <Flex align={'center'} gap={2}>
                 <Text fontSize={'xl'} fontWeight={800}>
