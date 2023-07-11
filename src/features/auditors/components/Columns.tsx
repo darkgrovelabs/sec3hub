@@ -14,17 +14,11 @@ import {
 } from '@/chakra/components'
 import { TAuditor } from '@/features/auditors/types'
 import { createColumnHelper } from '@tanstack/react-table'
-import {
-  Check,
-  FileCheck,
-  GithubIcon,
-  LinkIcon,
-  SendIcon,
-  TwitterIcon,
-} from 'lucide-react'
+import { Check, FileCheck } from 'lucide-react'
 
-import DataTableStickyColumn from '@/components/table/DataTableStickyColumn'
 import DataTableColumnHeader from '@/components/table/DataTableColumnHeader'
+import DataTableLinksColumn from '@/components/table/DataTableLinksColumn'
+import DataTableStickyColumn from '@/components/table/DataTableStickyColumn'
 import UpVoteAuditorButton from '../../../components/UpVoteButton'
 import { VOTE_SIGN_MESSAGE } from '../api'
 
@@ -234,67 +228,9 @@ const columns = [
     enableSorting: true,
   }),
   columnHelper.accessor('links', {
-    cell: ({ row, getValue }) => {
-      const github = getValue()?.github
-      const twitter = getValue()?.twitter
-      const telegram = getValue()?.telegram
-      const website = getValue()?.website
-
-      return (
-        <Td>
-          <Stack direction={'row'} gap={0}>
-            {github && (
-              <Link href={github} isExternal>
-                <Tooltip hasArrow borderRadius={'lg'} label={'Github'}>
-                  <IconButton
-                    size={'sm'}
-                    variant={'ghost'}
-                    aria-label='Github'
-                    icon={<GithubIcon />}
-                  />
-                </Tooltip>
-              </Link>
-            )}
-            {twitter && (
-              <Link href={twitter} isExternal>
-                <Tooltip hasArrow borderRadius={'lg'} label={'Twitter'}>
-                  <IconButton
-                    size={'sm'}
-                    variant={'ghost'}
-                    aria-label='Twitter'
-                    icon={<TwitterIcon />}
-                  />
-                </Tooltip>
-              </Link>
-            )}
-            {website && (
-              <Link href={website} isExternal>
-                <Tooltip hasArrow borderRadius={'lg'} label={'Website'}>
-                  <IconButton
-                    size={'sm'}
-                    variant={'ghost'}
-                    aria-label='Website'
-                    icon={<LinkIcon />}
-                  />
-                </Tooltip>
-              </Link>
-            )}
-            {telegram && (
-              <Link href={telegram} isExternal>
-                <Tooltip hasArrow borderRadius={'lg'} label={'Telegram'}>
-                  <IconButton
-                    size={'sm'}
-                    variant={'ghost'}
-                    aria-label='Telegram'
-                    icon={<SendIcon />}
-                  />
-                </Tooltip>
-              </Link>
-            )}
-          </Stack>
-        </Td>
-      )
-    },
+    cell: ({ row, getValue }) => (
+      <DataTableLinksColumn links={getValue()}></DataTableLinksColumn>
+    ),
     header: ({ column }) => (
       <DataTableColumnHeader
         column={column}

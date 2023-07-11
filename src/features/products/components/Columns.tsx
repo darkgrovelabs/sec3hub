@@ -1,32 +1,13 @@
 'use client'
 
-import {
-  Avatar,
-  Box,
-  Flex,
-  IconButton,
-  Link,
-  Stack,
-  Tag,
-  Td,
-  Text,
-  Tooltip,
-} from '@/chakra/components'
-import { TAuditor } from '@/features/auditors/types'
+import { Avatar, Box, Flex, Td, Text } from '@/chakra/components'
 import { createColumnHelper } from '@tanstack/react-table'
-import {
-  Check,
-  CheckIcon,
-  FileCheck,
-  GithubIcon,
-  LinkIcon,
-  SendIcon,
-  TwitterIcon,
-} from 'lucide-react'
+import { CheckIcon } from 'lucide-react'
 
-import DataTableColumnHeader from '@/components/table/DataTableColumnHeader'
-import DataTableStickyColumn from '@/components/table/DataTableStickyColumn'
 import UpVoteButton from '@/components/UpVoteButton'
+import DataTableColumnHeader from '@/components/table/DataTableColumnHeader'
+import DataTableLinksColumn from '@/components/table/DataTableLinksColumn'
+import DataTableStickyColumn from '@/components/table/DataTableStickyColumn'
 import { VOTE_SIGN_MESSAGE } from '../api'
 import { TProduct } from '../types'
 
@@ -70,8 +51,8 @@ const columns = [
   columnHelper.accessor('name', {
     cell: ({ row, getValue }) => {
       return (
-        <DataTableStickyColumn>
-          <Flex align={'center'} gap={2}>
+        <Td whiteSpace={'normal'} maxW={{ base: 'xs', md: 'xs' }}>
+          <Flex align={'start'} gap={3}>
             <Avatar
               size={'sm'}
               name={getValue()}
@@ -79,44 +60,50 @@ const columns = [
               bg={'primary.400'}
               color='white'
             />
-            <Text fontWeight='bold'>{getValue()}</Text>
+            <Box>
+              <Text fontWeight='bold' lineHeight={'tall'}>
+                {getValue()}
+              </Text>
+              <Text fontSize={'sm'} textOverflow={'ellipsis'} noOfLines={2}>
+                {row.original.description}
+              </Text>
+            </Box>
           </Flex>
-        </DataTableStickyColumn>
-      )
-    },
-    header: ({ column }) => (
-      <DataTableColumnHeader
-        column={column}
-        title={columnHeaderNames['name']}
-        sticky
-      />
-    ),
-    enableSorting: true,
-  }),
-  columnHelper.accessor('description', {
-    cell: ({ row, getValue }) => {
-      return (
-        <Td
-          textOverflow={'ellipsis'}
-          whiteSpace={{ base: 'inherit', sm: 'inherit', md: 'normal' }}
-          maxW={{ base: 'xs', md: 'md' }}
-          fontSize={'sm'}
-          overflow={'hidden'}
-          className='td-no-padding-aside'
-        >
-          {getValue()}
         </Td>
       )
     },
     header: ({ column }) => (
       <DataTableColumnHeader
         column={column}
-        title='Description'
-        className='td-no-padding-aside'
+        title={columnHeaderNames['name']}
       />
     ),
-    enableSorting: false,
+    enableSorting: true,
   }),
+  // columnHelper.accessor('description', {
+  //   cell: ({ row, getValue }) => {
+  //     return (
+  //       <Td
+  //         textOverflow={'ellipsis'}
+  //         whiteSpace={{ base: 'inherit', sm: 'inherit', md: 'normal' }}
+  //         maxW={{ base: 'xs', md: 'md' }}
+  //         fontSize={'sm'}
+  //         overflow={'hidden'}
+  //         className='td-no-padding-aside'
+  //       >
+  //         {getValue()}
+  //       </Td>
+  //     )
+  //   },
+  //   header: ({ column }) => (
+  //     <DataTableColumnHeader
+  //       column={column}
+  //       title='Description'
+  //       className='td-no-padding-aside'
+  //     />
+  //   ),
+  //   enableSorting: false,
+  // }),
   columnHelper.accessor('is_opensource', {
     cell: ({ row, getValue }) => {
       return (
@@ -169,67 +156,9 @@ const columns = [
     enableSorting: true,
   }),
   columnHelper.accessor('links', {
-    cell: ({ row, getValue }) => {
-      const github = getValue()?.github
-      const twitter = getValue()?.twitter
-      const telegram = getValue()?.telegram
-      const website = getValue()?.website
-
-      return (
-        <Td>
-          <Stack direction={'row'} gap={0}>
-            {github && (
-              <Link href={github} isExternal>
-                <Tooltip hasArrow borderRadius={'lg'} label={'Github'}>
-                  <IconButton
-                    size={'sm'}
-                    variant={'ghost'}
-                    aria-label='Github'
-                    icon={<GithubIcon />}
-                  />
-                </Tooltip>
-              </Link>
-            )}
-            {twitter && (
-              <Link href={twitter} isExternal>
-                <Tooltip hasArrow borderRadius={'lg'} label={'Twitter'}>
-                  <IconButton
-                    size={'sm'}
-                    variant={'ghost'}
-                    aria-label='Twitter'
-                    icon={<TwitterIcon />}
-                  />
-                </Tooltip>
-              </Link>
-            )}
-            {website && (
-              <Link href={website} isExternal>
-                <Tooltip hasArrow borderRadius={'lg'} label={'Website'}>
-                  <IconButton
-                    size={'sm'}
-                    variant={'ghost'}
-                    aria-label='Website'
-                    icon={<LinkIcon />}
-                  />
-                </Tooltip>
-              </Link>
-            )}
-            {telegram && (
-              <Link href={telegram} isExternal>
-                <Tooltip hasArrow borderRadius={'lg'} label={'Telegram'}>
-                  <IconButton
-                    size={'sm'}
-                    variant={'ghost'}
-                    aria-label='Telegram'
-                    icon={<SendIcon />}
-                  />
-                </Tooltip>
-              </Link>
-            )}
-          </Stack>
-        </Td>
-      )
-    },
+    cell: ({ row, getValue }) => (
+      <DataTableLinksColumn links={getValue()}></DataTableLinksColumn>
+    ),
     header: ({ column }) => (
       <DataTableColumnHeader
         column={column}
