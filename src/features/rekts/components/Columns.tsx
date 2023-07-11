@@ -153,14 +153,7 @@ const columns = [
 
               return (
                 <Flex key={tx}>
-                  <Link
-                    _hover={{
-                      color: 'primary.300',
-                      textDecoration: 'underline',
-                    }}
-                    href={tx}
-                    isExternal
-                  >
+                  <Link href={tx} isExternal>
                     <Text fontSize='sm' as='span' fontWeight={300}>
                       {truncateString(hash, 2, '')}
                     </Text>
