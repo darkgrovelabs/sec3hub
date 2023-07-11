@@ -1,5 +1,3 @@
-'use client'
-
 import { Card, CardBody } from '@/chakra/components'
 import { TAuditor } from '@/features/auditors/types'
 

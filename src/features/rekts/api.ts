@@ -1,19 +1,16 @@
 import { ResponseError, TPaginationRequestParams } from '@/types'
-import { TProduct, TResultGetProductStats, TResultGetProducts } from './types'
+import { TRekt, TResultGetRektStats, TResultGetRekts } from './type'
 
-export const VOTE_SIGN_MESSAGE =
-  'Please sign the transaction to upvote this product. It wont cost you any gas. Thanks!'
-
-async function getProducts(
+async function getRekts(
   props?: TPaginationRequestParams
-): Promise<TResultGetProducts> {
+): Promise<TResultGetRekts> {
   //backend start at 1
   const page = props?.page ? props.page + 1 : 1
   const limit = props?.limit || 10
   const order = props?.order || 'desc'
-  const sort = props?.sort || 'up_votes'
+  const sort = props?.sort || 'damage'
 
-  let url = `https://backbonez.fly.dev/products?page=${page}&limit=${limit}&order=${order}&sort=${sort}`
+  let url = `https://backbonez.fly.dev/rekts?page=${page}&limit=${limit}&order=${order}&sort=${sort}`
 
   if (props?.keyword) {
     url += `&keyword=${props.keyword}`
@@ -44,8 +41,8 @@ async function getProducts(
   }
 }
 
-async function getProductsStats(): Promise<TResultGetProductStats> {
-  const response = await fetch('https://backbonez.fly.dev/products/stats', {
+async function getRektsStats(): Promise<TResultGetRektStats> {
+  const response = await fetch('https://backbonez.fly.dev/rekts/stats', {
     cache: 'no-store',
   })
 
@@ -55,11 +52,11 @@ async function getProductsStats(): Promise<TResultGetProductStats> {
 
   const data = await response.json()
 
-  const totalProducts = data?.totalProducts[0]?.count
-  const totalOpenSource = data?.totalOpenSource[0]?.count
-  const lastRecord = data?.lastRecord[0] as TProduct
+  const totalRekts = data?.totalRekts[0]?.count
+  const totalDamage = data?.totalDamage[0]?.sum
+  const lastRecord = data?.lastRecord[0] as TRekt
 
-  return { totalProducts, totalOpenSource, lastRecord }
+  return { totalRekts, totalDamage, lastRecord }
 }
 
-export { getProducts, getProductsStats }
+export { getRekts, getRektsStats }

@@ -1,15 +1,17 @@
+'use client'
+
 import { Card, CardBody } from '@/chakra/components'
-import { TProduct } from '@/features/products/types'
 
+import { TRekt } from '../type'
+import { columnHeaderNames, columns } from './Columns'
 import DataTable from './DataTable'
-import { columns, columnHeaderNames } from './Columns'
 
-type AuditorsTableProps = {
-  initialData: TProduct[]
+type ReksTableProps = {
+  initialData: TRekt[]
   initialPageCount: number
 }
 
-export default function ProductsTable(props: AuditorsTableProps) {
+export default function RektsTable(props: ReksTableProps) {
   const { initialData, initialPageCount } = props
 
   return (

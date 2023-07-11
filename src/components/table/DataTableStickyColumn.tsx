@@ -5,12 +5,13 @@ import { ReactNode } from 'react'
 type DataTableStickyColumnProps = {
   children: ReactNode
   isNumeric?: boolean
+  className?: string
 }
 
 export default function DataTableStickyColumn(
   props: DataTableStickyColumnProps
 ) {
-  const { children, isNumeric = false } = props
+  const { children, isNumeric = false, className } = props
   const bgColor = useColorModeValue('#fff', '#0E0E0E')
 
   return (
@@ -20,6 +21,7 @@ export default function DataTableStickyColumn(
       bg={bgColor}
       left={0}
       isNumeric={isNumeric}
+      className={className}
     >
       {children}
     </Td>

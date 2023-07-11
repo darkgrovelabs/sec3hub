@@ -7,7 +7,6 @@ import { CheckIcon } from 'lucide-react'
 import UpVoteButton from '@/components/UpVoteButton'
 import DataTableColumnHeader from '@/components/table/DataTableColumnHeader'
 import DataTableLinksColumn from '@/components/table/DataTableLinksColumn'
-import DataTableStickyColumn from '@/components/table/DataTableStickyColumn'
 import { VOTE_SIGN_MESSAGE } from '../api'
 import { TProduct } from '../types'
 
@@ -19,10 +18,7 @@ const columnHeaderNames: { [key: string]: string } = {
   is_opensource: 'Open Source',
   is_commercial: 'Commercial',
   up_votes: 'Up Votes',
-  // total_audits: 'Audits',
-  // price_per_hour: 'Fee (p/hr)',
   links: 'Links',
-  // sample_report: 'Sample Report',
   start_year: 'Year',
 }
 
@@ -51,7 +47,11 @@ const columns = [
   columnHelper.accessor('name', {
     cell: ({ row, getValue }) => {
       return (
-        <Td whiteSpace={'normal'} maxW={{ base: 'xs', md: 'xs' }}>
+        <Td
+          className='td-no-padding-aside'
+          whiteSpace={'normal'}
+          maxW={{ base: 'xs', md: 'xs' }}
+        >
           <Flex align={'start'} gap={3}>
             <Avatar
               size={'sm'}
@@ -76,6 +76,7 @@ const columns = [
       <DataTableColumnHeader
         column={column}
         title={columnHeaderNames['name']}
+        className='td-no-padding-aside'
       />
     ),
     enableSorting: true,
