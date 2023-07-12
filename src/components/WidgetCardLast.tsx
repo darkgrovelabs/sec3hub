@@ -30,45 +30,43 @@ export default function WidgetCardLast<T>(props: WidgetCardLast<T>) {
       : `${dayjs(dayjs()).diff(entry.created_at, 'days')} days ago`
 
   return (
-    <>
-      <Card>
-        <CardBody display={'flex'} alignContent={'center'}>
-          <Flex align={'center'} gap={4}>
-            <Flex
-              borderRadius={'3xl'}
-              justifyContent={'center'}
-              alignItems={'center'}
-            >
-              <Avatar
-                name={entry.name}
-                src={entry.logo_url}
-                h={14}
-                w={14}
-                bgColor={iconBgColor}
-              />
-            </Flex>
-
-            <Box>
-              <Text
-                lineHeight={'shorter'}
-                fontSize={'sm'}
-                textTransform={'uppercase'}
-                color={labelColor}
-              >
-                {label}
-              </Text>
-              <Flex align={'center'} gap={2}>
-                <Text fontSize={'xl'} fontWeight={800}>
-                  {entry.name}
-                </Text>
-                <Text as='span' fontSize={'xs'} color={labelColor}>
-                  added {addedWhen}
-                </Text>
-              </Flex>
-            </Box>
+    <Card>
+      <CardBody display={'flex'} alignContent={'center'}>
+        <Flex align={'center'} gap={4}>
+          <Flex
+            borderRadius={'3xl'}
+            justifyContent={'center'}
+            alignItems={'center'}
+          >
+            <Avatar
+              name={entry.name}
+              src={entry.logo_url}
+              h={14}
+              w={14}
+              bgColor={iconBgColor}
+            />
           </Flex>
-        </CardBody>
-      </Card>
-    </>
+
+          <Box>
+            <Text
+              lineHeight={'shorter'}
+              fontSize={'sm'}
+              textTransform={'uppercase'}
+              color={labelColor}
+            >
+              {label}
+            </Text>
+            <Flex align={'center'} gap={2}>
+              <Text fontSize={'xl'} fontWeight={800}>
+                {entry.name}
+              </Text>
+              <Text as='span' fontSize={'xs'} color={labelColor}>
+                added {addedWhen}
+              </Text>
+            </Flex>
+          </Box>
+        </Flex>
+      </CardBody>
+    </Card>
   )
 }
