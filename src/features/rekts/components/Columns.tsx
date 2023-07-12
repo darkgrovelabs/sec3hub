@@ -45,7 +45,7 @@ const columns = [
     cell: ({ row, getValue }) => {
       return (
         <DataTableStickyColumn className='td-no-padding-aside'>
-          <Flex align={'start'} gap={3}>
+          <Flex align={'center'} gap={3}>
             <Avatar
               size={'sm'}
               name={getValue()}
@@ -54,11 +54,10 @@ const columns = [
               color='white'
             />
             <Box>
-              <Text fontWeight='bold' lineHeight={'tall'}>
-                {getValue()}
-              </Text>
               <Link href={row.original.website} isExternal>
-                <Text fontSize={'sm'}>{row.original.website}</Text>
+                <Text fontWeight='bold' lineHeight={'tall'}>
+                  {getValue()}
+                </Text>
               </Link>
             </Box>
           </Flex>
@@ -120,7 +119,7 @@ const columns = [
   columnHelper.accessor('audited_by', {
     cell: ({ row, getValue }) => {
       const auditedBy = getValue()
-      if (auditedBy.length === 0) return <Td></Td>
+      if (auditedBy.length === 0) return <Td>-</Td>
 
       return (
         <Td>
@@ -176,6 +175,9 @@ const columns = [
 
       if (sources.length === 0) return <Td></Td>
 
+      const sourceLinks = sources[0]
+      if (!sourceLinks) return <Td></Td>
+
       return (
         <Td textAlign={'center'}>
           <Menu>
@@ -185,19 +187,20 @@ const columns = [
               icon={<SearchCheckIcon />}
             ></MenuButton>
             <MenuList>
-              {sources.map((source, index) => {
-                if (!source) return null
+              {sourceLinks.split(',').map((link, index) => {
+                if (!link) return null
+
                 return (
                   <Link
                     _hover={{ textDecoration: 'none' }}
-                    href={source}
+                    href={link}
                     isExternal
-                    key={source}
+                    key={link}
                   >
                     <MenuItem flexDir={'column'} alignItems={'start'}>
                       <Text as='span'>Source {index + 1}</Text>
                       <Text maxW={'sm'} fontSize={'xs'} as='span'>
-                        {source.slice(0, 30)}...
+                        {link.slice(0, 40)}...
                       </Text>
                     </MenuItem>
                   </Link>

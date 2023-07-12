@@ -31,7 +31,7 @@ const columnHeaderNames: { [key: string]: string } = {
   up_votes: 'Up Votes',
   total_audits: 'Audits',
   price_per_hour: 'Fee (p/hr)',
-  links: 'Links',
+  links: 'Socials',
   sample_report: 'Sample Report',
   start_year: 'Year',
 }
@@ -60,6 +60,8 @@ const columns = [
   }),
   columnHelper.accessor('name', {
     cell: ({ row, getValue }) => {
+      const website = row.original.links['website']
+
       return (
         <DataTableStickyColumn>
           <Flex align={'center'} gap={2}>
@@ -70,7 +72,10 @@ const columns = [
               bg={'primary.400'}
               color='white'
             />
-            <Text fontWeight='bold'>{getValue()}</Text>
+
+            <Link href={website} isExternal>
+              <Text fontWeight='bold'>{getValue()}</Text>
+            </Link>
           </Flex>
         </DataTableStickyColumn>
       )
@@ -229,7 +234,10 @@ const columns = [
   }),
   columnHelper.accessor('links', {
     cell: ({ row, getValue }) => (
-      <DataTableLinksColumn links={getValue()}></DataTableLinksColumn>
+      <DataTableLinksColumn
+        hideWebsite
+        links={getValue()}
+      ></DataTableLinksColumn>
     ),
     header: ({ column }) => (
       <DataTableColumnHeader

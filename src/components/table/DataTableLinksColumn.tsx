@@ -2,10 +2,12 @@ import { IconButton, Link, Stack, Td, Tooltip } from '@/chakra/components'
 import { TAuditor } from '@/features/auditors/types'
 import { GithubIcon, LinkIcon, SendIcon, TwitterIcon } from 'lucide-react'
 
-interface DataTableLinksColumnProps extends Pick<TAuditor, 'links'> {}
+interface DataTableLinksColumnProps extends Pick<TAuditor, 'links'> {
+  hideWebsite?: boolean
+}
 
 export default function DataTableLinksColumn(props: DataTableLinksColumnProps) {
-  const { links } = props
+  const { links, hideWebsite = false } = props
 
   const github = links?.github
   const twitter = links?.twitter
@@ -39,7 +41,7 @@ export default function DataTableLinksColumn(props: DataTableLinksColumnProps) {
             </Tooltip>
           </Link>
         )}
-        {website && (
+        {website && !hideWebsite && (
           <Link href={website} isExternal>
             <Tooltip hasArrow borderRadius={'lg'} label={'Website'}>
               <IconButton

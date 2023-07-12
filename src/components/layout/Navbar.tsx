@@ -78,7 +78,7 @@ export default function Navbar() {
               size={{ base: 'sm', xl: 'md' }}
               variant={'gradient'}
             >
-              Add Content
+              Share with us
             </MenuButton>
 
             <MenuList>
@@ -86,19 +86,13 @@ export default function Navbar() {
                 href='https://docs.google.com/forms/d/e/1FAIpQLSfpfjwmBrxYIln5rQUAvIRLjNmE7q5weqvoDmcrcxRO2fCfOQ/viewform'
                 target='_blank'
               >
-                <MenuItem icon={<ListPlusIcon />}>Submit resource</MenuItem>
+                <MenuItem icon={<ListPlusIcon />}>Submit content</MenuItem>
               </Link>
               <Link
                 href='https://github.com/orgs/darkgrovelabs/discussions/new/choose'
                 target='_blank'
               >
                 <MenuItem icon={<LightbulbIcon />}>Request feature</MenuItem>
-              </Link>
-              <Link
-                href='https://github.com/darkgrovelabs/sec3hub/issues/new'
-                target='_blank'
-              >
-                <MenuItem icon={<FlagIcon />}>Report issue</MenuItem>
               </Link>
             </MenuList>
           </Menu>

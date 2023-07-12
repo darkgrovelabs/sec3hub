@@ -1,12 +1,20 @@
 'use client'
 
-import { Avatar, Box, Flex, Td, Text } from '@/chakra/components'
+import {
+  Avatar,
+  Box,
+  Flex,
+  Link,
+  Stack,
+  Tag,
+  Td,
+  Text,
+} from '@/chakra/components'
 import { createColumnHelper } from '@tanstack/react-table'
-import { CheckIcon } from 'lucide-react'
+import { CheckIcon, XIcon } from 'lucide-react'
 
 import UpVoteButton from '@/components/UpVoteButton'
 import DataTableColumnHeader from '@/components/table/DataTableColumnHeader'
-import DataTableLinksColumn from '@/components/table/DataTableLinksColumn'
 import { VOTE_SIGN_MESSAGE } from '../api'
 import { TProduct } from '../types'
 
@@ -46,29 +54,44 @@ const columns = [
   }),
   columnHelper.accessor('name', {
     cell: ({ row, getValue }) => {
+      const categories = row.original.categories.map((category) => {
+        return (
+          <Tag size={'sm'} key={category}>
+            {category}
+          </Tag>
+        )
+      })
+
       return (
-        <Td
-          className='td-no-padding-aside'
-          whiteSpace={'normal'}
-          maxW={{ base: 'xs', md: 'xs' }}
-        >
-          <Flex align={'start'} gap={3}>
+        <Td whiteSpace={'normal'} minW={'md'}>
+          <Flex align={'center'} gap={3}>
             <Avatar
-              size={'sm'}
+              size={'md'}
               name={getValue()}
               src={row.original.logo_url}
               bg={'primary.400'}
               color='white'
             />
             <Box>
-              <Text fontWeight='bold' lineHeight={'tall'}>
-                {getValue()}
-              </Text>
-              <Text fontSize={'sm'} textOverflow={'ellipsis'} noOfLines={2}>
-                {row.original.description}
-              </Text>
+              <Link href={row.original.website} isExternal>
+                <Text fontWeight='bold' lineHeight={'tall'}>
+                  {getValue()}
+                </Text>
+              </Link>
+              <Flex align={'center'} gap={1}>
+                {categories}
+              </Flex>
             </Box>
           </Flex>
+
+          <Text
+            mt={1.5}
+            fontSize={'sm'}
+            textOverflow={'ellipsis'}
+            noOfLines={2}
+          >
+            {row.original.description}
+          </Text>
         </Td>
       )
     },
@@ -76,7 +99,6 @@ const columns = [
       <DataTableColumnHeader
         column={column}
         title={columnHeaderNames['name']}
-        className='td-no-padding-aside'
       />
     ),
     enableSorting: true,
@@ -110,7 +132,7 @@ const columns = [
       return (
         <Td>
           <Flex justifyContent={'center'}>
-            {getValue() ? <CheckIcon /> : null}
+            {getValue() ? <CheckIcon /> : <XIcon />}
           </Flex>
         </Td>
       )
@@ -124,25 +146,25 @@ const columns = [
     ),
     enableSorting: false,
   }),
-  columnHelper.accessor('is_commercial', {
-    cell: ({ row, getValue }) => {
-      return (
-        <Td>
-          <Flex justifyContent={'center'}>
-            {getValue() ? <CheckIcon /> : null}
-          </Flex>
-        </Td>
-      )
-    },
-    header: ({ column }) => (
-      <DataTableColumnHeader
-        column={column}
-        title={columnHeaderNames['is_commercial']}
-        textAlign='center'
-      />
-    ),
-    enableSorting: false,
-  }),
+  // columnHelper.accessor('is_commercial', {
+  //   cell: ({ row, getValue }) => {
+  //     return (
+  //       <Td>
+  //         <Flex justifyContent={'center'}>
+  //           {getValue() ? <CheckIcon /> : <XIcon />}
+  //         </Flex>
+  //       </Td>
+  //     )
+  //   },
+  //   header: ({ column }) => (
+  //     <DataTableColumnHeader
+  //       column={column}
+  //       title={columnHeaderNames['is_commercial']}
+  //       textAlign='center'
+  //     />
+  //   ),
+  //   enableSorting: false,
+  // }),
   columnHelper.accessor('start_year', {
     cell: ({ row, getValue }) => {
       return <Td isNumeric>{getValue()}</Td>
@@ -156,18 +178,18 @@ const columns = [
     ),
     enableSorting: true,
   }),
-  columnHelper.accessor('links', {
-    cell: ({ row, getValue }) => (
-      <DataTableLinksColumn links={getValue()}></DataTableLinksColumn>
-    ),
-    header: ({ column }) => (
-      <DataTableColumnHeader
-        column={column}
-        title={columnHeaderNames['links']}
-      />
-    ),
-    enableSorting: false,
-  }),
+  // columnHelper.accessor('links', {
+  //   cell: ({ row, getValue }) => (
+  //     <DataTableLinksColumn links={getValue()}></DataTableLinksColumn>
+  //   ),
+  //   header: ({ column }) => (
+  //     <DataTableColumnHeader
+  //       column={column}
+  //       title={columnHeaderNames['links']}
+  //     />
+  //   ),
+  //   enableSorting: false,
+  // }),
 ]
 
 export { columnHeaderNames, columns }

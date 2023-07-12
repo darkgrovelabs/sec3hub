@@ -20,9 +20,9 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 import logo from 'public/images/logo.webp'
+import { version } from '../../../package.json'
 import ConnectWallet from './ConnectWallet'
 import SidebarLink from './SidebarLink'
-import { version } from '../../../package.json'
 
 type SidebarContentProps = {
   mini?: boolean
@@ -40,13 +40,14 @@ export default function SidebarContent(props: SidebarContentProps) {
           label='Auditors'
           icon={UsersIcon}
         />
+
+        <SidebarLink onlyIcon route='/rekts' label='Rekts' icon={SkullIcon} />
         <SidebarLink
           onlyIcon
           route='/products'
           label='Products'
           icon={BoxIcon}
         />
-        <SidebarLink onlyIcon route='/rekts' label='Rekts' icon={SkullIcon} />
         <SidebarLink
           onlyIcon
           route='/resources'
@@ -79,7 +80,7 @@ export default function SidebarContent(props: SidebarContentProps) {
               </Text>
             </Text>
             <Text variant={'muted'} fontSize={'xs'}>
-              v {version}
+              v{version}
             </Text>
           </Center>
 
@@ -91,8 +92,8 @@ export default function SidebarContent(props: SidebarContentProps) {
 
           <Stack direction='column' gap={2}>
             <SidebarLink route='/auditors' label='Auditors' icon={UsersIcon} />
-            <SidebarLink route='/products' label='Products' icon={BoxIcon} />
             <SidebarLink route='/rekts' label='Rekts' icon={SkullIcon} />
+            <SidebarLink route='/products' label='Products' icon={BoxIcon} />
             <SidebarLink
               route='/resources'
               label='Resources'
@@ -102,12 +103,30 @@ export default function SidebarContent(props: SidebarContentProps) {
         </Box>
 
         <Box>
+          {/* <VisitLab /> */}
           <ToggleColorMode />
         </Box>
       </Flex>
     </>
   )
 }
+
+// function VisitLab() {
+//   return (
+//     <Link
+//       href='https://github.com/darkgrovelabs/sec3hub'
+//       isExternal
+//       _hover={{ textDecoration: 'none' }}
+//     >
+//       <Flex align={'center'} gap={1.5} py={1.5}>
+//         <Icon as={GithubIcon} strokeWidth={'1.50px'} fontSize={22} />
+//         <Text fontSize={'lg'} ml={2}>
+//           Visit the lab
+//         </Text>
+//       </Flex>
+//     </Link>
+//   )
+// }
 
 function ToggleColorMode() {
   const { colorMode, toggleColorMode } = useColorMode()

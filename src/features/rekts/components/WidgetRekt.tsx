@@ -53,7 +53,7 @@ export default function WidgetRekt(props: WidgetRektProps) {
                 textTransform={'uppercase'}
                 color={labelColor}
               >
-                Recently added
+                Recently wrecked
               </Text>
               <Flex align={'center'} gap={2}>
                 <Text fontSize={'xl'} fontWeight={800}>
