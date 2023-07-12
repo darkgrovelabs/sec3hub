@@ -6,12 +6,14 @@ import {
   Center,
   Divider,
   Flex,
+  Icon,
   Stack,
   Text,
   useColorMode,
 } from '@/chakra/components'
 import {
   BoxIcon,
+  GithubIcon,
   LifeBuoyIcon,
   Moon,
   SkullIcon,
@@ -20,7 +22,7 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 import logo from 'public/images/logo.webp'
-import { version } from '../../../package.json'
+import packageInfo from '../../../package.json'
 import ConnectWallet from './ConnectWallet'
 import SidebarLink from './SidebarLink'
 
@@ -80,7 +82,7 @@ export default function SidebarContent(props: SidebarContentProps) {
               </Text>
             </Text>
             <Text variant={'muted'} fontSize={'xs'}>
-              v{version}
+              v{packageInfo.version}
             </Text>
           </Center>
 
@@ -102,44 +104,52 @@ export default function SidebarContent(props: SidebarContentProps) {
           </Stack>
         </Box>
 
+        <Divider my={4} />
         <Box>
-          {/* <VisitLab /> */}
           <ToggleColorMode />
+          <VisitLab />
         </Box>
       </Flex>
     </>
   )
 }
 
-// function VisitLab() {
-//   return (
-//     <Link
-//       href='https://github.com/darkgrovelabs/sec3hub'
-//       isExternal
-//       _hover={{ textDecoration: 'none' }}
-//     >
-//       <Flex align={'center'} gap={1.5} py={1.5}>
-//         <Icon as={GithubIcon} strokeWidth={'1.50px'} fontSize={22} />
-//         <Text fontSize={'lg'} ml={2}>
-//           Visit the lab
-//         </Text>
-//       </Flex>
-//     </Link>
-//   )
-// }
+function VisitLab() {
+  const { colorMode, toggleColorMode } = useColorMode()
+  return (
+    <Button
+      as='a'
+      href='https://github.com/darkgrovelabs'
+      target='_blank'
+      justifyContent={'flex-start'}
+      color={colorMode === 'light' ? 'blackAlpha.600' : 'whiteAlpha.600'}
+      w='100%'
+      variant={'ghost'}
+      size='sm'
+      leftIcon={<Icon as={GithubIcon} />}
+    >
+      Visit the lab
+    </Button>
+  )
+}
 
 function ToggleColorMode() {
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
-    <Center>
+    <>
       <Button
+        justifyContent={'flex-start'}
+        mb={1}
+        w='100%'
+        color={colorMode === 'light' ? 'blackAlpha.600' : 'whiteAlpha.600'}
         onClick={toggleColorMode}
-        variant={'outline'}
-        leftIcon={colorMode === 'dark' ? <Sun /> : <Moon />}
+        variant={'ghost'}
+        size='sm'
+        leftIcon={colorMode === 'dark' ? <Icon as={Sun} /> : <Icon as={Moon} />}
       >
         {colorMode === 'dark' ? 'Turn on lights' : 'Turn off lights'}
       </Button>
-    </Center>
+    </>
   )
 }

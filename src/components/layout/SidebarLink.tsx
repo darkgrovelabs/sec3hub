@@ -31,7 +31,7 @@ export default function SidebarLink(props: SidebarLinkProps) {
     colorMode === 'light' ? 'blackAlpha.600' : 'whiteAlpha.600'
   const activeIconColor = 'primary.300'
 
-  const fontWeight = active ? 800 : 500
+  const fontWeight = active ? 800 : 400
 
   if (onlyIcon) {
     return (

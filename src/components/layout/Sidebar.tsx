@@ -12,7 +12,7 @@ export default function Sidebar() {
   return (
     <Card
       h={'calc(100vh - 1em)'}
-      width={!isSidebarOpen ? '2.25rem' : '15rem'}
+      width={!isSidebarOpen ? '2.25rem' : '14.5rem'}
       position={'sticky'}
       top={2}
       mx={2}

@@ -11,8 +11,6 @@ export const metadata = {
 export default async function Products() {
   const [rekts, stats] = await Promise.all([getRekts(), getRektsStats()])
 
-  //   console.log(products, stats)
-
   return (
     <>
       <Box mb={4}>

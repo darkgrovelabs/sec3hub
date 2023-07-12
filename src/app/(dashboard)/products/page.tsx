@@ -14,8 +14,6 @@ export default async function Products() {
     getProductsStats(),
   ])
 
-  console.log(products, stats)
-
   return (
     <>
       <Box mb={4}>

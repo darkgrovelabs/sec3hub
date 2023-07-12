@@ -20,7 +20,7 @@ export default function RootLayout({
         <Box flex={1} overflowX={'clip'}>
           <Navbar />
           <Box flex={1} as='section' px={4} py={6}>
-            <Box mb={4}>{children}</Box>
+            <Box mb={6}>{children}</Box>
             <Footer />
           </Box>
         </Box>
