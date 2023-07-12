@@ -3,18 +3,21 @@ import {
   TPaginationRequestParams,
   TPaginationRequestResult,
 } from '@/types'
-import { TRekt, TResultGetRektStats } from './type'
+import { TResource, TResultGeTResourceStats } from './types'
 
-async function getRekts(
+export const VOTE_SIGN_MESSAGE =
+  'Please sign the transaction to upvote this resource. It wont cost you any gas. Thanks!'
+
+async function getResources(
   props?: TPaginationRequestParams
-): Promise<TPaginationRequestResult<TRekt>> {
+): Promise<TPaginationRequestResult<TResource>> {
   //backend start at 1
   const page = props?.page ? props.page + 1 : 1
   const limit = props?.limit || 10
   const order = props?.order || 'desc'
-  const sort = props?.sort || 'damage'
+  const sort = props?.sort || 'up_votes'
 
-  let url = `https://backbonez.fly.dev/rekts?page=${page}&limit=${limit}&order=${order}&sort=${sort}`
+  let url = `https://backbonez.fly.dev/resources?page=${page}&limit=${limit}&order=${order}&sort=${sort}`
 
   if (props?.keyword) {
     url += `&keyword=${props.keyword}`
@@ -45,8 +48,8 @@ async function getRekts(
   }
 }
 
-async function getRektsStats(): Promise<TResultGetRektStats> {
-  const response = await fetch('https://backbonez.fly.dev/rekts/stats', {
+async function getResourcesStats(): Promise<TResultGeTResourceStats> {
+  const response = await fetch('https://backbonez.fly.dev/resources/stats', {
     cache: 'no-store',
   })
 
@@ -56,11 +59,11 @@ async function getRektsStats(): Promise<TResultGetRektStats> {
 
   const data = await response.json()
 
-  const totalRekts = data?.totalRekts[0]?.count
-  const totalDamage = data?.totalDamage[0]?.sum
-  const lastRecord = data?.lastRecord[0] as TRekt
+  const totalResources = data?.totalResources[0]?.count
+  const totalCategories = data?.totalCategories[0]?.count
+  const lastRecord = data?.lastRecord[0] as TResource
 
-  return { totalRekts, totalDamage, lastRecord }
+  return { totalResources, totalCategories, lastRecord }
 }
 
-export { getRekts, getRektsStats }
+export { getResources, getResourcesStats }

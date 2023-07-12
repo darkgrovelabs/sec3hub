@@ -1,16 +1,17 @@
 import {
   ResponseError,
   TPaginationRequestParams,
+  TPaginationRequestResult,
   TUpVoteMutationParams,
 } from '@/types'
-import { TResultGetAuditors, TAuditor, TResultGetAuditorStats } from './types'
+import { TAuditor, TResultGetAuditorStats } from './types'
 
 export const VOTE_SIGN_MESSAGE =
   'Please sign the transaction to upvote this auditor. It wont cost you any gas. Thanks!'
 
 async function getAuditors(
   props?: TPaginationRequestParams
-): Promise<TResultGetAuditors> {
+): Promise<TPaginationRequestResult<TAuditor>> {
   //backend start at 1
   const page = props?.page ? props.page + 1 : 1
   const limit = props?.limit || 10
@@ -66,18 +67,24 @@ async function getAuditorsStats(): Promise<TResultGetAuditorStats> {
   return { totalAuditors, totalAudits, lastRecord }
 }
 
-async function upVote({ walletAddress, signature, id }: TUpVoteMutationParams) {
+async function upVote({
+  walletAddress,
+  signature,
+  id,
+  type,
+  message,
+}: TUpVoteMutationParams) {
   const response = await fetch('https://backbonez.fly.dev/vote', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      msg: VOTE_SIGN_MESSAGE,
+      msg: message,
       pub: walletAddress,
       sig: signature,
       id,
-      type: 'auditor',
+      type,
     }),
   })
 
@@ -88,4 +95,4 @@ async function upVote({ walletAddress, signature, id }: TUpVoteMutationParams) {
   return await response.json()
 }
 
-export { getAuditors, upVote, getAuditorsStats }
+export { getAuditors, getAuditorsStats, upVote }

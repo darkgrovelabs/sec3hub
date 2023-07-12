@@ -2,9 +2,9 @@
 
 import { SimpleGrid } from '@/chakra/components'
 import WidgetCard from '@/components/WidgetCard'
+import WidgetCardLast from '@/components/WidgetCardLast'
 import { BoxIcon, HeartIcon } from 'lucide-react'
 import { TProduct } from '../types'
-import WidgetProduct from './WidgetProduct'
 
 type WidgetsProps = {
   totalProducts: number
@@ -23,7 +23,7 @@ export default function Widgets(props: WidgetsProps) {
         icon={HeartIcon}
         value={totalOpenSource}
       />
-      <WidgetProduct product={lastProduct} />
+      <WidgetCardLast entry={lastProduct} />
     </SimpleGrid>
   )
 }

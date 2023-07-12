@@ -16,6 +16,7 @@ type UpVoteButtonProps = {
   votes: number
   id: number
   message: string
+  type: TUpVoteMutationParams['type']
 }
 
 var defaults = {
@@ -48,7 +49,7 @@ export default function UpVoteButton(props: UpVoteButtonProps) {
   const { address } = useAccount()
   const { openConnectModal } = useConnectModal()
   const toast = useToast()
-  const { votes, id, message } = props
+  const { votes, id, message, type } = props
 
   // TODO: Update cache when mutation happens
   // for now, companies are refetch on every table change
@@ -91,7 +92,13 @@ export default function UpVoteButton(props: UpVoteButtonProps) {
 
     const signature = await signMessage({ message })
 
-    upVoteMutation.mutate({ walletAddress: address, signature, id })
+    upVoteMutation.mutate({
+      walletAddress: address,
+      signature,
+      id,
+      type,
+      message,
+    })
   }
 
   return (

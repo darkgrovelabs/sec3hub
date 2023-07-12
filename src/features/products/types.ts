@@ -1,7 +1,7 @@
 export type TProduct = {
   id: number
   name: string
-  is_commercial: boolean
+  // is_commercial: boolean
   is_opensource: boolean
   categories: string[]
   website: string
@@ -16,12 +16,6 @@ export type TProduct = {
     github?: string
     website?: string
   }
-}
-
-export type TResultGetProducts = {
-  data: TProduct[]
-  pageCount: number
-  rowCount: number
 }
 
 export type TResultGetProductStats = {

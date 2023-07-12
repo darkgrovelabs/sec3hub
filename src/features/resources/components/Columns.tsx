@@ -1,33 +1,21 @@
 'use client'
 
-import {
-  Avatar,
-  Box,
-  Flex,
-  Link,
-  Stack,
-  Tag,
-  Td,
-  Text,
-} from '@/chakra/components'
+import { Avatar, Box, Flex, Link, Tag, Td, Text } from '@/chakra/components'
 import { createColumnHelper } from '@tanstack/react-table'
 import { CheckIcon, XIcon } from 'lucide-react'
 
 import UpVoteButton from '@/components/UpVoteButton'
 import DataTableColumnHeader from '@/components/table/DataTableColumnHeader'
 import { VOTE_SIGN_MESSAGE } from '../api'
-import { TProduct } from '../types'
+import { TResource } from '../types'
 
-const columnHelper = createColumnHelper<TProduct>()
+const columnHelper = createColumnHelper<TResource>()
 
 const columnHeaderNames: { [key: string]: string } = {
   name: 'Name',
   description: 'Description',
-  is_opensource: 'Open Source',
   categories: 'Categories',
   up_votes: 'Up Votes',
-  links: 'Links',
-  start_year: 'Year',
 }
 
 const columns = [
@@ -39,7 +27,7 @@ const columns = [
             id={row.original.id}
             votes={getValue()}
             message={VOTE_SIGN_MESSAGE}
-            type='product'
+            type='resource'
           />
         </Td>
       )
@@ -66,7 +54,7 @@ const columns = [
               color='white'
             />
             <Box>
-              <Link href={row.original.website} isExternal>
+              <Link href={row.original.link} isExternal>
                 <Text fontWeight='bold' lineHeight={'tall'}>
                   {getValue()}
                 </Text>
@@ -97,7 +85,7 @@ const columns = [
         )
       })
       return (
-        <Td minWidth={'xs'} maxW={'xs'}>
+        <Td minWidth={'xs'} maxW={'md'}>
           <Flex flexWrap={'wrap'} align={'center'} gap={1}>
             {categories}
           </Flex>
@@ -111,38 +99,6 @@ const columns = [
       />
     ),
     enableSorting: false,
-  }),
-  columnHelper.accessor('is_opensource', {
-    cell: ({ row, getValue }) => {
-      return (
-        <Td>
-          <Flex justifyContent={'center'}>
-            {getValue() ? <CheckIcon /> : <XIcon />}
-          </Flex>
-        </Td>
-      )
-    },
-    header: ({ column }) => (
-      <DataTableColumnHeader
-        column={column}
-        title={columnHeaderNames['is_opensource']}
-        textAlign='center'
-      />
-    ),
-    enableSorting: false,
-  }),
-  columnHelper.accessor('start_year', {
-    cell: ({ row, getValue }) => {
-      return <Td isNumeric>{getValue()}</Td>
-    },
-    header: ({ column }) => (
-      <DataTableColumnHeader
-        column={column}
-        title={columnHeaderNames['start_year']}
-        isNumeric
-      />
-    ),
-    enableSorting: true,
   }),
 ]
 

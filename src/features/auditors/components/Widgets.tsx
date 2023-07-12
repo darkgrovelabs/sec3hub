@@ -2,9 +2,9 @@
 
 import { SimpleGrid } from '@/chakra/components'
 import WidgetCard from '@/components/WidgetCard'
+import WidgetCardLast from '@/components/WidgetCardLast'
 import { ListOrdered, ShieldCheck } from 'lucide-react'
 import { TAuditor } from '../types'
-import WidgetAuditor from './WidgetAuditor'
 
 type WidgetsProps = {
   totalAuditors: number
@@ -19,7 +19,8 @@ export default function Widgets(props: WidgetsProps) {
     <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={4}>
       <WidgetCard label='auditors' value={totalAuditors} icon={ListOrdered} />
       <WidgetCard label='audits' icon={ShieldCheck} value={totalAudits} />
-      <WidgetAuditor auditor={lastAuditor} />
+
+      <WidgetCardLast entry={lastAuditor} />
     </SimpleGrid>
   )
 }

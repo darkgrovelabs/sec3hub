@@ -13,12 +13,6 @@ export type TRekt = {
   created_at: string
 }
 
-export type TResultGetRekts = {
-  data: TRekt[]
-  pageCount: number
-  rowCount: number
-}
-
 export type TResultGetRektStats = {
   totalRekts: number
   totalDamage: number

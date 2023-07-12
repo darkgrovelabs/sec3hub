@@ -19,8 +19,16 @@ export type TPaginationRequestParams = {
   keyword?: string
 }
 
+export type TPaginationRequestResult<T> = {
+  data: T[]
+  pageCount: number
+  rowCount: number
+}
+
 export type TUpVoteMutationParams = {
   walletAddress: `0x${string}`
   signature: string
   id: number
+  type: 'auditor' | 'product' | 'resource'
+  message: string
 }

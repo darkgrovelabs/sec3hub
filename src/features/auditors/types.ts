@@ -18,12 +18,6 @@ export type TAuditor = {
   created_at: string
 }
 
-export type TResultGetAuditors = {
-  data: TAuditor[]
-  pageCount: number
-  rowCount: number
-}
-
 export type TResultGetAuditorStats = {
   totalAuditors: number
   totalAudits: number

@@ -18,11 +18,12 @@ import {
   Thead,
   Tr,
 } from '@/chakra/components'
-import DataTableViewOptions from '@/components/table/DataTableViewOptions'
 import DataTablePagination from '@/components/table/DataTablePagination'
+import DataTableViewOptions from '@/components/table/DataTableViewOptions'
 import { getAuditors } from '@/features/auditors/api'
-import { TAuditor, TResultGetAuditors } from '@/features/auditors/types'
+import { TAuditor } from '@/features/auditors/types'
 import useDebounce from '@/hooks/useDebounce'
+import { TPaginationRequestResult } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import {
   ColumnDef,
@@ -69,7 +70,7 @@ export default function DataTable({
     return { order: sorting[0].desc ? 'desc' : 'asc', sort: sorting[0].id }
   }, [sorting])
 
-  const query = useQuery<TResultGetAuditors>({
+  const query = useQuery<TPaginationRequestResult<TAuditor>>({
     queryKey: [
       'companies',
       pagination.pageIndex,

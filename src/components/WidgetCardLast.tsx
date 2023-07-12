@@ -9,23 +9,25 @@ import {
   Text,
   useColorMode,
 } from '@/chakra/components'
-
 import dayjs from 'dayjs'
-import { TRekt } from '../type'
-import formatCurrency from '@/utils/formatCurrency'
 
-type WidgetRektProps = {
-  rekt: TRekt
+type WidgetCardLast<T> = {
+  entry: T & { created_at: string; logo_url: string; name: string }
+  label?: string
 }
 
-export default function WidgetRekt(props: WidgetRektProps) {
-  const { rekt } = props
+export default function WidgetCardLast<T>(props: WidgetCardLast<T>) {
+  const { entry, label = 'Recently Added' } = props
   const { colorMode } = useColorMode()
 
   const labelColor = colorMode === 'light' ? 'blackAlpha.600' : 'whiteAlpha.600'
   const iconBgColor = colorMode === 'light' ? 'blue.400' : 'blue.100'
 
-  const date = dayjs(dayjs()).diff(rekt.created_at, 'days')
+  const daysDiff = dayjs(dayjs()).diff(entry.created_at, 'days')
+  const addedWhen =
+    daysDiff === 0
+      ? `${dayjs(dayjs()).diff(entry.created_at, 'hours')} hours ago`
+      : `${dayjs(dayjs()).diff(entry.created_at, 'days')} days ago`
 
   return (
     <>
@@ -38,8 +40,8 @@ export default function WidgetRekt(props: WidgetRektProps) {
               alignItems={'center'}
             >
               <Avatar
-                name={rekt.name}
-                src={rekt.logo_url}
+                name={entry.name}
+                src={entry.logo_url}
                 h={14}
                 w={14}
                 bgColor={iconBgColor}
@@ -53,14 +55,14 @@ export default function WidgetRekt(props: WidgetRektProps) {
                 textTransform={'uppercase'}
                 color={labelColor}
               >
-                Recently wrecked
+                {label}
               </Text>
               <Flex align={'center'} gap={2}>
                 <Text fontSize={'xl'} fontWeight={800}>
-                  {rekt.name}
+                  {entry.name}
                 </Text>
                 <Text as='span' fontSize={'xs'} color={labelColor}>
-                  added {date} days ago
+                  added {addedWhen}
                 </Text>
               </Flex>
             </Box>

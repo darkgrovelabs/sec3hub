@@ -33,8 +33,9 @@ import {
 } from '@tanstack/react-table'
 import { Search, XCircleIcon } from 'lucide-react'
 import { Fragment, useMemo, useState } from 'react'
-import { TRekt, TResultGetRektStats, TResultGetRekts } from '../type'
+import { TRekt } from '../type'
 import { getRekts } from '../api'
+import { TPaginationRequestResult } from '@/types'
 
 export type DataTableProps = {
   initialData: TRekt[]
@@ -69,7 +70,7 @@ export default function DataTable({
     return { order: sorting[0].desc ? 'desc' : 'asc', sort: sorting[0].id }
   }, [sorting])
 
-  const query = useQuery<TResultGetRekts>({
+  const query = useQuery<TPaginationRequestResult<TRekt>>({
     queryKey: [
       'rekts',
       pagination.pageIndex,
@@ -129,7 +130,7 @@ export default function DataTable({
 
             <Input
               borderRadius={'lg'}
-              placeholder={'Search by Name / Description / Website ...'}
+              placeholder={'Search by Name / Type / Proofs on chain (tx) ...'}
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
             />

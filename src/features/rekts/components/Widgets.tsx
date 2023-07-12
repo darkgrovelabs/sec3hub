@@ -2,10 +2,10 @@
 
 import { SimpleGrid } from '@/chakra/components'
 import WidgetCard from '@/components/WidgetCard'
-import { BoxIcon, DollarSignIcon, HeartIcon } from 'lucide-react'
-import { TRekt } from '../type'
+import WidgetCardLast from '@/components/WidgetCardLast'
 import formatCurrency from '@/utils/formatCurrency'
-import WidgetRekt from './WidgetRekt'
+import { BoxIcon, DollarSignIcon } from 'lucide-react'
+import { TRekt } from '../type'
 
 type WidgetsProps = {
   totalRekts: number
@@ -24,7 +24,8 @@ export default function Widgets(props: WidgetsProps) {
         icon={DollarSignIcon}
         value={formatCurrency(totalDamage)}
       />
-      <WidgetRekt rekt={lastRekt} />
+
+      <WidgetCardLast entry={lastRekt} label='Recently Wrecked' />
     </SimpleGrid>
   )
 }

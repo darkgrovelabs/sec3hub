@@ -1,12 +1,16 @@
-import { ResponseError, TPaginationRequestParams } from '@/types'
-import { TProduct, TResultGetProductStats, TResultGetProducts } from './types'
+import {
+  ResponseError,
+  TPaginationRequestParams,
+  TPaginationRequestResult,
+} from '@/types'
+import { TProduct, TResultGetProductStats } from './types'
 
 export const VOTE_SIGN_MESSAGE =
   'Please sign the transaction to upvote this product. It wont cost you any gas. Thanks!'
 
 async function getProducts(
   props?: TPaginationRequestParams
-): Promise<TResultGetProducts> {
+): Promise<TPaginationRequestResult<TProduct>> {
   //backend start at 1
   const page = props?.page ? props.page + 1 : 1
   const limit = props?.limit || 10

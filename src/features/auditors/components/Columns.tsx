@@ -45,6 +45,7 @@ const columns = [
             id={row.original.id}
             votes={getValue()}
             message={VOTE_SIGN_MESSAGE}
+            type='auditor'
           />
         </Td>
       )
@@ -153,7 +154,7 @@ const columns = [
                 }
               >
                 <Tag size='md' borderRadius={'full'}>
-                  {value.length - 1}+
+                  +{value.length - 1}
                 </Tag>
               </Tooltip>
             )}
