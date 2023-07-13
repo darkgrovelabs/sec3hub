@@ -74,7 +74,7 @@ const columns = [
               color='white'
             />
 
-            <Link href={website} isExternal>
+            <Link color='blue.300' href={website} isExternal>
               <Text fontWeight='bold'>{getValue()}</Text>
             </Link>
           </Flex>

@@ -54,7 +54,7 @@ const columns = [
               color='white'
             />
             <Box>
-              <Link href={row.original.link} isExternal>
+              <Link color='blue.300' href={row.original.link} isExternal>
                 <Text fontWeight='bold' lineHeight={'tall'}>
                   {getValue()}
                 </Text>
