@@ -131,7 +131,9 @@ export default function DataTable({
 
             <Input
               borderRadius={'lg'}
-              placeholder={'Search by Name / Description / Categories ...'}
+              placeholder={
+                'Search by Name / Description / Categories / Website ...'
+              }
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
             />

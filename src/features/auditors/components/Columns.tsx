@@ -93,15 +93,7 @@ const columns = [
   columnHelper.accessor('type', {
     cell: ({ row, getValue }) => {
       const value = getValue()
-      return (
-        <Td>
-          {value === 'private' ? (
-            <Text>Private</Text>
-          ) : (
-            <Text>Crowdfunding</Text>
-          )}
-        </Td>
-      )
+      return <Td textTransform={'capitalize'}>{getValue()}</Td>
     },
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Type' />
