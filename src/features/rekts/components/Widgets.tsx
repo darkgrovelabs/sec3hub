@@ -18,14 +18,14 @@ export default function Widgets(props: WidgetsProps) {
 
   return (
     <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={4}>
-      <WidgetCard label='Rekts' value={totalRekts} icon={BoxIcon} />
+      <WidgetCard label='Incidents' value={totalRekts} icon={BoxIcon} />
       <WidgetCard
         label='Total Damage'
         icon={DollarSignIcon}
         value={formatCurrency(totalDamage)}
       />
 
-      <WidgetCardLast entry={lastRekt} label='Recently Wrecked' />
+      <WidgetCardLast entry={lastRekt} label='Recently added' />
     </SimpleGrid>
   )
 }

@@ -13,12 +13,14 @@ import {
 } from '@/chakra/components'
 import {
   BoxIcon,
+  FlameIcon,
   GithubIcon,
   LifeBuoyIcon,
   LightbulbIcon,
   Moon,
   SkullIcon,
   Sun,
+  UserSquare2,
   UsersIcon,
 } from 'lucide-react'
 import Image from 'next/image'
@@ -41,10 +43,15 @@ export default function SidebarContent(props: SidebarContentProps) {
           onlyIcon
           route='/auditors'
           label='Auditors'
-          icon={UsersIcon}
+          icon={UserSquare2}
         />
 
-        <SidebarLink onlyIcon route='/rekts' label='Rekts' icon={SkullIcon} />
+        <SidebarLink
+          onlyIcon
+          route='/incidents'
+          label='Incidents'
+          icon={FlameIcon}
+        />
         <SidebarLink
           onlyIcon
           route='/products'
@@ -94,8 +101,16 @@ export default function SidebarContent(props: SidebarContentProps) {
           </Box>
 
           <Stack direction='column' gap={2}>
-            <SidebarLink route='/auditors' label='Auditors' icon={UsersIcon} />
-            <SidebarLink route='/rekts' label='Rekts' icon={SkullIcon} />
+            <SidebarLink
+              route='/auditors'
+              label='Auditors'
+              icon={UserSquare2}
+            />
+            <SidebarLink
+              route='/incidents'
+              label='Incidents'
+              icon={FlameIcon}
+            />
             <SidebarLink route='/products' label='Products' icon={BoxIcon} />
             <SidebarLink
               route='/resources'

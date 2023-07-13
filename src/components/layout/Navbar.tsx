@@ -89,14 +89,14 @@ export default function Navbar() {
 const titles: { [key: string]: string } = {
   auditors: 'Audit Buddies',
   products: 'Products',
-  rekts: 'Rekts',
+  incidents: 'Incidents',
   resources: 'Resources',
 }
 
 const buttons: { [key: string]: string } = {
   auditors: 'Add Auditor',
   products: 'Add Product',
-  rekts: 'Add Rekt',
+  incidents: 'Add Incident',
   resources: 'Add Resource',
 }
 

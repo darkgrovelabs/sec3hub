@@ -14,7 +14,14 @@ import {
 } from '@/chakra/components'
 import { TAuditor } from '@/features/auditors/types'
 import { createColumnHelper } from '@tanstack/react-table'
-import { Check, FileCheck } from 'lucide-react'
+import {
+  Building,
+  Building2,
+  Check,
+  FileCheck,
+  User,
+  Users2,
+} from 'lucide-react'
 
 import DataTableColumnHeader from '@/components/table/DataTableColumnHeader'
 import DataTableLinksColumn from '@/components/table/DataTableLinksColumn'
@@ -93,7 +100,16 @@ const columns = [
   columnHelper.accessor('type', {
     cell: ({ row, getValue }) => {
       const value = getValue()
-      return <Td textTransform={'capitalize'}>{getValue()}</Td>
+      return (
+        <Td>
+          <Flex align='center' gap={2}>
+            {value === 'company' && <Building2 size='18' />}
+            {value === 'solo' && <User size='18' />}
+            {value === 'crowdsource' && <Users2 size='18' />}
+            <Text textTransform={'capitalize'}> {getValue()}</Text>
+          </Flex>
+        </Td>
+      )
     },
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Type' />

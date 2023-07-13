@@ -2,7 +2,7 @@ export type TAuditor = {
   id: number
   name: string
   logo_url: string
-  type: string
+  type: 'company' | 'solo' | 'crowdsource'
   total_audits: number
   up_votes: number
   price_per_hour?: { min: number; max: number }
