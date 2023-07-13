@@ -9,27 +9,17 @@ import {
   DrawerOverlay,
   Flex,
   Heading,
+  Icon,
   IconButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
   useColorModeValue,
   useDisclosure,
 } from '@/chakra/components'
+import { MenuIcon, PlusIcon } from 'lucide-react'
 import Image from 'next/image'
 import { usePathname, useSelectedLayoutSegments } from 'next/navigation'
 import logo from 'public/images/logo.webp'
 import { useEffect, useRef } from 'react'
 import SidebarContent from './SidebarContent'
-import {
-  FlagIcon,
-  LightbulbIcon,
-  ListPlusIcon,
-  MenuIcon,
-  SmilePlusIcon,
-} from 'lucide-react'
-import Link from 'next/link'
 
 export default function Navbar() {
   return (
@@ -71,31 +61,7 @@ export default function Navbar() {
         </Flex>
 
         <Box>
-          <Menu>
-            <MenuButton
-              leftIcon={<SmilePlusIcon size={20} />}
-              as={Button}
-              size={{ base: 'sm', xl: 'md' }}
-              variant={'gradient'}
-            >
-              Share with us
-            </MenuButton>
-
-            <MenuList>
-              <Link
-                href='https://docs.google.com/forms/d/e/1FAIpQLSfpfjwmBrxYIln5rQUAvIRLjNmE7q5weqvoDmcrcxRO2fCfOQ/viewform'
-                target='_blank'
-              >
-                <MenuItem icon={<ListPlusIcon />}>Submit content</MenuItem>
-              </Link>
-              <Link
-                href='https://github.com/orgs/darkgrovelabs/discussions/new/choose'
-                target='_blank'
-              >
-                <MenuItem icon={<LightbulbIcon />}>Request feature</MenuItem>
-              </Link>
-            </MenuList>
-          </Menu>
+          <NavbarAddContent />
         </Box>
 
         {/* <Card borderRadius={'3xl'} p={2}>
@@ -125,6 +91,13 @@ const titles: { [key: string]: string } = {
   products: 'Products',
   rekts: 'Rekts',
   resources: 'Resources',
+}
+
+const buttons: { [key: string]: string } = {
+  auditors: 'Add Auditor',
+  products: 'Add Product',
+  rekts: 'Add Rekt',
+  resources: 'Add Resource',
 }
 
 function MobileMenu() {
@@ -188,5 +161,22 @@ function NavbarTitle() {
     >
       {titles[selectedLayoutSegment[0]]}
     </Heading>
+  )
+}
+
+function NavbarAddContent() {
+  const selectedLayoutSegment = useSelectedLayoutSegments()
+
+  return (
+    <Button
+      leftIcon={<Icon as={PlusIcon} />}
+      as='a'
+      href='https://docs.google.com/forms/d/e/1FAIpQLSfpfjwmBrxYIln5rQUAvIRLjNmE7q5weqvoDmcrcxRO2fCfOQ/viewform'
+      target='_blank'
+      variant='gradient'
+      size={{ base: 'sm', xl: 'md' }}
+    >
+      {buttons[selectedLayoutSegment[0]]}
+    </Button>
   )
 }

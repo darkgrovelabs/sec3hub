@@ -29,10 +29,10 @@ export default function Footer() {
         </Link>
       </Box>
       <Flex gap={8} align={'center'}>
-        <Text variant='muted' fontSize={{ base: 'sm', md: 'md' }}>
+        <Text variant='muted' fontSize={'sm'}>
           Terms of service
         </Text>
-        <Text variant='muted' fontSize={{ base: 'sm', md: 'md' }}>
+        <Text variant='muted' fontSize={'sm'}>
           Privacy policy
         </Text>
       </Flex>

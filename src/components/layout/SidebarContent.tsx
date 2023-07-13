@@ -15,6 +15,7 @@ import {
   BoxIcon,
   GithubIcon,
   LifeBuoyIcon,
+  LightbulbIcon,
   Moon,
   SkullIcon,
   Sun,
@@ -106,8 +107,9 @@ export default function SidebarContent(props: SidebarContentProps) {
 
         <Divider my={4} />
         <Box>
-          <ToggleColorMode />
+          <RequestFeature />
           <VisitLab />
+          <ToggleColorMode />
         </Box>
       </Flex>
     </>
@@ -115,7 +117,7 @@ export default function SidebarContent(props: SidebarContentProps) {
 }
 
 function VisitLab() {
-  const { colorMode, toggleColorMode } = useColorMode()
+  const { colorMode } = useColorMode()
   return (
     <Button
       as='a'
@@ -151,5 +153,24 @@ function ToggleColorMode() {
         {colorMode === 'dark' ? 'Turn on lights' : 'Turn off lights'}
       </Button>
     </>
+  )
+}
+
+function RequestFeature() {
+  const { colorMode } = useColorMode()
+  return (
+    <Button
+      as='a'
+      href='https://github.com/orgs/darkgrovelabs/discussions/new/choose'
+      target='_blank'
+      justifyContent={'flex-start'}
+      color={colorMode === 'light' ? 'blackAlpha.600' : 'whiteAlpha.600'}
+      w='100%'
+      variant={'ghost'}
+      size='sm'
+      leftIcon={<Icon as={LightbulbIcon} />}
+    >
+      Request feature
+    </Button>
   )
 }
