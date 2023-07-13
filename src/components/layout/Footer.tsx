@@ -1,6 +1,5 @@
-import { Box, Flex, Text, Link, Icon } from '@/chakra/components'
+import { Box, Flex, Link, Text } from '@/chakra/components'
 import { FlagIcon } from 'lucide-react'
-// import { FlagIcon } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -21,14 +20,15 @@ export default function Footer() {
         <Link
           href='https://github.com/darkgrovelabs/sec3hub/issues/new'
           isExternal
+          color='red.200'
         >
-          <Text variant='muted' fontSize={{ base: 'sm', md: 'md' }}>
-            Report issue or data inaccuracies.
-          </Text>
+          <Flex as='span' gap={1} align='center'>
+            <FlagIcon size={12} strokeWidth={'2px'} />
+            <Text fontSize='sm'>Report issue or data inaccuracies.</Text>
+          </Flex>
         </Link>
       </Box>
       <Flex gap={8} align={'center'}>
-        {/* <Icon as={FlagIcon} color='red.400' /> */}
         <Text variant='muted' fontSize={{ base: 'sm', md: 'md' }}>
           Terms of service
         </Text>
