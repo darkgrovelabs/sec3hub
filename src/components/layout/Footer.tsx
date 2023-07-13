@@ -29,12 +29,22 @@ export default function Footer() {
         </Link>
       </Box>
       <Flex gap={8} align={'center'}>
-        <Text variant='muted' fontSize={'sm'}>
+        <Link
+          href='https://github.com/darkgrovelabs/sec3hub/blob/main/terms-of-service.md'
+          isExternal
+          variant='muted'
+          fontSize={'sm'}
+        >
           Terms of service
-        </Text>
-        <Text variant='muted' fontSize={'sm'}>
+        </Link>
+        <Link
+          href='https://github.com/darkgrovelabs/sec3hub/blob/main/privacy-policy.md'
+          isExternal
+          variant='muted'
+          fontSize={'sm'}
+        >
           Privacy policy
-        </Text>
+        </Link>
       </Flex>
     </Flex>
   )

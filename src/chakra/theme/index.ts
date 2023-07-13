@@ -7,6 +7,7 @@ import Text from './text'
 import Skeleton from './skeleton'
 import Card from './card'
 import Button from './button'
+import Link from './link'
 
 const font = Nunito({
   subsets: ['latin'],
@@ -36,6 +37,7 @@ const theme = (colorMode: 'light' | 'dark' | string) =>
       Skeleton,
       Card,
       Button,
+      Link,
     },
     colors: {
       primary: {
