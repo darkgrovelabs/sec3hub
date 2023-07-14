@@ -5,7 +5,7 @@ import { getAuditors, getAuditorsStats } from '@/features/auditors/api'
 
 export const metadata = {
   title: 'Auditors',
-  description: 'Discover web3 security auditors and find out what people like’',
+  description: 'Discover web3 security auditors and find out what people like',
 }
 
 //TODO: Handle errors
