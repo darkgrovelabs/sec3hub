@@ -50,7 +50,7 @@ export default function SidebarContent(props: SidebarContentProps) {
           onlyIcon
           route='/incidents'
           label='Incidents'
-          icon={FlameIcon}
+          icon={SkullIcon}
         />
         <SidebarLink
           onlyIcon
@@ -109,7 +109,7 @@ export default function SidebarContent(props: SidebarContentProps) {
             <SidebarLink
               route='/incidents'
               label='Incidents'
-              icon={FlameIcon}
+              icon={SkullIcon}
             />
             <SidebarLink route='/products' label='Products' icon={BoxIcon} />
             <SidebarLink
