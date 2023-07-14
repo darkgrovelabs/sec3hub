@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Icon,
-  Image,
-  Text,
-} from '@/chakra/components'
+import { Box, Button, ButtonGroup, Icon, Image } from '@/chakra/components'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { WalletIcon } from 'lucide-react'
 
