@@ -3,9 +3,10 @@ import { getProducts, getProductsStats } from '@/features/products/api'
 import ProductsTable from '@/features/products/components/ProductsTable'
 import Widgets from '@/features/products/components/Widgets'
 
-// TODO: Metadata
 export const metadata = {
   title: 'Products',
+  description:
+    'Explore web3 security products and tools to stay safe in the decentralized world',
 }
 
 export default async function Products() {

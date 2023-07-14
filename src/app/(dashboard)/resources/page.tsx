@@ -3,9 +3,10 @@ import { getResources, getResourcesStats } from '@/features/resources/api'
 import Widgets from '@/features/resources/components/Widgets'
 import ResourcesTable from '@/features/resources/components/ResourcesTable'
 
-// TODO: Metadata
 export const metadata = {
   title: 'Resources',
+  description:
+    'Discover valuable resources to stay informed about web3 security',
 }
 
 export default async function Products() {

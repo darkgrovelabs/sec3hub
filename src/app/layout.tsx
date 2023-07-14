@@ -10,6 +10,12 @@ export const metadata = {
   keywords: [
     'sec3hub',
     'web3 security',
+    'blockchain security',
+    'security tools',
+    'security products',
+    'defi',
+    'audit',
+    'trusted auditors',
     'audit companies',
     'security',
     'crypto',

@@ -3,9 +3,10 @@ import Widgets from '@/features/rekts/components/Widgets'
 import { getRekts, getRektsStats } from '@/features/rekts/api'
 import RektsTable from '@/features/rekts/components/RektsTable'
 
-// TODO: Metadata
 export const metadata = {
-  title: 'Rekts',
+  title: 'Incidents',
+  description:
+    'Stay informed about web3 security incidents and learn from real-word examples',
 }
 
 export default async function Products() {
