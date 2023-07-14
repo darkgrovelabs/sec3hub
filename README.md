@@ -1,6 +1,10 @@
+<div align="center">
+ <img src="https://github.com/darkgrovelabs/sec3hub/assets/7522096/840ba832-b607-4746-9a7b-aa4f8e1dfe39" align="center" />
+</div>  
 <h1 align="center">
   SEC3 HUB
 </h1>
+
 
 <h4 align="center">
 <i>Open-source, community-driven, security-focused</i>
