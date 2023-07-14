@@ -1,8 +1,16 @@
-![SEC3 HUB](https://github.com/darkgrovelabs/sec3hub/assets/7522096/466a68c8-8804-4810-8f79-e3da7b5f73ab)
+<h1 align="center">
+  SEC3 HUB
+</h1>
 
-# SEC3 HUB
+<h4 align="center">
+<i>Open-source, community-driven, security-focused</i>
+</h4>
 
-The ultimate aggegator hub for all things SEC3 starting with the SEC3 websites, smart contract auditing companies directory, tools and resources, and more.
+![thumbnail](https://github.com/darkgrovelabs/sec3hub/assets/7522096/46f002ba-2784-40dd-ad41-1185f5be7a5f)
+
+# Introduction
+
+The ultimate aggegator Hub for all things SEC3 starting with the SEC3 websites, smart contract auditing companies directory, tools and resources, and more.
 
 ## Getting Started
 
