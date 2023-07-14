@@ -32,11 +32,11 @@ export default function WidgetCardLast<T>(props: WidgetCardLast<T>) {
   return (
     <Card>
       <CardBody display={'flex'} alignContent={'center'}>
-        <Flex align={'center'} gap={4}>
+        <Flex align={'start'} gap={4}>
           <Flex
             borderRadius={'3xl'}
             justifyContent={'center'}
-            alignItems={'center'}
+            alignItems={'start'}
           >
             <Avatar
               name={entry.name}
@@ -49,21 +49,21 @@ export default function WidgetCardLast<T>(props: WidgetCardLast<T>) {
 
           <Box>
             <Text
-              lineHeight={'shorter'}
+              // lineHeight={'shorter'}
               fontSize={'sm'}
               textTransform={'uppercase'}
               color={labelColor}
             >
               {label}
             </Text>
-            <Flex align={'center'} gap={2}>
-              <Text fontSize={'xl'} fontWeight={800}>
-                {entry.name}
-              </Text>
-              <Text as='span' fontSize={'xs'} color={labelColor}>
-                added {addedWhen}
-              </Text>
-            </Flex>
+            {/* <Flex align={'center'} gap={2}> */}
+            <Text lineHeight={1} fontSize={'xl'} fontWeight={800}>
+              {entry.name}
+            </Text>
+            <Text fontSize={'xs'} color={labelColor}>
+              added {addedWhen}
+            </Text>
+            {/* </Flex> */}
           </Box>
         </Flex>
       </CardBody>
