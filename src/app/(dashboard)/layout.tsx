@@ -19,7 +19,7 @@ export default function RootLayout({
         {/* content */}
         <Box flex={1} overflowX={'clip'}>
           <Navbar />
-          <Box flex={1} as='section' px={4} py={6}>
+          <Box flex={1} as='section' px={2} py={6}>
             <Box mb={6}>{children}</Box>
             <Footer />
           </Box>

@@ -15,7 +15,7 @@ const columnHeaderNames: { [key: string]: string } = {
   name: 'Name',
   description: 'Description',
   categories: 'Categories',
-  up_votes: 'Up Votes',
+  up_votes: 'Votes',
 }
 
 const columns = [

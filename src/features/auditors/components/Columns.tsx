@@ -35,7 +35,7 @@ const columnHeaderNames: { [key: string]: string } = {
   name: 'Name',
   type: 'Type',
   services: 'Services',
-  up_votes: 'Up Votes',
+  up_votes: 'Votes',
   total_audits: 'Audits',
   price_per_hour: 'Fee (p/hr)',
   links: 'Socials',

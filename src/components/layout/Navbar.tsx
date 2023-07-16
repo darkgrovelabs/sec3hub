@@ -45,16 +45,18 @@ export default function Navbar() {
         alignItems={'center'}
         justifyContent={'space-between'}
       >
-        <Flex align={'center'} gap={2} mr={2}>
-          <Box gap={2} display={{ base: 'flex', xl: 'none' }}>
+        <Flex align={'center'} gap={2} mr={1}>
+          <Box display={{ base: 'flex', xl: 'none' }}>
             <MobileMenu />
 
-            <Image
-              src={logo.src}
-              width={35}
-              height={35}
-              alt='Logo SEC3HUB'
-            ></Image>
+            <Box ml={1}>
+              <Image
+                src={logo.src}
+                width={35}
+                height={35}
+                alt='Logo SEC3HUB'
+              ></Image>
+            </Box>
           </Box>
 
           <NavbarTitle />
@@ -157,7 +159,7 @@ function NavbarTitle() {
       bgGradient='linear(to-r, primary.300, red.800)'
       bgClip='text'
       fontWeight={800}
-      fontSize={{ base: '2xl', xl: '3xl' }}
+      fontSize={{ base: 'xl', md: '2xl', xl: '3xl' }}
     >
       {titles[selectedLayoutSegment[0]]}
     </Heading>

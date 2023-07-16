@@ -25,7 +25,7 @@ const columnHeaderNames: { [key: string]: string } = {
   description: 'Description',
   is_opensource: 'Open Source',
   categories: 'Categories',
-  up_votes: 'Up Votes',
+  up_votes: 'Votes',
   links: 'Links',
   start_year: 'Year',
 }
