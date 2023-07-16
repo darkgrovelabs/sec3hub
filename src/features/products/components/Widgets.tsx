@@ -19,7 +19,7 @@ export default function Widgets(props: WidgetsProps) {
     <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={4}>
       <WidgetCard label='products' value={totalProducts} icon={BoxIcon} />
       <WidgetCard
-        label='Open Source (like us)'
+        label='Open Source'
         icon={HeartIcon}
         value={totalOpenSource}
       />

@@ -176,7 +176,7 @@ function RequestFeature() {
   return (
     <Button
       as='a'
-      href='https://github.com/orgs/darkgrovelabs/discussions/new/choose'
+      href='https://github.com/orgs/darkgrovelabs/discussions/new?category=new-ideas-feature-request'
       target='_blank'
       justifyContent={'flex-start'}
       color={colorMode === 'light' ? 'blackAlpha.600' : 'whiteAlpha.600'}
