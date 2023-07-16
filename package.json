@@ -34,5 +34,10 @@
   },
   "devDependencies": {
     "@types/canvas-confetti": "^1.6.0"
+  },
+  "browser": {
+    "fs": false,
+    "net": false,
+    "tls": false
   }
 }
