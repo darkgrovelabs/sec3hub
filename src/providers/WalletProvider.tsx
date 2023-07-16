@@ -21,7 +21,7 @@ const { chains, publicClient } = configureChains(
 
 const { connectors } = getDefaultWallets({
   appName: 'SEC3 Hub',
-  projectId: '2e4a7b7cfb5bfc7d568289e0dbeda110',
+  projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
   chains,
 })
 
