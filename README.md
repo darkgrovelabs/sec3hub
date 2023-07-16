@@ -5,7 +5,6 @@
   SEC3 HUB
 </h1>
 
-
 <h4 align="center">
 <i>Open-source, community-driven, security-focused</i>
 </h4>
@@ -21,13 +20,13 @@ The ultimate aggegator Hub for all things SEC3 starting with the SEC3 websites, 
 First, install dependencies:
 
 ```bash
-pnpm install --shamefully-hoist
+npm install
 ```
 
 Then, run the development server:
 
 ```bash
-pnpm dev
+npm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
