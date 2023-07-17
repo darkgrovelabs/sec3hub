@@ -185,7 +185,7 @@ const columns = [
               as={IconButton}
               icon={<SearchCheckIcon />}
             ></MenuButton>
-            <MenuList>
+            <MenuList zIndex={'dropdown'}>
               {sourceLinks.split(',').map((link, index) => {
                 if (!link) return null
 
