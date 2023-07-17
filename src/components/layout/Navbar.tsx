@@ -171,7 +171,6 @@ function NavbarAddContent() {
 
   return (
     <Button
-      leftIcon={<Icon as={PlusIcon} />}
       as='a'
       href='https://docs.google.com/forms/d/e/1FAIpQLSfpfjwmBrxYIln5rQUAvIRLjNmE7q5weqvoDmcrcxRO2fCfOQ/viewform'
       target='_blank'
