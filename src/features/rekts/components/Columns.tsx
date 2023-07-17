@@ -44,15 +44,15 @@ const columns = [
   columnHelper.accessor('name', {
     cell: ({ row, getValue }) => {
       return (
-        <DataTableStickyColumn className='td-no-padding-aside'>
+        <DataTableStickyColumn>
           <Flex align={'center'} gap={3}>
-            <Avatar
+            {/* <Avatar
               size={'sm'}
               name={getValue()}
               src={row.original.logo_url}
               bg={'primary.400'}
               color='white'
-            />
+            /> */}
             <Box>
               <Link color='blue.300' href={row.original.website} isExternal>
                 <Text fontWeight='bold' lineHeight={'tall'}>
@@ -68,7 +68,6 @@ const columns = [
       <DataTableColumnHeader
         column={column}
         title={columnHeaderNames['name']}
-        className='td-no-padding-aside'
         sticky
       />
     ),
