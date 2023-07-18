@@ -14,7 +14,8 @@
 
 # Introduction
 
-The ultimate aggegator Hub for all things SEC3 starting with the SEC3 websites, smart contract auditing companies directory, tools and resources, and more.
+The ultimate aggegator Hub for all things SEC3 starting with the SEC3 websites, smart contract autitors, incidents, products, tools and resources, and more. check out the backbone [here](https://github.com/darkgrovelabs/sec3hub-backend)
+
 
 ## Getting Started
 
@@ -32,6 +33,8 @@ npm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Learn More
+### Collaborations & Contributions & Sponsorship
 
-To learn more about SEC3, take a look at the following resources:
+Please contact via twitter [@0xsha](https://twitter.com/@0xsha)  or [@jeromevvb](https://twitter.com/@jeromevvb) .
+
+Or email to  [hello](mailto:hello@darkgrove.xyz) .
