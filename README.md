@@ -1,5 +1,6 @@
 <div align="center">
- <img src="https://github.com/darkgrovelabs/sec3hub/assets/7522096/840ba832-b607-4746-9a7b-aa4f8e1dfe39" align="center" />
+ <img src="https://github.com/darkgrovelabs/sec3hub/assets/7522096/1368f5da-501f-47df-9bd6-c72a7fa5e1ad" align="center" />
+
 </div>  
 <h1 align="center">
   SEC3 HUB
@@ -10,7 +11,7 @@
 <i>Open-source, community-driven, security-focused</i>
 </h4>
 
-![thumbnail](https://github.com/darkgrovelabs/sec3hub/assets/7522096/46f002ba-2784-40dd-ad41-1185f5be7a5f)
+![thumbnail](https://github.com/darkgrovelabs/sec3hub/assets/7522096/b7f5718f-c4ae-446f-9c05-095cc1b64bb9)
 
 # Backgroud 
 
