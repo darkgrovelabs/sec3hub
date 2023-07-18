@@ -12,9 +12,17 @@
 
 ![thumbnail](https://github.com/darkgrovelabs/sec3hub/assets/7522096/46f002ba-2784-40dd-ad41-1185f5be7a5f)
 
-# Introduction
+# Backgroud 
 
 The ultimate aggegator Hub for all things SEC3 starting with the SEC3 websites, smart contract autitors, incidents, products, tools and resources, and more. check out the backbone [here](https://github.com/darkgrovelabs/sec3hub-backend)
+
+## Tech stack
+
+- Next.js 13
+- Wagmi/Viem
+- RainbowKit
+- WalletConnect
+- Chakra-UI
 
 
 ## Getting Started
