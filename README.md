@@ -13,9 +13,10 @@
 
 ![thumbnail](https://github.com/darkgrovelabs/sec3hub/assets/7522096/b7f5718f-c4ae-446f-9c05-095cc1b64bb9)
 
-# Backgroud 
+# Background 
 
-The ultimate aggegator Hub for all things SEC3 starting with the SEC3 websites, smart contract autitors, incidents, products, tools and resources, and more. check out the backbone [here](https://github.com/darkgrovelabs/sec3hub-backend)
+The ultimate aggegator Hub for all things SEC3 starting with the SEC3 websites, Smart Contract autitors, Incidents, Products, Tools and Resources, and more.  
+check out the backbone [here](https://github.com/darkgrovelabs/sec3hub-backend)
 
 ## Tech stack
 
