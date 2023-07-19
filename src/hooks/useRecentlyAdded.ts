@@ -1,6 +1,11 @@
 'use client'
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+  useSelectedLayoutSegment,
+} from 'next/navigation'
 import { useEffect } from 'react'
 
 export default function useRecentlyAdded(callback?: (value: string) => void) {
@@ -9,15 +14,21 @@ export default function useRecentlyAdded(callback?: (value: string) => void) {
   const pathname = usePathname()
 
   useEffect(() => {
-    const recentlyAdded = searchParams.get('recentlyAdded')
-    if (recentlyAdded && callback) {
-      callback(recentlyAdded)
+    const last = searchParams.get('last')
+    if (last && callback) {
+      callback(last)
     }
-  }, [searchParams, callback])
+  }, [searchParams])
 
   const setRecentlyAdded = (value: string) => {
-    router.push(`${pathname}?recentlyAdded=${value}`)
+    router.push(`${pathname}?last=${value}`)
   }
 
-  return { setRecentlyAdded }
+  const resetRecentlyAdded = () => {
+    if (searchParams.has('last')) {
+      router.replace(pathname)
+    }
+  }
+
+  return { setRecentlyAdded, resetRecentlyAdded }
 }

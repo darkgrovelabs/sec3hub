@@ -61,11 +61,14 @@ export default function DataTable({
     pageIndex: 0,
     pageSize: 10,
   })
-  useRecentlyAdded((recently) => setKeyword(recently))
+  const { resetRecentlyAdded } = useRecentlyAdded((recently) =>
+    setKeyword(recently)
+  )
   const debouncecKeyword = useDebounce(keyword, 500)
 
   const resetFilters = () => {
     setKeyword('')
+    resetRecentlyAdded()
   }
 
   const { order, sort } = useMemo(() => {
