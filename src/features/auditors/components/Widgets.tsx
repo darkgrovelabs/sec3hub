@@ -3,9 +3,9 @@
 import { SimpleGrid } from '@/chakra/components'
 import WidgetCard from '@/components/WidgetCard'
 import WidgetCardLast from '@/components/WidgetCardLast'
+import formatCurrency from '@/utils/formatCurrency'
 import { ListOrdered, ShieldCheck } from 'lucide-react'
 import { TAuditor } from '../types'
-import formatCurrency from '@/utils/formatCurrency'
 
 type WidgetsProps = {
   totalAuditors: number

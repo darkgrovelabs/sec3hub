@@ -9,6 +9,7 @@ import {
   Text,
   useColorMode,
 } from '@/chakra/components'
+import useRecentlyAdded from '@/hooks/useRecentlyAdded'
 import dayjs from 'dayjs'
 
 type WidgetCardLast<T> = {
@@ -19,6 +20,7 @@ type WidgetCardLast<T> = {
 export default function WidgetCardLast<T>(props: WidgetCardLast<T>) {
   const { entry, label = 'Recently Added' } = props
   const { colorMode } = useColorMode()
+  const { setRecentlyAdded } = useRecentlyAdded()
 
   const labelColor = colorMode === 'light' ? 'blackAlpha.600' : 'whiteAlpha.600'
   const iconBgColor = colorMode === 'light' ? 'blue.400' : 'blue.100'
@@ -30,7 +32,12 @@ export default function WidgetCardLast<T>(props: WidgetCardLast<T>) {
       : `${dayjs(dayjs()).diff(entry.created_at, 'days')} days ago`
 
   return (
-    <Card>
+    <Card
+      _hover={{
+        cursor: 'pointer',
+      }}
+      onClick={() => setRecentlyAdded(entry.name)}
+    >
       <CardBody display={'flex'} alignContent={'center'}>
         <Flex align={'start'} gap={4}>
           <Flex

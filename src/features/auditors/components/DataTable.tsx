@@ -23,6 +23,7 @@ import DataTableViewOptions from '@/components/table/DataTableViewOptions'
 import { getAuditors } from '@/features/auditors/api'
 import { TAuditor } from '@/features/auditors/types'
 import useDebounce from '@/hooks/useDebounce'
+import useRecentlyAdded from '@/hooks/useRecentlyAdded'
 import { TPaginationRequestResult } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import {
@@ -59,6 +60,7 @@ export default function DataTable({
     pageIndex: 0,
     pageSize: 10,
   })
+  useRecentlyAdded((recently) => setKeyword(recently))
   const debouncecKeyword = useDebounce(keyword, 500)
 
   const resetFilters = () => {

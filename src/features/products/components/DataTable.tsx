@@ -36,6 +36,7 @@ import { Search, XCircleIcon } from 'lucide-react'
 import { Fragment, useMemo, useState } from 'react'
 import { getProducts } from '../api'
 import { TProduct } from '../types'
+import useRecentlyAdded from '@/hooks/useRecentlyAdded'
 
 export type DataTableProps = {
   initialData: TProduct[]
@@ -59,6 +60,7 @@ export default function DataTable({
     pageIndex: 0,
     pageSize: 10,
   })
+  useRecentlyAdded((recently) => setKeyword(recently))
   const debouncecKeyword = useDebounce(keyword, 500)
 
   const resetFilters = () => {
