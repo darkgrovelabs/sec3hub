@@ -37,6 +37,7 @@ import { Fragment, useMemo, useState } from 'react'
 import { TPaginationRequestResult } from '@/types'
 import { getResources } from '../api'
 import { TResource } from '../types'
+import useRecentlyAdded from '@/hooks/useRecentlyAdded'
 
 export type DataTableProps = {
   initialData: TResource[]
@@ -60,10 +61,14 @@ export default function DataTable({
     pageIndex: 0,
     pageSize: 10,
   })
+  const { resetRecentlyAdded } = useRecentlyAdded((recently) =>
+    setKeyword(recently)
+  )
   const debouncecKeyword = useDebounce(keyword, 500)
 
   const resetFilters = () => {
     setKeyword('')
+    resetRecentlyAdded()
   }
 
   const { order, sort } = useMemo(() => {
