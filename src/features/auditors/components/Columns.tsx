@@ -114,7 +114,7 @@ const columns = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Type' />
     ),
-    enableSorting: false,
+    enableSorting: true,
   }),
   columnHelper.accessor('total_audits', {
     cell: ({ row, getValue }) => {
