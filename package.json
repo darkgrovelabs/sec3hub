@@ -1,6 +1,6 @@
 {
   "name": "sec3hub",
-  "version": "0.0.1-alpha",
+  "version": "0.0.2-alpha",
   "private": true,
   "scripts": {
     "dev": "next dev",
